@@ -9,7 +9,6 @@
     <version>0.1.0.0</version>
     <packaging>war</packaging>
     <dependencies>
-        <!-- Prettyfaces
         <dependency>
 			<groupId>org.ocpsoft.rewrite</groupId>
 			<artifactId>rewrite-servlet</artifactId>
@@ -19,8 +18,7 @@
 			<groupId>org.ocpsoft.rewrite</groupId>
 			<artifactId>rewrite-config-prettyfaces</artifactId>
 			<version>3.4.1.Final</version>
-		</dependency> -->
-
+		</dependency>
         <!-- omnifaces
         <dependency>
             <groupId>org.omnifaces</groupId>
