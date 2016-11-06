@@ -4,6 +4,7 @@ import org.hibernate.validator.constraints.URL;
 
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -17,17 +18,21 @@ public class Airline extends User {
     private String website;
 
     @OneToMany
-    private List<Object> routes;
+    private List<Route> routes;
 
     @OneToMany
-    private List<Object> flights;
+    private List<Flight> flights;
 
     protected Airline() {
         super();
+        this.routes = new ArrayList<>();
+        this.flights = new ArrayList<>();
     }
 
-    public Airline(String firstName, String lastName, String address, String telephone, String email, String airlineName, String website, List<Object> routes, List<Object> flights) {
+    public Airline(String firstName, String lastName, String address, String telephone, String email, String airlineName, String website, List<Route> routes, List<Flight> flights) {
         super(firstName, lastName, address, telephone, email);
+        this.routes = new ArrayList<>();
+        this.flights = new ArrayList<>();
         this.airlineName = airlineName;
         this.website = website;
         this.routes = routes;
@@ -50,11 +55,11 @@ public class Airline extends User {
         this.website = website;
     }
 
-    public List<Object> getRoutes() {
+    public List<Route> getRoutes() {
         return routes;
     }
 
-    public List<Object> getFlights() {
+    public List<Flight> getFlights() {
         return flights;
     }
 

@@ -6,7 +6,8 @@ import java.util.Date;
 /**
  * Created by Frederik Van Herbruggen on 4/11/2016.
  */
-@MappedSuperclass
+@Entity
+@Inheritance
 public class PriceModifier {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

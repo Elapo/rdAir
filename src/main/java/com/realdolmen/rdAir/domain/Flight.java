@@ -1,17 +1,21 @@
 package com.realdolmen.rdAir.domain;
 
-import javax.persistence.Entity;
-import javax.persistence.OneToOne;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
+import javax.persistence.*;
 import java.util.Date;
-import java.util.List;
 
 /**
  * Created by Frederik Van Herbruggen on 4/11/2016.
  */
 @Entity
-public class Flight extends Route{
+public class Flight{
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
+
+    @ManyToOne
+    private Route route;
+
     @OneToOne
     private PriceModifier rdAirModifier;
 
@@ -25,8 +29,8 @@ public class Flight extends Route{
         super();
     }
 
-    public Flight(Location departureLocation, Location destination, List<PriceModifier> modifiers, List<PriceModifier> rdModifiers, PriceModifier rdAirModifier, Date departureTime, Date flightDuration) {
-        super(departureLocation, destination, modifiers, rdModifiers);
+    public Flight(Route route, PriceModifier rdAirModifier, Date departureTime, Date flightDuration) {
+        this.route = route;
         this.rdAirModifier = rdAirModifier;
         this.departureTime = departureTime;
         this.flightDuration = flightDuration;
@@ -54,5 +58,9 @@ public class Flight extends Route{
 
     public void setFlightDuration(Date flightDuration) {
         this.flightDuration = flightDuration;
+    }
+
+    public int getId() {
+        return id;
     }
 }

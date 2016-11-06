@@ -1,6 +1,8 @@
 package com.realdolmen.rdAir.domain;
 
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -8,18 +10,21 @@ import java.util.List;
  */
 @Entity
 public class RDEmployee extends User {
-    private List<String> PriceWarnings;
+    @ElementCollection
+    private List<String> priceWarnings;
 
     public RDEmployee() {
         super();
+        priceWarnings = new ArrayList<>();
     }
 
     public RDEmployee(String firstName, String lastName, String address, String telephone, String email, List<String> priceWarnings) {
         super(firstName, lastName, address, telephone, email);
-        PriceWarnings = priceWarnings;
+        priceWarnings = new ArrayList<>();
+        this.priceWarnings = priceWarnings;
     }
 
     public List<String> getPriceWarnings() {
-        return PriceWarnings;
+        return priceWarnings;
     }
 }

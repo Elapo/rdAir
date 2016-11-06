@@ -1,12 +1,13 @@
 package com.realdolmen.rdAir.domain;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Created by Frederik Van Herbruggen on 4/11/2016.
  */
-@MappedSuperclass
+@Entity
 public class Route {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -25,11 +26,15 @@ public class Route {
     private List<PriceModifier> rdModifiers;
 
     protected Route() {
+        modifiers = new ArrayList<>();
+        rdModifiers = new ArrayList<>();
     }
 
     public Route(Location departureLocation, Location destination, List<PriceModifier> modifiers, List<PriceModifier> rdModifiers) {
         this.departureLocation = departureLocation;
         this.destination = destination;
+        this.modifiers = new ArrayList<>();
+        this.rdModifiers = new ArrayList<>();
         this.modifiers = modifiers;
         this.rdModifiers = rdModifiers;
     }

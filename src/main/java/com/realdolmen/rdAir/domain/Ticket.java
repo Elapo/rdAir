@@ -1,9 +1,6 @@
 package com.realdolmen.rdAir.domain;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 /**
  * Created by Frederik Van Herbruggen on 4/11/2016.
@@ -14,8 +11,10 @@ public class Ticket {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
+    @ManyToOne
     private Flight flight;
 
+    @ManyToOne
     private FlightClass flightClass;
 
     protected Ticket() {
