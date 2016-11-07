@@ -23,5 +23,4 @@ public class FlightRepository {
     public List<Flight> getByRoute(Route route){
         return em.createQuery("select f from Flight f where Route r = route").getResultList();
     }
-    
 }
