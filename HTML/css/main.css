@@ -1,0 +1,26 @@
+.content-container{
+    
+}
+.hero-img{
+    background-image: url("https://upload.wikimedia.org/wikipedia/commons/2/2e/Plane_wing_at_sunset.jpg");
+    background-size: cover;
+    height: 400px;
+}
+.card-container{
+    height: 400px;
+    background-color: grey;
+    overflow: hidden;
+}
+.form-card{
+    width: 80%;
+}
+.search-form{
+    height: 300px;
+}
+label{
+    padding-top: 10px;
+}
+.custom-footer{
+    height: 300px;
+    background-color: #222;
+}
