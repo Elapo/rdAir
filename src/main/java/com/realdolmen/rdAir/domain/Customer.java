@@ -20,8 +20,8 @@ public class Customer extends User {
 
     public Customer(String firstName, String lastName, String address, String telephone, String email, List<Order> orders) {
         super(firstName, lastName, address, telephone, email);
-        orders = new ArrayList<>();
-        this.orders = orders;
+        if(orders != null) this.orders = orders;
+        else orders = new ArrayList<>(); //fixme: do this to other plqces, or remove lists from ctors entirely
     }
 
     public List<Order> getOrders() {
