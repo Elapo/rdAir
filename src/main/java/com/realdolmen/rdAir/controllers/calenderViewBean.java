@@ -6,6 +6,8 @@ import org.primefaces.event.SelectEvent;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.context.FacesContext;
+import javax.validation.constraints.Future;
+import javax.validation.constraints.NotNull;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -16,6 +18,8 @@ import java.util.Date;
 @ManagedBean
 public class calenderViewBean {
 
+    @NotNull
+    @Future
     private Date date;
 
     public void onDateSelect(SelectEvent event) {

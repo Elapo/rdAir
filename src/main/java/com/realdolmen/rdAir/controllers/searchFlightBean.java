@@ -27,8 +27,11 @@ public class searchFlightBean implements Serializable {
 
     private String locationOption;
     private boolean clickedLocationOptionOne=false;
+    @NotNull
     private String departureLocation;
+    @NotNull
     private String destinationLocation;
+    @NotNull
     private String globalRegion;
 
     @NotNull //(message="{error.dateOfDeparture}")
@@ -37,6 +40,8 @@ public class searchFlightBean implements Serializable {
 
     @NotNull
     private String flightWay;
+    private boolean clickedReturn=false;
+    @NotNull
     @Future
     private Date dateOfReturn;
 
@@ -77,6 +82,10 @@ public class searchFlightBean implements Serializable {
         clickedLocationOptionOne = locationOption.contains("Departure Location - Destination Location");
     }
 
+    public void listener1() {
+        clickedReturn = flightWay.contains("Return");
+    }
+
     public boolean getClickedLocationOptionOne() {
         return clickedLocationOptionOne;
     }
@@ -84,6 +93,14 @@ public class searchFlightBean implements Serializable {
 
     public void setClickedLocationOptionOne(boolean clickedLocationOptionOne) {
         this.clickedLocationOptionOne = clickedLocationOptionOne;
+    }
+
+    public boolean getClickedReturn() {
+        return clickedReturn;
+    }
+
+    public void setClickedReturn(boolean clickedReturn) {
+        this.clickedReturn = clickedReturn;
     }
 
     public String getDepartureLocation() {

@@ -1,8 +1,16 @@
-.searchBar{
+.searchBar {
     background-color: rgba(255,255,255,0.2);
 }
 .autoHeight {
     height: auto;
+}
+
+.mdl-layout__content {
+    background-image: url("#{resource['images/airbus_320_214_516423.jpg']}");height:100%;width:100%;
+}
+
+.mdl-textfield__error {
+        background-color: rgba(255,255,255,0.2);
 }
 
 .page-content {
@@ -11,13 +19,29 @@
 }
 .demo-card-wide.mdl-card {
     width: 80%;
-    height: 600px;
-    margin: 30px auto;
+    margin: auto;
 }
+
 .demo-card-wide > .mdl-card__title {
-    color: #fff;
-    background: bottom right 15% no-repeat #68228B;
+    color: #FFF;
+    background-color: rgb(103,58,183);
 }
+
+
+
+
+.mdl-card__supporting-text {
+    background-image: url(#{resource['images/Transport-Airplane-Takeoff-icon1.png']});
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.promoCard.mdl-card__supporting-text {
+    background-image: url(#{resource['.png']});
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
 
 .mdl-button.mdl-button--twitter {
     color: #3f51b5;
@@ -119,54 +143,53 @@
     background: white;
 }
 
-
-.mdl-button.stumbleupon {
+.mdl-button.mdl-button--stumbleupon {
     color: #3f51b5;
 }
 
-.mdl-button.stumbleupon:focus:not(:active) {
+.mdl-button.mdl-button--stumbleupon:focus:not(:active) {
     background-color: #f74425;
 }
 
-.mdl-button--raised.stumbleupon {
+.mdl-button--raised.mdl-button--stumbleupon {
     background: #f74425;
     color: white;
 }
 
-.mdl-button--raised.stumbleupon:hover {
+.mdl-button--raised.mdl-button--stumbleupon:hover {
     background-color: #f74425;
 }
 
-.mdl-button--raised.stumbleupon:active {
+.mdl-button--raised.mdl-button--stumbleupon:active {
     background-color: #f74425;
 }
 
-.mdl-button--raised.stumbleupon:focus:not(:active) {
+.mdl-button--raised.mdl-button--stumbleupon:focus:not(:active) {
     background-color: #f74425;
 }
 
-.mdl-button--raised.stumbleupon.mdl-ripple {
+.mdl-button--raised.mdl-button--stumbleupon .mdl-ripple {
     background: white;
 }
 
-.mdl-button--fab.stumbleupon {
+.mdl-button--fab.mdl-button--stumbleupon {
     background: #f74425;
     color: white;
 }
 
-.mdl-button--fab.stumbleupon:hover {
+.mdl-button--fab.mdl-button--stumbleupon:hover {
     background-color: #f74425;
 }
 
-.mdl-button--fab.stumbleupon:focus:not(:active) {
+.mdl-button--fab.mdl-button--stumbleupon:focus:not(:active) {
     background-color: #f74425;
 }
 
-.mdl-button--fab.stumbleupon:active {
+.mdl-button--fab.mdl-button--stumbleupon:active {
     background-color: #f74425;
 }
 
-.mdl-button--fab.stumbleupon.mdl-ripple {
+.mdl-button--fab.mdl-button--stumbleupon .mdl-ripple {
     background: white;
 }
 
