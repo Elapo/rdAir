@@ -2,6 +2,7 @@ package com.realdolmen.rdAir.domain;
 
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,7 +10,7 @@ import java.util.List;
  * Created by Frederik Van Herbruggen on 4/11/2016.
  */
 @Entity
-public class RDEmployee extends User {
+public class RDEmployee extends User implements Serializable{
     @ElementCollection
     private List<String> priceWarnings;
 
@@ -18,8 +19,8 @@ public class RDEmployee extends User {
         priceWarnings = new ArrayList<>();
     }
 
-    public RDEmployee(String firstName, String lastName, String address, String telephone, String email, List<String> priceWarnings) {
-        super(firstName, lastName, address, telephone, email);
+    public RDEmployee(String firstName, String lastName, String address, String telephone, String email,String passwordHash, List<String> priceWarnings) {
+        super(firstName, lastName, address, telephone, email, passwordHash);
         priceWarnings = new ArrayList<>();
         this.priceWarnings = priceWarnings;
     }

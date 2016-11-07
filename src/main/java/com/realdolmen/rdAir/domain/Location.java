@@ -1,12 +1,13 @@
 package com.realdolmen.rdAir.domain;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 /**
  * Created by Frederik Van Herbruggen on 4/11/2016.
  */
 @Entity
-public class Location {
+public class Location implements Serializable{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
@@ -15,7 +16,7 @@ public class Location {
 
     private String airportCode;
 
-    @OneToOne
+    @OneToOne(fetch = FetchType.LAZY)
     private Region region;
 
     public Location() {

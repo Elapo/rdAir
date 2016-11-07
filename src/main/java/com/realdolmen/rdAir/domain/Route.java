@@ -1,6 +1,7 @@
 package com.realdolmen.rdAir.domain;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,21 +9,21 @@ import java.util.List;
  * Created by Frederik Van Herbruggen on 4/11/2016.
  */
 @Entity
-public class Route {
+public class Route implements Serializable{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @OneToOne
+    @OneToOne(fetch = FetchType.LAZY)
     private Location departureLocation;
 
-    @OneToOne
+    @OneToOne(fetch = FetchType.LAZY)
     private Location destination;
 
-    @OneToMany
+    @OneToMany(fetch = FetchType.LAZY)
     private List<PriceModifier> modifiers;
 
-    @OneToMany
+    @OneToMany(fetch = FetchType.LAZY)
     private List<PriceModifier> rdModifiers;
 
     protected Route() {

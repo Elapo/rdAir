@@ -1,22 +1,23 @@
 package com.realdolmen.rdAir.domain;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Date;
 
 /**
  * Created by Frederik Van Herbruggen on 4/11/2016.
  */
 @Entity
-public class Flight{
+public class Flight implements Serializable{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     private Route route;
 
-    @OneToOne
+    @OneToOne(fetch = FetchType.LAZY)
     private PriceModifier rdAirModifier;
 
     @Temporal(TemporalType.DATE)

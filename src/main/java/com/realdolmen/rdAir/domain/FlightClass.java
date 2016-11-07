@@ -1,12 +1,13 @@
 package com.realdolmen.rdAir.domain;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 /**
  * Created by Frederik Van Herbruggen on 4/11/2016.
  */
 @Entity
-public class FlightClass {
+public class FlightClass implements Serializable{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;

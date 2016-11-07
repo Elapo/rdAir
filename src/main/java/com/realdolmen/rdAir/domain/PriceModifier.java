@@ -1,6 +1,7 @@
 package com.realdolmen.rdAir.domain;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Date;
 
 /**
@@ -8,7 +9,7 @@ import java.util.Date;
  */
 @Entity
 @Inheritance
-public class PriceModifier {
+public class PriceModifier implements Serializable{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
@@ -27,15 +28,21 @@ public class PriceModifier {
     @Temporal(TemporalType.TIME)
     private Date endTime;
 
+    private boolean isPercent;
+
+    private double amount;
+
     protected PriceModifier() {
     }
 
-    public PriceModifier(String name, Date startDate, Date endDate, Date startTime, Date endTime) {
+    public PriceModifier(String name, Date startDate, Date endDate, Date startTime, Date endTime, boolean isPercent, double amount) {
         this.name = name;
         this.startDate = startDate;
         this.endDate = endDate;
         this.startTime = startTime;
         this.endTime = endTime;
+        this.isPercent = isPercent;
+        this.amount = amount;
     }
 
     public int getId() {
@@ -81,4 +88,21 @@ public class PriceModifier {
     public void setEndTime(Date endTime) {
         this.endTime = endTime;
     }
+
+    public boolean isPercent() {
+        return isPercent;
+    }
+
+    public void setPercent(boolean percent) {
+        isPercent = percent;
+    }
+
+    public double getAmount() {
+        return amount;
+    }
+
+    public void setAmount(double amount) {
+        this.amount = amount;
+    }
+
 }

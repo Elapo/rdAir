@@ -6,12 +6,13 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
+import java.io.Serializable;
 
 /**
  * Created by Frederik Van Herbruggen on 4/11/2016.
  */
 @MappedSuperclass
-public class User {
+public class User implements Serializable{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -28,15 +29,18 @@ public class User {
     @Email(message = "{validation.mail.invalid}")
     private String email;
 
+    private String passwordHash;
+
     protected User() {
     }
 
-    public User(String firstName, String lastName, String address, String telephone, String email) {
+    public User(String firstName, String lastName, String address, String telephone, String email, String passwordHash) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.address = address;
         this.telephone = telephone;
         this.email = email;
+        this.passwordHash = passwordHash;
     }
 
     public int getId() {
@@ -81,6 +85,14 @@ public class User {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getPasswordHash() {
+        return passwordHash;
+    }
+
+    public void setPasswordHash(String passwordHash) {
+        this.passwordHash = passwordHash;
     }
 }
 

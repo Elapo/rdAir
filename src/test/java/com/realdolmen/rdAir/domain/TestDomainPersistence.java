@@ -9,10 +9,7 @@ import org.junit.Test;
 import javax.persistence.EntityManager;
 import java.util.Date;
 
-/**
- * Created by Frederik on 04/11/2016.
- */
-public class DomainPersistenceTests extends JpaPersistenceTest {
+public class TestDomainPersistence extends JpaPersistenceTest {
 
     EntityManager em;
 
@@ -23,7 +20,7 @@ public class DomainPersistenceTests extends JpaPersistenceTest {
 
     @Test
     public void testAirlinePersistence(){
-        Airline a = new Airline("Frederik", "Van Herbruggen", "FCL 34", "0474416357", "email@email.com", "freAir", "http://freAir.com", null, null);
+        Airline a = new Airline("Frederik", "Van Herbruggen", "FCL 34", "0474416357", "email@email.com", "freAir", "http://freAir.com", "abc", null, null);
         em.persist(a);
 
         Airline aPersisted = em.find(Airline.class, a.getId());
@@ -33,7 +30,7 @@ public class DomainPersistenceTests extends JpaPersistenceTest {
 
     @Test
     public void testCustomerPersistence(){
-        Customer c = new Customer("Frederik", "Van Herbruggen", "FCL 34", "0474416357", "email@email.com", null);
+        Customer c = new Customer("Frederik", "Van Herbruggen", "FCL 34", "0474416357", "email@email.com","abc", null);
         em.persist(c);
 
         Customer cPersisted = em.find(Customer.class, c.getId());
@@ -85,12 +82,56 @@ public class DomainPersistenceTests extends JpaPersistenceTest {
 
     @Test
     public void testPriceModifierPersistence(){
-        PriceModifier pm = new PriceModifierFlat("Rich tax", new Date(), new Date(), new Date(), new Date(), 20000000000d);
-        PriceModifier pmp = new PriceModifierPercent("Rich tax", new Date(), new Date(), new Date(), new Date(), 20000000000d);
+        PriceModifier pm = new PriceModifier("Rich tax", new Date(), new Date(), new Date(), new Date(), true,20000000000d);
 
         em.persist(pm);
-        em.persist(pmp);
+        PriceModifier pmPersisted = em.find(PriceModifier.class, pm.getId());
 
-
+        Assert.assertNotNull(pmPersisted);
+        Assert.assertEquals(pmPersisted.getName(), "Rich tax");
     }
+
+    @Test
+    public void testRDEmployeePersistence(){
+        RDEmployee rde = new RDEmployee("Frederik", "Van Herbruggen", "FCL 34", "0474416357", "email@email.com", "abc", null);
+
+        em.persist(rde);
+        RDEmployee rdePersisted = em.find(RDEmployee.class, rde.getId());
+
+        Assert.assertNotNull(rdePersisted);
+        Assert.assertEquals(rdePersisted.getFirstName(), "Frederik");
+    }
+
+    @Test
+    public void testRegionPersistence(){
+        Region r = new Region("America");
+
+        em.persist(r);
+        Region rPersisted = em.find(Region.class, r.getId());
+
+        Assert.assertNotNull(rPersisted);
+        Assert.assertEquals(rPersisted.getName(), "America");
+    }
+
+    @Test
+    public void testRoutePersistence(){
+        Route r = new Route(null, null, null, null);
+
+        em.persist(r);
+        Route rPersisted = em.find(Route.class, r.getId());
+
+        Assert.assertNotNull(rPersisted);
+    }
+
+    @Test
+    public void testTicketPersistence(){
+        Ticket t = new Ticket(null, null);
+
+        em.persist(t);
+        Ticket tPersisted = em.find(Ticket.class, t.getId());
+
+        Assert.assertNotNull(tPersisted);
+    }
+    //todo: fix tests when validation is done
 }
+

@@ -1,20 +1,21 @@
 package com.realdolmen.rdAir.domain;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 /**
  * Created by Frederik Van Herbruggen on 4/11/2016.
  */
 @Entity
-public class Ticket {
+public class Ticket implements Serializable{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     private Flight flight;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     private FlightClass flightClass;
 
     protected Ticket() {

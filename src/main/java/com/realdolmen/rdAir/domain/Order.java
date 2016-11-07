@@ -1,6 +1,7 @@
 package com.realdolmen.rdAir.domain;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -9,12 +10,13 @@ import java.util.List;
  * Created by Frederik Van Herbruggen on 4/11/2016.
  */
 @Entity
-public class Order {
+@Table(name = "tblOrder")
+public class Order implements Serializable{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @OneToMany
+    @OneToMany(fetch = FetchType.LAZY)
     private List<Ticket> tickets;
 
     @Temporal(TemporalType.DATE)
