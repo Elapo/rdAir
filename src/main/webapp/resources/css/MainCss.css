@@ -1,0 +1,182 @@
+.searchBar{
+    background-color: rgba(255,255,255,0.2);
+}
+.autoHeight {
+    height: auto;
+}
+
+.page-content {
+    width:100%;
+    height:100%;
+}
+.demo-card-wide.mdl-card {
+    width: 80%;
+    height: 600px;
+    margin: 30px auto;
+}
+.demo-card-wide > .mdl-card__title {
+    color: #fff;
+    background: bottom right 15% no-repeat #68228B;
+}
+
+.mdl-button.mdl-button--twitter {
+    color: #3f51b5;
+}
+
+.mdl-button.mdl-button--twitter:focus:not(:active) {
+    background-color: #00acee;
+}
+
+.mdl-button--raised.mdl-button--twitter {
+    background: #00acee;
+    color: white;
+}
+
+.mdl-button--raised.mdl-button--twitter:hover {
+    background-color: #00acee;
+}
+
+.mdl-button--raised.mdl-button--twitter:active {
+    background-color: #00acee;
+}
+
+.mdl-button--raised.mdl-button--twitter:focus:not(:active) {
+    background-color: #00acee;
+}
+
+.mdl-button--raised.mdl-button--twitter .mdl-ripple {
+    background: white;
+}
+
+.mdl-button--fab.mdl-button--twitter {
+    background: #00acee;
+    color: white;
+}
+
+.mdl-button--fab.mdl-button--twitter:hover {
+    background-color: #00acee;
+}
+
+.mdl-button--fab.mdl-button--twitter:focus:not(:active) {
+    background-color: #00acee;
+}
+
+.mdl-button--fab.mdl-button--twitter:active {
+    background-color: #00acee;
+}
+
+.mdl-button--fab.mdl-button--twitter .mdl-ripple {
+    background: white;
+}
+
+.mdl-button.mdl-button--facebook {
+    color: #3f51b5;
+}
+
+.mdl-button.mdl-button--facebook:focus:not(:active) {
+    background-color: #3b5998;
+}
+
+.mdl-button--raised.mdl-button--facebook {
+    background: #3b5998;
+    color: white;
+}
+
+.mdl-button--raised.mdl-button--facebook:hover {
+    background-color: #3b5998;
+}
+
+.mdl-button--raised.mdl-button--facebook:active {
+    background-color: #3b5998;
+}
+
+.mdl-button--raised.mdl-button--facebook:focus:not(:active) {
+    background-color: #3b5998;
+}
+
+.mdl-button--raised.mdl-button--facebook .mdl-ripple {
+    background: white;
+}
+
+.mdl-button--fab.mdl-button--facebook {
+    background: #3b5998;
+    color: white;
+}
+
+.mdl-button--fab.mdl-button--facebook:hover {
+    background-color: #3b5998;
+}
+
+.mdl-button--fab.mdl-button--facebook:focus:not(:active) {
+    background-color: #3b5998;
+}
+
+.mdl-button--fab.mdl-button--facebook:active {
+    background-color: #3b5998;
+}
+
+.mdl-button--fab.mdl-button--facebook .mdl-ripple {
+    background: white;
+}
+
+
+.mdl-button.stumbleupon {
+    color: #3f51b5;
+}
+
+.mdl-button.stumbleupon:focus:not(:active) {
+    background-color: #f74425;
+}
+
+.mdl-button--raised.stumbleupon {
+    background: #f74425;
+    color: white;
+}
+
+.mdl-button--raised.stumbleupon:hover {
+    background-color: #f74425;
+}
+
+.mdl-button--raised.stumbleupon:active {
+    background-color: #f74425;
+}
+
+.mdl-button--raised.stumbleupon:focus:not(:active) {
+    background-color: #f74425;
+}
+
+.mdl-button--raised.stumbleupon.mdl-ripple {
+    background: white;
+}
+
+.mdl-button--fab.stumbleupon {
+    background: #f74425;
+    color: white;
+}
+
+.mdl-button--fab.stumbleupon:hover {
+    background-color: #f74425;
+}
+
+.mdl-button--fab.stumbleupon:focus:not(:active) {
+    background-color: #f74425;
+}
+
+.mdl-button--fab.stumbleupon:active {
+    background-color: #f74425;
+}
+
+.mdl-button--fab.stumbleupon.mdl-ripple {
+    background: white;
+}
+
+
+
+
+
+
+
+
+
+
+

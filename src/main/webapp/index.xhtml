@@ -4,10 +4,74 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
-<ui:composition template="WEB-INF/templates/material-template.xhtml">
-    <ui:define name="content">
-        <p>Some amazing content</p>
-    </ui:define>
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+<ui:composition template="WEB-INF/templates/material-template-customers.xhtml">
+
+        <ui:define name="title">Welcome to RdAir!</ui:define>
+        <ui:define name="content">
+
+            <h2 style="color:floralwhite">Fly everywhere... with RdAir!</h2>
+            <br></br>
+            <br></br>
+
+            <div class="centered-card">
+            <div class="demo-card-wide mdl-card mdl-shadow--2dp">
+            <div class="mdl-card__title">
+                <h2 class="mdl-card__title-text">Search here for a flight: </h2>
+            </div>
+                <div class="mdl-card__supporting-text">
+                <h:form>
+                    <h:panelGrid columns="2">
+                        <h:outputLabel value="Select your preferred airline company: " />
+                        <h:panelGroup>
+                         <h:selectOneMenu value="#{searchFlightBean.preferredAirline}"
+                        styleClass="inputText" id="preferredAirlineInput"/>
+                            <h:message for="preferredAirlineInput" styleClass="error" />
+                        </h:panelGroup>
+                        <h:panelGroup>
+                            <h:selectOneRadio value="#{searchFlightBean.flightWay}" styleClass="inputText" id="flightWayInput">
+                                <f:selectItem itemValue="One way"
+                                      itemLabel="One way" />
+                                <f:selectItem itemValue="Return"
+                                      itemLabel="Return" />
+                            </h:selectOneRadio>
+                            <h:message for="flightWayInput" styleClass="error" />
+                        </h:panelGroup>
+                        <br/>
+                        <h:outputLabel value="Select your number of seats: " />
+                        <h:panelGroup>
+                            <h:selectOneMenu value="#{searchFlightBean.desiredNrOfSeats}" styleClass="inputText" id="desiredNrOfSeatsInput"/>
+                            <h:message for="desiredNrOfSeatsInput" styleClass="error" />
+                        </h:panelGroup>
+                        <h:outputLabel value="Select your flight location(s): "/>
+                        <h:panelGroup>
+                            <h:selectOneRadio value="#{searchFlightBean.locationOption}" styleClass="inputText" id="locationOptionInput">
+                                <p:ajax process="@this" update="locationOptionInput" listener="#{searchFlightBean.listener}" />
+                                <f:selectItem itemValue="Departure Location - Destination Location"
+                                          itemLabel="Departure Location - Destination Location" rendered="#{searchFlightBean.clickedLocationOptionOne}"/>
+                                    <h:outputLabel value="Select your departure location: "/>
+                                    <h:selectOneMenu value="#{searchFlightBean.departureLocation}" styleClass="inputText" id="departureLocationInput"/>
+                                    <h:outputLabel value="Select your destination location: "/>
+                                    <h:selectOneMenu value="#{searchFlightBean.destinationLocation}" styleClass="inputText" id="destinationLocationInput"/>
+
+                                <f:selectItem itemValue="World Region"
+                                          itemLabel="World Region" rendered="#{not searchFlightBean.clickedLocationOptionOne}"/>
+                                    <h:outputLabel value="Select your world region: "/>
+                                    <h:selectOneMenu value="#{searchFlightBean.region}" styleClass="inputText" id="regionInput"/>
+                                </h:selectOneRadio>
+                            <h:message for="locationOptionInput" styleClass="error" />
+                        </h:panelGroup>
+                        <h:outputLabel for="popup" value="Select your date of departure: " />
+                        <h:panelGroup>
+                            <p:calendar id="popup" value="#{calendarViewBean.date}" />
+                        </h:panelGroup>
+                    </h:panelGrid>
+                </h:form>
+                </div>
+                </div>
+            </div>
+        </ui:define>
 </ui:composition>
 </html>
