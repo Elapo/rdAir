@@ -14,7 +14,7 @@ import java.util.List;
  */
 @ManagedBean
 @RequestScoped
-public class searchFlightBean implements Serializable {
+public class SearchFlightBean implements Serializable {
 
     @NotNull //(message="{error.desiredNrOfSeats}")
     @Size(min=1,max=189)

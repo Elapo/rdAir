@@ -22,18 +22,18 @@
                 <div class="mdl-card__title">
                     <h2 class="mdl-card__title-text">Search here for a flight</h2>
                 </div>
-                <div class="mdl-card__supporting-text">
+                <div class="mdl-card__supporting-text planeImage">
                 <h:form>
                     <h:panelGrid columns="2">
                         <h:outputLabel value="Select your preferred airline company: " />
                         <h:panelGroup>
-                         <h:selectOneMenu value="#{searchFlightBean.preferredAirline}"
+                         <h:selectOneMenu value="#{SearchFlightBean.preferredAirline}"
                         styleClass="inputText" id="preferredAirlineInput">Input van db</h:selectOneMenu>
                             <h:message for="preferredAirlineInput" styleClass="error" />
                         </h:panelGroup>
                         <h:outputLabel value="Select your traveling class: " />
                         <h:panelGroup>
-                            <h:selectOneMenu value="#{searchFlightBean.flightClass}"
+                            <h:selectOneMenu value="#{SearchFlightBean.flightClass}"
                                              styleClass="inputText" id="flightClassInput">
                             <f:selectItem itemValue="Economy" itemLabel="Economy" />
                             <f:selectItem itemValue="Business" itemLabel="Business" />
@@ -41,12 +41,12 @@
                             </h:selectOneMenu>
                             <h:message for="flightClassInput" styleClass="error" />
                             <h:outputText styleClass="outputText" id="accountNumberOutput"
-                                          value="#{searchFlightBean.flightClass}" />
+                                          value="#{SearchFlightBean.flightClass}" />
                         </h:panelGroup>
                         <h:outputLabel value="Ticket: " />
                         <h:panelGroup>
-                            <h:selectOneRadio value="#{searchFlightBean.flightWay}" styleClass="inputText" id="flightWayInput">
-                                <p:ajax process="@this" update="flightWayInput" listener="#{searchFlightBean.listener1}" />
+                            <h:selectOneRadio value="#{SearchFlightBean.flightWay}" styleClass="inputText" id="flightWayInput">
+                                <p:ajax process="@this" update="flightWayInput" listener="#{SearchFlightBean.listener1}" />
 
                                 <f:selectItem itemValue="One way"
                                       itemLabel="One way"/>
@@ -62,31 +62,31 @@
                         <h:panelGroup>
                             <p:calendar id="popup" value="#{calendarViewBean.date}" />
                         </h:panelGroup>
-                        <h:outputLabel for="popup1" value="Select your date of return: " rendered="#{searchFlightBean.clickedReturn}"/>
+                        <h:outputLabel for="popup1" value="Select your date of return: " rendered="#{SearchFlightBean.clickedReturn}"/>
                         <h:panelGroup>
-                            <p:calendar id="popup1" value="#{calendarViewBean.date}" rendered="#{searchFlightBean.clickedReturn}"/>
+                            <p:calendar id="popup1" value="#{calendarViewBean.date}" rendered="#{SearchFlightBean.clickedReturn}"/>
                         </h:panelGroup>
                         <br/>
                         <h:outputLabel value="Select your number of seats: " />
                         <h:panelGroup>
-                            <h:inputText type="number" value="#{searchFlightBean.desiredNrOfSeats}" styleClass="inputText" id="desiredNrOfSeatsInput" />
+                            <h:inputText type="number" value="#{SearchFlightBean.desiredNrOfSeats}" styleClass="inputText" id="desiredNrOfSeatsInput" />
                             <h:message for="desiredNrOfSeatsInput" styleClass="error" />
                         </h:panelGroup>
                         <h:outputLabel value="Select your flight location(s): "/>
                         <h:panelGrid columns="3">
-                            <h:selectOneRadio value="#{searchFlightBean.locationOption}" styleClass="inputText" id="locationOptionInput">
-                                <p:ajax process="@this" update="locationOptionInput" listener="#{searchFlightBean.listener}" />
+                            <h:selectOneRadio value="#{SearchFlightBean.locationOption}" styleClass="inputText" id="locationOptionInput">
+                                <p:ajax process="@this" update="locationOptionInput" listener="#{SearchFlightBean.listener}" />
                                 <f:selectItem itemValue="Departure Location - Destination Location"
                                           itemLabel="Departure Location - Destination Location"/>
                                     <h:outputLabel value="Select your departure location: "/>
-                                    <h:selectOneMenu value="#{searchFlightBean.departureLocation}" styleClass="inputText" id="departureLocationInput" rendered="#{searchFlightBean.clickedLocationOptionOne}"/>
+                                    <h:selectOneMenu value="#{SearchFlightBean.departureLocation}" styleClass="inputText" id="departureLocationInput" rendered="#{SearchFlightBean.clickedLocationOptionOne}"/>
                                     <h:outputLabel value="Select your destination location: "/>
-                                    <h:selectOneMenu value="#{searchFlightBean.destinationLocation}" styleClass="inputText" id="destinationLocationInput" rendered="#{searchFlightBean.clickedLocationOptionOne}"/>
+                                    <h:selectOneMenu value="#{SearchFlightBean.destinationLocation}" styleClass="inputText" id="destinationLocationInput" rendered="#{SearchFlightBean.clickedLocationOptionOne}"/>
 
                                     <f:selectItem itemValue="World Region"
                                           itemLabel="World Region"/>
                                     <h:outputLabel value="Select your world region: "/>
-                                    <h:selectOneMenu value="#{searchFlightBean.globalRegion}" styleClass="inputText" id="regionInput" rendered="#{not searchFlightBean.clickedLocationOptionOne}"/>
+                                    <h:selectOneMenu value="#{SearchFlightBean.globalRegion}" styleClass="inputText" id="regionInput" rendered="#{not SearchFlightBean.clickedLocationOptionOne}"/>
 
                             </h:selectOneRadio>
                             <h:message for="locationOptionInput" styleClass="error" />
@@ -105,11 +105,11 @@
 
 
 
-            <div class="demo-card-wide mdl-card mdl-shadow--2dp promoCard">
+            <div class="demo-card-wide mdl-card mdl-shadow--2dp">
             <div class="mdl-card__title">
                 <h2 class="mdl-card__title-text">Promotions</h2>
             </div>
-            <div class="mdl-card__supporting-text">
+            <div class="mdl-card__supporting-text planeImage">
                 NEW OFFER! Get 5% off now!
             </div>
             <div class="mdl-card__actions mdl-card--border">

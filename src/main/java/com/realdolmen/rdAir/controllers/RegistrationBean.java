@@ -8,7 +8,7 @@ import javax.faces.bean.ViewScoped;
 import javax.inject.Inject;
 
 @ViewScoped
-public class registrationBean {
+public class RegistrationBean {
     @Inject
     UserRepository ur;
 

@@ -35,7 +35,7 @@
 }
 
 .demo-card-wide{
-    height: 400px;
+    height: 500px;
     background-color: floralwhite;
     overflow: hidden;
 }
@@ -51,21 +51,49 @@
 }
 
 
-.mdl-card__supporting-text {
+.mdl-card__supporting-text.planeImage {
     background-image: url(#{resource['images/Transport-Airplane-Takeoff-icon1.png']});
     background-repeat: no-repeat;
     background-position: center;
     height: 300px;
 }
 
-.promoCard.mdl-card__supporting-text {
+/*.promoCard.mdl-card__supporting-text {
     background-image: url(#{resource['.png']});
     background-repeat: no-repeat;
     background-position: center;
+}*/
+
+#loginCardTitle {
+    display:flex;
+    flex-direction: row;
+    justify-content: center;
 }
 
-#loginCard {
+#loginBackground {
     background-color:floralwhite;
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#loginCardEndButton {
+    display:flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+#registerCardTitle {
+    display:flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+#registerBackground {
+    background-color:floralwhite;
+    display:flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .mdl-mega-footer {
