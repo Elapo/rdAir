@@ -6,4 +6,31 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
 
+
+<ui:composition template="WEB-INF/templates/material-template-customers.xhtml">
+    <ui:define name="title">Login</ui:define>
+
+    <ui:define name="content">
+
+    <div class="demo-card-wide mdl-card mdl-shadow--2dp">
+    <div class="mdl-card__title">
+        <h2 class="mdl-card__title-text">Registrated User Login</h2>
+    </div>
+    <div class="mdl-card__supporting-text" id="loginCard">
+        <h:form>
+            <h:outputLabel>Email</h:outputLabel>
+            <h:inputText value=""></h:inputText>
+            <h:outputLabel>Password</h:outputLabel>
+        </h:form>
+    </div>
+    </div><div class="mdl-card__actions mdl-card--border">
+        <!-- booking or register link if not already registered!!-->
+        <a class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--accent"> <!--href=".xhtml"-->
+            Login!
+        </a>
+    </div>
+    </div>
+
+    </ui:define>
+    </ui:composition>
 </html>

@@ -7,6 +7,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by Hade on 6/11/2016.
@@ -25,7 +26,7 @@ public class searchFlightBean implements Serializable {
     private String preferredAirline;
 
 
-    private String locationOption;
+    private List<String> locationOption;
     private boolean clickedLocationOptionOne=false;
     @NotNull
     private String departureLocation;
@@ -39,7 +40,7 @@ public class searchFlightBean implements Serializable {
     private Date dateOfDeparture;
 
     @NotNull
-    private String flightWay;
+    private List<String> flightWay;
     private boolean clickedReturn=false;
     @NotNull
     @Future
@@ -70,11 +71,11 @@ public class searchFlightBean implements Serializable {
         this.preferredAirline = preferredAirline;
     }
 
-    public String getLocationOption() {
+    public List<String> getLocationOption() {
         return locationOption;
     }
 
-    public void setLocationOption(String locationOption) {
+    public void setLocationOption(List<String> locationOption) {
         this.locationOption = locationOption;
     }
 
@@ -135,11 +136,11 @@ public class searchFlightBean implements Serializable {
         this.dateOfDeparture = dateOfDeparture;
     }
 
-    public String getFlightWay() {
+    public List<String> getFlightWay() {
         return flightWay;
     }
 
-    public void setFlightWay(String flightWay) {
+    public void setFlightWay(List<String> flightWay) {
         this.flightWay = flightWay;
     }
 

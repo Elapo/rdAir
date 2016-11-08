@@ -18,7 +18,7 @@
 <h:body>
     <!-- The drawer is always open in large screens. The header is always shown,
       even in small screens. -->
-    <div class="mdl-layout mdl-js-layout mdl-layout--fixed-drawer
+    <div class="mdl-layout mdl-js-layout
             mdl-layout--fixed-header autoHeight">
         <header class="mdl-layout__header">
             <div class="mdl-layout__header-row">
@@ -34,7 +34,7 @@
                     Button 3
                 </button>
                 <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">
-                    Button 4
+                    LOGIN
                 </button>
                 <div class="mdl-textfield mdl-js-textfield mdl-textfield--expandable
                   mdl-textfield--floating-label mdl-textfield--align-right">
@@ -50,16 +50,8 @@
                 </div>
             </div>
         </header>
-        <div class="mdl-layout__drawer">
-            <span class="mdl-layout-title">Title</span>
-            <nav class="mdl-navigation">
-                <a class="mdl-navigation__link" href="">Link</a>
-                <a class="mdl-navigation__link" href="">Link</a>
-                <a class="mdl-navigation__link" href="">Link</a>
-                <a class="mdl-navigation__link" href="">Link</a>
-            </nav>
-        </div>
-        <main id="main" class="mdl-layout__content">
+
+        <main id="mainCustomers" class="mdl-layout__content">
 
                 <h1>
                     <ui:insert name="title">Placeholder</ui:insert>
@@ -68,9 +60,9 @@
                     <ui:insert name="content"/>
                 </div>
         </main>
-        <footer class="mdl-mega-footer">
+        <div class="mdl-mega-footer">
             <div class="mdl-mega-footer--middle-section">
-                <div class="mdl-mega-footer--drop-down-section">
+                <div class="mdl-mega-footer--drop-down-section" id="leftPlaced">
                     <input class="mdl-mega-footer__heading-checkbox" type="checkbox" checked="checked">
                         <h1 class="mdl-mega-footer__heading">RdAir and Partners</h1>
                         <ul class="mdl-mega-footer__link-list">
@@ -80,31 +72,34 @@
                         </ul>
                     </input>
                 </div>
-                <div class="mdl-mega-footer--drop-down-section">
+                <div class="mdl-mega-footer--drop-down-section" id="rightPlaced">
                     <input class="mdl-mega-footer__heading-checkbox" type="checkbox" checked="checked">
                         <h1 class="mdl-mega-footer__heading">Other useful links</h1>
                         <ul class="mdl-mega-footer__link-list">
                             <li><a href="">FAQ</a></li>
                             <li><a href="">Contact Us</a></li>
                             <br></br>
+                            <div class="mdl--social-buttons">
                             <a href="https://www.facebook.com/sharer/sharer.php?u=" title="Share on Facebook" target="_blank" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--facebook">
                                 <i class="fa fa-facebook fa-fw"></i>Facebook</a>
                             <a href="http://twitter.com/home?status=" title="Share on Twitter" target="_blank" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--twitter">
                                 <i class="fa fa-twitter fa-fw"></i>Twitter</a>
                             <a href="http://www.stumbleupon.com/submit?url=" title="Share on StumbleUpon" target="_blank" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--stumbleupon">
                                 <i class="fa fa-stumbleupon fa-fw"></i>StumbleUpon</a>
+                            </div>
                         </ul>
                     </input>
                 </div>
             </div>
-            <div class="mdl-mega-footer--bottom-section">
+            <div class="mdl-mega-footer--bottom-section" id="middlePlaced">
+
                 <div class="mdl-logo">
                     Copyright 2016 RdAir.
                 </div>
             </div>
-        </footer>
+        </div>
     </div>
-    <script type="text/javascript">
+    <!--<script type="text/javascript">
         document.addEventListener("DOMContentLoaded", function(event) {
             alert(window.location.pathname);
             if(window.location.pathname.indexOf("index") &lt; -1) {
@@ -113,7 +108,7 @@
 
             }
         });
-    </script>
+    </script>-->
 </h:body>
 </f:view>
 </html>
