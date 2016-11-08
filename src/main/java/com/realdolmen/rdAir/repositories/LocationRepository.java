@@ -9,7 +9,7 @@ import javax.persistence.Query;
 import java.util.List;
 
 @Stateless
-public class LocationRepository {
+public class LocationRepository {//todo test
 
     @PersistenceContext
     EntityManager em;
@@ -36,4 +36,5 @@ public class LocationRepository {
                 .setMaxResults(perPage)
                 .getResultList();
     }
+
 }

@@ -29,6 +29,11 @@
             <scope>provided</scope>
         </dependency>
         <dependency>
+            <groupId>de.svenkubiak</groupId>
+            <artifactId>jBCrypt</artifactId>
+            <version>0.4</version>
+        </dependency>
+        <dependency>
 			<groupId>org.ocpsoft.rewrite</groupId>
 			<artifactId>rewrite-servlet</artifactId>
 			<version>3.4.1.Final</version>

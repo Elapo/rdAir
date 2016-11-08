@@ -10,6 +10,15 @@ import java.util.Date;
 @Entity
 public class Flight implements Serializable{
 
+        /*
+    - seatcount
+    - class
+    - Airline
+    - departure/arrival, Region
+    - Date
+    - ReturnDate
+     */
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
@@ -63,5 +72,13 @@ public class Flight implements Serializable{
 
     public int getId() {
         return id;
+    }
+
+    public Route getRoute() {
+        return route;
+    }
+
+    public void setRoute(Route route) {
+        this.route = route;
     }
 }

@@ -42,7 +42,7 @@ public class TestUserRepository extends JpaPersistenceTest {
 
     @Test
     public void testUserRepositoryFindById(){
-        RDEmployee rde = new RDEmployee("Frederik", "Van Herbruggen", "FCL 34", "0474416357", "email@email.com","abc", null);
+        RDEmployee rde = new RDEmployee("Frederik", "Van Herbruggen", "FCL 34", "0474416357", "fre@email.com","abc", null);
         em.persist(rde);
 
         RDEmployee rdePersisted = ur.findById(rde.getId(), RDEmployee.class);
@@ -56,9 +56,10 @@ public class TestUserRepository extends JpaPersistenceTest {
         Airline a = new Airline("Frederik", "Van Herbruggen", "FCL 34", "0474416357", "email@email.com", "freAir", "http://freAir.com","abc", null, null);
         em.persist(a);
 
-        Airline aPersisted = ur.getUserByEmail("email@email.com", Airline.class);
+        Airline aPersisted = (Airline)ur.getUserByEmail("email@email.com");
 
         Assert.assertNotNull(aPersisted);
+        Assert.assertNotNull(aPersisted.getWebsite());
         Assert.assertEquals(a, aPersisted);
     }
 

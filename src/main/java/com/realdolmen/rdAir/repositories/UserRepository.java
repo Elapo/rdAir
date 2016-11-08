@@ -4,6 +4,7 @@ import com.realdolmen.rdAir.domain.User;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import java.util.List;
@@ -27,10 +28,29 @@ public class UserRepository {
         return em.find(type, id);
     }
 
+    public User getUserByEmail(String email){
+        Query sql = em.createQuery("select o from User o where o.email = ?1");;
+        User u;
+        try{
+            u = (User)sql.setParameter(1, email).getSingleResult();
+        }
+        catch (NoResultException e) {
+            return null;
+        }
+        return u;
+    }
+
     @SuppressWarnings(value = "all")
-    public <T extends User> T getUserByEmail(String email, Class<T> type){
-        Query sql = em.createQuery("select o from "+type.getSimpleName()+" o where o.email = ?1");
-        return (T)sql.setParameter(1, email).getSingleResult();
+    public <T extends User> T findByName(String name, Class<T> type){//todo test
+        Query sql;
+        if(type.getSimpleName() != "Airline") sql = em.createQuery("select u from " +type.getSimpleName()+" u where u.lastName=?1");
+        else sql = em.createQuery("select u from Airline u where u.airlineName=?1");
+        try {
+            return (T)sql.setParameter(1,name).getSingleResult();
+        }
+        catch (NoResultException e){
+            return null;
+        }
     }
 
     @SuppressWarnings(value = "all")

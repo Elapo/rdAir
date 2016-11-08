@@ -22,6 +22,8 @@ public class Order implements Serializable{
     @Temporal(TemporalType.DATE)
     private Date orderDate;
 
+    private String status; //todo maybe make enum
+
     protected Order() {
         tickets = new ArrayList<>();
     }
@@ -46,5 +48,13 @@ public class Order implements Serializable{
 
     public void setOrderDate(Date orderDate) {
         this.orderDate = orderDate;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 }

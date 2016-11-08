@@ -2,16 +2,14 @@ package com.realdolmen.rdAir.domain;
 
 import org.hibernate.validator.constraints.Email;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.MappedSuperclass;
+import javax.persistence.*;
 import java.io.Serializable;
 
 /**
  * Created by Frederik Van Herbruggen on 4/11/2016.
  */
-@MappedSuperclass
+@Entity
+@Inheritance(strategy = InheritanceType.JOINED)
 public class User implements Serializable{
 
     @Id
