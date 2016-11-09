@@ -62,4 +62,17 @@ public class TestRouteRepository extends JpaPersistenceTest {
         List<Route> routes= rp.getPerPage(0,10);
         Assert.assertNotEquals(0, routes.size());
     }
+
+    @Test
+    public void testRouteRepositoryDelete(){
+        Route r = new Route(null,null,null,null);
+        em.persist(r);
+        int id = r.getId();
+        Route rPersisted = em.find(Route.class, id);
+        Assert.assertNotNull(rPersisted);
+
+        rp.delete(id);
+        rPersisted = em.find(Route.class, id);
+        Assert.assertNull(rPersisted);
+    }
 }

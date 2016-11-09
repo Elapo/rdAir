@@ -1,0 +1,63 @@
+package com.realdolmen.rdAir.util;
+
+import javax.activation.DataHandler;
+import javax.activation.DataSource;
+import javax.activation.FileDataSource;
+import javax.mail.*;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeBodyPart;
+import javax.mail.internet.MimeMessage;
+import javax.mail.internet.MimeMultipart;
+import java.util.Properties;
+
+public class MailService {
+    final String username="realdolmenair@gmail.com";
+    final String password="u9ZSZncU0pvjalaxB7g4";
+    Properties props;
+    public MailService(){
+        props = new Properties();
+        props.put("mail.smtp.auth", "true");
+        props.put("mail.smtp.starttls.enable", "true");
+        props.put("mail.smtp.host", "smtp.gmail.com");
+        props.put("mail.smtp.port", "587");
+    }
+    public boolean mail(String to, String subject, String body){
+        Session session = Session.getInstance(props,
+                new Authenticator() {
+                    @Override
+                    protected PasswordAuthentication getPasswordAuthentication() {
+                        return new PasswordAuthentication(username, password);
+                    }
+                });
+        try {
+            Message mess = new MimeMessage(session);
+            mess.setFrom(new InternetAddress(username));
+            mess.setRecipient(Message.RecipientType.TO,
+                    new InternetAddress(to));
+
+            MimeMultipart multipart = new MimeMultipart();
+
+            mess.setSubject(subject);
+            BodyPart messBodyPart = new MimeBodyPart();
+            messBodyPart.setContent(body, "text/html");
+
+            multipart.addBodyPart(messBodyPart);
+
+            messBodyPart = new MimeBodyPart();
+            DataSource fds = new FileDataSource("C:\\Users\\FVHBB94\\Documents\\Git\\rdAir\\src\\main\\resources\\Images\\sample.png");
+            messBodyPart.setDataHandler(new DataHandler(fds));
+            messBodyPart.setHeader("Content-ID", "<image>");
+            multipart.addBodyPart(messBodyPart);
+
+            mess.setContent(multipart);
+
+
+            Transport.send(mess);
+            return true;
+        }
+        catch (Exception e){
+            e.printStackTrace();
+            return false;
+        }
+    }
+}

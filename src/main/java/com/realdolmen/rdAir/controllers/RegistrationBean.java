@@ -8,12 +8,9 @@ import javax.faces.bean.ViewScoped;
 import javax.inject.Inject;
 
 @ViewScoped
-public class registrationBean {
+public class RegistrationBean {
     @Inject
     UserRepository ur;
-
-    @Inject
-    private LoginBean login;
 
     private Customer user;
 
@@ -35,8 +32,6 @@ public class registrationBean {
         passwordHash = BCrypt.hashpw(password, BCrypt.gensalt());
         user = new Customer(fName, lName, address, telephone, email, passwordHash, null);
         ur.save(user);
-        login.setUser(user);
-        login.setLoggedIn(true);
         return "pretty:view-login";
     }
 
@@ -95,4 +90,5 @@ public class registrationBean {
     public void setPasswordHash(String passwordHash) {
         this.passwordHash = passwordHash;
     }
+
 }

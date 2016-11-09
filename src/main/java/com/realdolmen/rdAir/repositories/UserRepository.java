@@ -41,9 +41,10 @@ public class UserRepository {
     }
 
     @SuppressWarnings(value = "all")
-    public <T extends User> T findByName(String name, Class<T> type){//todo test
+    public <T extends User> T findByName(String name, Class<T> type){
         Query sql;
-        if(type.getSimpleName() != "Airline") sql = em.createQuery("select u from " +type.getSimpleName()+" u where u.lastName=?1");
+        String test = type.getSimpleName();
+        if(!type.getSimpleName().equals("Airline")) return null;
         else sql = em.createQuery("select u from Airline u where u.airlineName=?1");
         try {
             return (T)sql.setParameter(1,name).getSingleResult();
@@ -61,5 +62,12 @@ public class UserRepository {
                 .getResultList();
     }
 
-
+    public <T extends User> boolean delete(int id, Class<T> type){
+        User u = em.getReference(type, id);
+        if(u!=null) {
+            em.remove(em.getReference(type, id));
+            return true;
+        }
+        return false;
+    }
 }

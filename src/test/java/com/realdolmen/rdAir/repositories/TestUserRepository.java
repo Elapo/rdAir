@@ -76,4 +76,34 @@ public class TestUserRepository extends JpaPersistenceTest {
         Assert.assertNotNull(list);
         Assert.assertNotEquals(list.size(), 0); //check if list is longer than 0, which it should be after inserting 2 values
     }
+
+    @Test
+    public void testUserRepositoryFindByName(){
+        Customer c = new Customer("Frederik123", "Van Herbruggen", "FCL 34", "0474416357", "email@email.com","abc", null);
+        em.persist(c);
+
+        Customer cPersisted = ur.findByName("Frederik12", Customer.class);
+
+        Assert.assertNull(cPersisted);
+
+        Airline a = new Airline("Frederik", "Van Herbruggen", "FCL 34", "0474416357", "email@email.com", "freAir", "http://freAir.com","abc", null, null);
+        em.persist(a);
+
+        Airline aPersisted = ur.findByName("freAir", Airline.class);
+
+        Assert.assertNotNull(aPersisted);
+    }
+
+    @Test
+    public void testUserRepositoryDelete(){
+        Customer c = new Customer("Frederik123", "Van Herbruggen", "FCL 34", "0474416357", "email@email.com","abc", null);
+        em.persist(c);
+        int id = c.getId();
+        Customer cPersisted = em.find(Customer.class, id);
+        Assert.assertNotNull(cPersisted);
+
+        ur.delete(id, Customer.class);
+        cPersisted = em.find(Customer.class, id);
+        Assert.assertNull(cPersisted);
+    }
 }

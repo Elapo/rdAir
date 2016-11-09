@@ -22,7 +22,13 @@ public class Order implements Serializable{
     @Temporal(TemporalType.DATE)
     private Date orderDate;
 
+    private double orderPrice;
+
+    //pending or paid
     private String status; //todo maybe make enum
+
+    //todo needs (average) profit margin for rdair,
+    //which also makes it easier to do logging
 
     protected Order() {
         tickets = new ArrayList<>();
@@ -32,6 +38,8 @@ public class Order implements Serializable{
         this.tickets = new ArrayList<>();
         this.tickets = tickets;
         this.orderDate = orderDate;
+        this.orderPrice = 0;
+        this.status = "pending";
     }
 
     public int getId() {
@@ -56,5 +64,13 @@ public class Order implements Serializable{
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public double getOrderPrice() {
+        return orderPrice;
+    }
+
+    public void setOrderPrice(double orderPrice) {
+        this.orderPrice = orderPrice;
     }
 }

@@ -35,11 +35,13 @@ public class OrderRepository { //todo test
     }
 
     public int getPaidOrderCount(){
-        return em.createQuery("select count(o) from Order o where o.status=\"paid\"").getFirstResult();
+        Long l = (long)em.createQuery("select count(o) from Order o where o.status='accepted'").getSingleResult();
+        return l.intValue();
     }
 
     public int getPendingOrderCount(){
-        return em.createQuery("select count(o) from Order o where o.status=\"pending\"").getFirstResult();
+        Long l = (long)em.createQuery("select count(o) from Order o where o.status='pending'").getSingleResult();
+        return l.intValue();
     }
 
     @SuppressWarnings(value = "all")
@@ -50,5 +52,14 @@ public class OrderRepository { //todo test
         catch (NoResultException e){
             return null;
         }
+    }
+
+    public boolean delete(int id) {
+        Order o = em.getReference(Order.class, id);
+        if (o != null) {
+            em.remove(o);
+            return true;
+        }
+        return false;
     }
 }

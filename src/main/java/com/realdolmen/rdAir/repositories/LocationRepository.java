@@ -30,11 +30,19 @@ public class LocationRepository {//todo test
     }
 
     @SuppressWarnings(value = "all")
-    public List<Location> getPerPage(int currentPage, int perPage){
+    public List<Location> getPerPage(int currentPage, int perPage){//todo change formula so page starts from 1
         return em.createQuery("select l from Location l")
                 .setFirstResult(currentPage*perPage)
                 .setMaxResults(perPage)
                 .getResultList();
     }
 
+    public boolean delete(int id) {
+        Location l = em.getReference(Location.class, id);
+        if(l != null) {
+            em.remove(l);
+            return true;
+        }
+        return false;
+    }
 }

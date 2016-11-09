@@ -31,4 +31,13 @@ public class FlightClassRepository {//todo test
             return null;
         }
     }
+
+    public boolean delete(int id){
+        FlightClass fc = em.getReference(FlightClass.class, id);
+        if (fc != null) {
+            em.remove(fc);
+            return true;
+        }
+        return false;
+    }
 }

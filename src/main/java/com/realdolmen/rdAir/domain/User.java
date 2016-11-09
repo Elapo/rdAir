@@ -3,6 +3,7 @@ package com.realdolmen.rdAir.domain;
 import org.hibernate.validator.constraints.Email;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 
 /**
@@ -21,7 +22,7 @@ public class User implements Serializable{
     private String lastName;
 
     private String address;
-
+    
     private String telephone;
 
     @Email(message = "{validation.mail.invalid}")

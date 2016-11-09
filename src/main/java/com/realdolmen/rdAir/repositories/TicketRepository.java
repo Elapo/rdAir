@@ -18,4 +18,12 @@ public class TicketRepository { //todo test
         return em.find(Ticket.class, id);
     }
 
+    public boolean delete(int id){
+        Ticket t = em.getReference(Ticket.class, id);
+        if(t != null){
+            em.remove(t);
+            return true;
+        }
+        return false;
+    }
 }

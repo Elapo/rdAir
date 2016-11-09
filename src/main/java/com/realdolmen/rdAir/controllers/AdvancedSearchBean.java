@@ -7,8 +7,6 @@ import com.realdolmen.rdAir.repositories.RouteRepository;
 import com.realdolmen.rdAir.repositories.UserRepository;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.criterion.Restrictions;
 
 import javax.inject.Inject;
 import javax.persistence.PersistenceContext;

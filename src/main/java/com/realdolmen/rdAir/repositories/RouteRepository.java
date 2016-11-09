@@ -30,4 +30,13 @@ public class RouteRepository {
     public List<Route> getPerPage(int currentPage, int perPage){
         return em.createQuery("select r from Route r").setFirstResult(currentPage*perPage).setMaxResults(perPage).getResultList();
     }
+
+    public boolean delete(int id){
+        Route r= em.getReference(Route.class, id);
+        if(r!=null){
+            em.remove(r);
+            return true;
+        }
+        return false;
+    }
 }

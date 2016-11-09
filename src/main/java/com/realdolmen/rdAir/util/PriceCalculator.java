@@ -8,24 +8,67 @@ import org.hibernate.Hibernate;
 
 import java.util.Date;
 
-public abstract class PriceCalculator {
-    public double calculatePrice(Ticket t){
+public class PriceCalculator {
+
+    public static final double RDAIR_CREDITCARD_PROMO = 0.95;
+
+    public static double calculatePrice(Ticket t){
         FlightClass fc = t.getFlightClass();
         Flight f = t.getFlight();
         Hibernate.initialize(fc);
         Hibernate.initialize(f);
 
         double basePrice = fc.getPrice();
-        if(!t.getFlight().getRdAirModifier().isPercent()){
+        Hibernate.initialize(f.getRdAirModifier());
+        if(!f.getRdAirModifier().isPercent()){
             //the RD modifier is not a percentage, so it is a flat amount
             //meaning this is the final price
             //todo check if price is lower than airline price
             return t.getFlight().getRdAirModifier().getAmount();
         }
-        return 0;
+        else{
+            Hibernate.initialize(f.getRoute());
+            Hibernate.initialize(f.getRoute().getModifiers());
+            Hibernate.initialize(f.getRoute().getRdModifiers());
+            //get all modifiers from db
+            for(PriceModifier pm: f.getRoute().getModifiers()){
+                if(isActive(pm)) {//if modifier is active
+                    if (pm.isPercent())//percentage needs to be multiplied
+                        basePrice *= pm.getAmount();
+                    else//flat amount just needs to be added
+                        basePrice += pm.getAmount();
+                }
+            }
+            for(PriceModifier pm: f.getRoute().getRdModifiers()){
+                if(isActive(pm)){
+                    basePrice += pm.getAmount();
+                }
+            }
+            return basePrice;
+        }
     }
 
-    private boolean isActive(PriceModifier pm){
+    public static double calcAirlinePrice(Ticket t){
+        FlightClass fc = t.getFlightClass();
+        Flight f = t.getFlight();
+        Hibernate.initialize(fc);
+        Hibernate.initialize(f);
+        Hibernate.initialize(f.getRoute());
+
+        double price = fc.getPrice();
+        Hibernate.initialize(f.getRoute().getModifiers());
+        for (PriceModifier pm : f.getRoute().getRdModifiers()){
+            if(isActive(pm) && pm.isPercent()){
+                price = price*pm.getAmount();
+            }
+            else if(isActive(pm) && ! pm.isPercent()){
+                price = price + pm.getAmount();
+            }
+        }
+        return price;
+    }
+
+    private static boolean isActive(PriceModifier pm){
         Date now = new Date();
         if(pm.getStartDate() == null){ //it's time-based
             if(pm.getStartDate().before(now) && pm.getEndDate().after(now)){
