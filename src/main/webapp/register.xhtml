@@ -9,47 +9,59 @@
 
 <ui:composition template="WEB-INF/templates/material-template-customers.xhtml">
 
-<ui:define name="title">Register</ui:define>
+<ui:define name="title">#{msgs['Register.register']}</ui:define>
 <ui:define name="content">
 
     <div class="demo-card-wide mdl-card mdl-shadow--2dp">
         <div class="mdl-card__title" id="registerCardTitle">
-            <h2 class="mdl-card__title-text">Register yourself here</h2>
+            <h2 class="mdl-card__title-text">#{msgs['Register.yourself']}</h2>
         </div>
         <div class="mdl-card__supporting-text" id="registerBackground">
             <h:form>
                 <h:panelGrid columns="2">
                     <h:panelGrid columns="2">
-                <h:outputLabel>First Name: </h:outputLabel>
+                <h:outputLabel>#{msgs['Register.first.name']}</h:outputLabel>
                 <br></br>
-                <p:inputText value="#{registrationBean.fname}"/>
-                <br></br>
-                <br></br>
-                <h:outputLabel>Last Name: </h:outputLabel>
-                <br></br>
-                <p:inputText value="#{registrationBean.lname}"/>
+                <p:inputText value="#{registrationBean.fname}" styleClass="inputText" id="firstNameInput"/>
+                        <!--<p:message for="firstNameInput" styleClass="error"/>-->
                 <br></br>
                 <br></br>
-                <h:outputLabel>Address: </h:outputLabel>
+                <h:outputLabel>#{msgs['Register.last.name']} </h:outputLabel>
                 <br></br>
-                <p:inputText value="#{registrationBean.address}"/>
-                <br></br>
-                <br></br>
-                        </h:panelGrid>
-                        <h:panelGrid columns="2">
-                <h:outputLabel>Telephone: </h:outputLabel>
-                <br></br>
-                <p:inputText type="telephone" value="#{registrationBean.telephone}"/>
+                <p:inputText value="#{registrationBean.lname}" styleClass="inputText" id="lastNameInput"/>
+                        <!--<p:message for="lastNameInput" styleClass="error"/>-->
                 <br></br>
                 <br></br>
-                <h:outputLabel>Email: </h:outputLabel>
+                <h:outputLabel>#{msgs['Register.address']} </h:outputLabel>
                 <br></br>
-                <p:inputText type="email" value="#{registrationBean.email}"/>
+                <p:inputText value="#{registrationBean.address}" styleClass="inputText" id="addressInput"/>
+                        <!--<p:message for="addressInput" styleClass="error"/>-->
                 <br></br>
                 <br></br>
-                <h:outputLabel>Password: </h:outputLabel>
+                <h:outputLabel>#{msgs['Register.telephone']} </h:outputLabel>
                 <br></br>
-                <p:inputText type="password" value="#{registrationBean.password}"/>
+                <p:inputText type="telephone" value="#{registrationBean.telephone}" styleClass="inputText" id="telephoneInput"/>
+                        <!--<p:message for="telephoneInput" styleClass="error"/>-->
+                <br></br>
+                <br></br>
+                    </h:panelGrid>
+                    <h:panelGrid columns="2">
+                <h:outputLabel>#{msgs['Register.email']} </h:outputLabel>
+                <br></br>
+                <p:inputText type="email" value="#{registrationBean.email}" styleClass="inputText" id="emailInput"/>
+                        <!--<p:message for="emailInput" styleClass="error"/>-->
+                <br></br>
+                <br></br>
+                <h:outputLabel>#{msgs['Register.password']} </h:outputLabel>
+                <br></br>
+                <p:inputText type="password" value="#{registrationBean.password}" styleClass="inputText" id="passwordInput"/>
+                        <!--<p:message for="passwordInput" styleClass="error"/>-->
+                            <br></br>
+                            <br></br>
+                            <h:outputLabel>#{msgs['Register.password.repeat']} </h:outputLabel>
+                            <br></br>
+                            <p:inputText type="password" value="#{registrationBean.password}" styleClass="inputText" id="passwordRepeatInput"/>
+                        <!--<p:message for="passwordRepeatInput" styleClass="error"/>-->
                         </h:panelGrid>
                 </h:panelGrid>
             </h:form>
@@ -57,7 +69,7 @@
                 <div class="mdl-card__actions mdl-card--border" id="loginCardEndButton">
                 <!-- back to login (mr dan zonder de registertekstknop?)!!-->
                 <a class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--accent" href="login.xhtml">
-                    Register!
+                    #{msgs['Register.button']}
                 </a>
         </div>
     </div>

@@ -6,7 +6,7 @@
               version="2.2">
     <application>
         <locale-config>
-            <default-locale>en</default-locale>
+            <default-locale>en_GB</default-locale>
             <supported-locale>en_GB</supported-locale>
             <supported-locale>nl_BE</supported-locale>
             <supported-locale>fr_BE</supported-locale>

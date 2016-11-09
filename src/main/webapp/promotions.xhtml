@@ -9,28 +9,28 @@
 
 <ui:composition template="WEB-INF/templates/material-template-customers.xhtml">
 
-    <ui:define name="title">Promotions</ui:define>
+    <ui:define name="title">#{msgs['Promotions.promotions']}</ui:define>
     <ui:define name="content">
 
 
         <div class="demo-card-wide mdl-card mdl-shadow--2dp">
         <div class="mdl-card__title" id="promoCardTitle">
         <h2 class="mdl-card__title-text">
-            Promotion of the week
+            #{msgs['Promotions.week']}
         </h2>
         </div>
             <div class="mdl-card__supporting-text" id="promotionImage">
                 <h3>
-                    5% off on all flights to Asia! Enjoy it while it lasts!
+                    #{msgs['Promotions.supporting.text.promotion.one']}
                 </h3>
                 <br></br>
                 <h4>
-                    Quick! Don't let it take off without you!
+                    #{msgs['Promotions.supporting.text.promotion.one.extra']}
                 </h4>
             </div>
             <div class="mdl-card__actions mdl-card--border">
-                <a class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--accent" href="/booking.xhtml">
-                    Go for it! BOOK NOW!
+                <a class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--accent" href="booking.xhtml">
+                    #{msgs['Promotions.book.button']}
                 </a>
             </div>
         </div>

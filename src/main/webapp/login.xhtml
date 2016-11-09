@@ -9,36 +9,37 @@
 
 
 <ui:composition template="WEB-INF/templates/material-template-customers.xhtml">
-    <ui:define name="title">Login</ui:define>
+    <ui:define name="title">#{msgs['Login.login']}</ui:define>
 
     <ui:define name="content">
 
     <div class="demo-card-wide mdl-card mdl-shadow--2dp">
     <div class="mdl-card__title" id="loginCardTitle">
-        <h2 class="mdl-card__title-text">Registered User Login</h2>
+        <h2 class="mdl-card__title-text">#{msgs['Login.registered.user.login']}</h2>
     </div>
     <div class="mdl-card__supporting-text" id="loginBackground">
         <h:form>
-            <h:outputLabel>Email</h:outputLabel>
+            <h:outputLabel>#{msgs['Login.email']}</h:outputLabel>
             <br></br>
             <p:inputText value="#{loginBean.email}"/>
             <br></br>
             <br></br>
-            <h:outputLabel>Password</h:outputLabel>
+            <h:outputLabel>#{msgs['Login.password']}</h:outputLabel>
             <br></br>
             <p:inputText type="password" value="#{loginBean.password}"/>
             <br></br>
-            <br></br>
-            <br></br>
-            <h:outputLabel value="Not registered yet? "/>
-            <br></br>
-            <h:button value="Register here!" outcome="register.xhtml"/>
+
         </h:form>
     </div>
     <div class="mdl-card__actions mdl-card--border" id="loginCardEndButton">
-        <!-- login/booking or register link if not already registered!!-->
+        <!-- linken nr home page of verder booking (als men hiervan komt)-->
         <a class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--accent"> <!--href=".xhtml"-->
-            Login!
+            #{msgs['Login.login.button']}
+        </a>
+        <br></br>
+        <br></br>
+        <a class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--accent" href="register.xhtml">
+            #{msgs['Login.register.button']}
         </a>
     </div>
     </div>
