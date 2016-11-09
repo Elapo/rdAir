@@ -12,8 +12,6 @@
         <class>com.realdolmen.rdAir.domain.Location</class>
         <class>com.realdolmen.rdAir.domain.Order</class>
         <class>com.realdolmen.rdAir.domain.PriceModifier</class>
-        <class>com.realdolmen.rdAir.domain.PriceModifierFlat</class>
-        <class>com.realdolmen.rdAir.domain.PriceModifierPercent</class>
         <class>com.realdolmen.rdAir.domain.Region</class>
         <class>com.realdolmen.rdAir.domain.Route</class>
         <class>com.realdolmen.rdAir.domain.User</class>

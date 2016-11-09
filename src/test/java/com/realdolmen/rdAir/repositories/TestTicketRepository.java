@@ -9,7 +9,7 @@ import org.junit.Test;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
-public class TicketRepositoryTest extends JpaPersistenceTest {
+public class TestTicketRepository extends JpaPersistenceTest {
 
     EntityManager em;
 

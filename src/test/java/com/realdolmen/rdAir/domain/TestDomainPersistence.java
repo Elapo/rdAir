@@ -18,6 +18,7 @@ public class TestDomainPersistence extends JpaPersistenceTest {
         em = entityManager();
     }
 
+    //todo test cascades
     @Test
     public void testAirlinePersistence(){
         Airline a = new Airline("Frederik", "Van Herbruggen", "FCL 34", "0474416357", "email@email.com", "freAir", "http://freAir.com", "abc", null, null);

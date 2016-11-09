@@ -13,6 +13,7 @@ import javax.persistence.PersistenceContext;
 import java.util.Date;
 import java.util.List;
 
+@Deprecated
 public class AdvancedSearchBean {
     @PersistenceContext
     private Session s;
