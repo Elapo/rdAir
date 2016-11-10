@@ -28,7 +28,11 @@ public class RouteRepository {
 
     @SuppressWarnings(value = "all")
     public List<Route> getPerPage(int currentPage, int perPage){
-        return em.createQuery("select r from Route r").setFirstResult(currentPage*perPage).setMaxResults(perPage).getResultList();
+        if(currentPage <= 0 || perPage <= 0) return null;
+        return em.createQuery("select r from Route r")
+                .setFirstResult((currentPage-1)*perPage)
+                .setMaxResults(perPage)
+                .getResultList();
     }
 
     public boolean delete(int id){

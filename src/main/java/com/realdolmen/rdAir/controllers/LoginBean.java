@@ -57,7 +57,8 @@ public class LoginBean implements Serializable{
                 booking = new Order(null, new Date());
             }
             booking.getTickets().add(t);
-            booking.setOrderPrice(booking.getOrderPrice() + PriceCalculator.calculatePrice(t));
+            t.setSalesPrice(PriceCalculator.calculatePrice(t));
+            booking.setOrderPrice(booking.getOrderPrice() + t.getSalesPrice());
         }
     }
 

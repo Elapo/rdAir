@@ -14,6 +14,7 @@ public class TestSearchRepository extends JpaPersistenceTest {
 
     EntityManager em;
     SearchRepository search;
+    CriteriaSearchRepository csr;
 
     Flight f;
     FlightClass fc;
@@ -24,6 +25,9 @@ public class TestSearchRepository extends JpaPersistenceTest {
         em = entityManager();
         search = new SearchRepository();
         search.em = em;
+
+        csr = new CriteriaSearchRepository();
+
         Region r = new Region("America");
         Location l1 = new Location("Airport", "APT", r);
         Location l2 = new Location("SecondAirport", "SPT", r);
@@ -34,7 +38,8 @@ public class TestSearchRepository extends JpaPersistenceTest {
         a.getRoutes().add(route);
         f = new Flight(route, null, new Date(), new Date());
         a.getFlights().add(f);
-        fc = new FlightClass("second", 50, 30, 30, f);
+        fc = new FlightClass("First Class", 50, 30, 30, f);
+        f.getAvailableClasses().add(fc);
 
         em.persist(a);
         em.flush();
@@ -45,8 +50,21 @@ public class TestSearchRepository extends JpaPersistenceTest {
         Ticket t = new Ticket(f, fc);
         em.persist(t);
 
-        List<Ticket> results = search.searchFlights(2, "second", "rdair", "", "", "", null);
-        Assert.assertNotNull(results);
-        System.out.println(results.get(0).getFlightClass().getName());
+        List<Ticket> results = search.searchFlights(2, "First Class", "rdair", "Airport", "SecondAirport", "", null);
+        Assert.assertNotNull(results.get(0));
+    }
+
+    @Test
+    public void testSearchWithoutDateWithRegion(){
+        Ticket t = new Ticket(f, fc);
+        em.persist(t);
+        System.out.println(t.getFlight().getAvailableFirstClass());
+        List<Ticket> results = search.searchFlights(2, "First Class", "rdair", "", "", "America", null);
+        Assert.assertNotNull(results.get(0));
+    }
+
+    @Test
+    public void testOtherSearch(){
+        System.out.println(csr.searchFlights(0, "", "rdair", "", "", "", null));
     }
 }

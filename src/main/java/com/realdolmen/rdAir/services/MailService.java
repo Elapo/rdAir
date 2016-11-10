@@ -43,12 +43,6 @@ public class MailService {
 
             multipart.addBodyPart(messBodyPart);
 
-            messBodyPart = new MimeBodyPart();
-            DataSource fds = new FileDataSource("C:\\Users\\FVHBB94\\Documents\\Git\\rdAir\\src\\main\\resources\\Images\\sample.png");
-            messBodyPart.setDataHandler(new DataHandler(fds));
-            messBodyPart.setHeader("Content-ID", "<image>");
-            multipart.addBodyPart(messBodyPart);
-
             mess.setContent(multipart);
 
 

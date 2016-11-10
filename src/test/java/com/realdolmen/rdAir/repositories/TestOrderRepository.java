@@ -52,6 +52,11 @@ public class TestOrderRepository extends JpaPersistenceTest {
     }
 
     @Test
+    public void testOrderRepostitoryFindByStatusWithNonExistentStatus(){
+        Assert.assertEquals(0, or.findByStatus("bloop").size());
+    }
+
+    @Test
     public void testOrderRepositoryGetPaidOrderCount(){
         Order o = new Order(null, new Date());
         o.setStatus("accepted");
@@ -73,6 +78,62 @@ public class TestOrderRepository extends JpaPersistenceTest {
         em.persist(o);
 
         Assert.assertNotEquals(0,or.getAllOrders().size());
+    }
+
+    @Test
+    public void testOrderRepositoryGetAllOrdersWithNoOrders(){
+        Assert.assertEquals(0, or.getAllOrders().size());
+    }
+
+    @Test
+    public void testOrderRepositoryGetAvgOrderPrice(){
+        Order o = new Order(null, new Date());
+        Order o2 = new Order(null, new Date());
+        o.setOrderPrice(2);
+        o2.setOrderPrice(4);
+        em.persist(o);
+        em.persist(o2);
+
+        Assert.assertEquals(3 ,or.getAverageOrderPrice(), 0);
+    }
+
+    @Test
+    public void testOrderRepositoryGetAvgOrdersWithNoOrders(){
+        Assert.assertEquals(0, or.getAverageOrderPrice(), 0);
+    }
+
+    @Test
+    public void testOrderRepositoryGetMinOrderPrice(){
+        Order o = new Order(null, new Date());
+        Order o2 = new Order(null, new Date());
+        o.setOrderPrice(2);
+        o2.setOrderPrice(4);
+        em.persist(o);
+        em.persist(o2);
+
+        Assert.assertEquals(2 ,or.getMinOrderPrice(), 0);
+    }
+
+    @Test
+    public void testOrderRepositoryGetMinOrderPriceWithNoOrders(){
+        Assert.assertEquals(0, or.getMinOrderPrice(), 0);
+    }
+
+    @Test
+    public void testOrderRepositoryGetMaxOrderPrice(){
+        Order o = new Order(null, new Date());
+        Order o2 = new Order(null, new Date());
+        o.setOrderPrice(2);
+        o2.setOrderPrice(4);
+        em.persist(o);
+        em.persist(o2);
+
+        Assert.assertEquals(4 ,or.getMaxOrderPrice(), 0);
+    }
+
+    @Test
+    public void testOrderRepositoryGetMaxOrderPriceWithNoOrders(){
+        Assert.assertEquals(0, or.getMaxOrderPrice(), 0);
     }
 
     @Test

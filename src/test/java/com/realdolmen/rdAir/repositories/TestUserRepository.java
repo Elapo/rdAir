@@ -71,7 +71,7 @@ public class TestUserRepository extends JpaPersistenceTest {
         em.persist(rde);
         em.persist(rde2);
 
-        List<RDEmployee> list = ur.getPerPage(0, 10, RDEmployee.class);
+        List<RDEmployee> list = ur.getPerPage(1, 10, RDEmployee.class);
 
         Assert.assertNotNull(list);
         Assert.assertNotEquals(list.size(), 0); //check if list is longer than 0, which it should be after inserting 2 values

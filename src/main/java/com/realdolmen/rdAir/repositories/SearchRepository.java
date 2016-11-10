@@ -14,7 +14,7 @@ import java.util.List;
 /**
  * Created by Frederik on 09/11/2016.
  */
-public class SearchRepository implements FlightSearchSupplier {
+public class SearchRepository{
     //todo list:
     /*
         1. get a simple search running using a long query with ands and null checks
@@ -24,7 +24,6 @@ public class SearchRepository implements FlightSearchSupplier {
     @PersistenceContext
     EntityManager em;
 
-    @Override
     @SuppressWarnings(value = "all")
     public List<Ticket> searchFlights(int seats, String fClass, String airComp, String dep, String dest, String region, Date departureDate) {
         List<String> availableParams = new ArrayList<>();
@@ -33,9 +32,24 @@ public class SearchRepository implements FlightSearchSupplier {
             query += "t.flight.route.airline.airlineName=:aircomp ";
             availableParams.add("airline");
         }
-        if(seats != 0 && fClass != null){
-            query += "and t.flightClass.availableSeatCount>=:seats and t.flightClass.name=:fClass ";
+//        if(seats != 0 && fClass != null){
+//            query += "and t.flightClass.availableSeatCount>=:seats and t.flightClass.name=:fClass ";
+//            availableParams.add("class");
+//        }
+        if(seats != 0 ){
             availableParams.add("class");
+            switch (fClass){
+                case "First Class":
+                    query += "and t.flight.availableFirstClass>=:seats ";
+                    break;
+                case "Business Class":
+                    break;
+                case "Economy Class":
+                    break;
+                default:
+                    availableParams.remove(availableParams.size()-1);//remove if no class given
+                    break;
+            }
         }
         if(!dep.trim().isEmpty() && !dest.trim().isEmpty()){
             query+= "and t.flight.route.departureLocation.airportName=:depart and t.flight.route.destination.airportName=:dest ";
@@ -57,7 +71,7 @@ public class SearchRepository implements FlightSearchSupplier {
         }
         if(availableParams.contains("class")){
             sql.setParameter("seats", seats);
-            sql.setParameter("fClass", fClass);
+            //sql.setParameter("fClass", fClass);
         }
         if(availableParams.contains("location")){
             sql.setParameter("depart", dep);

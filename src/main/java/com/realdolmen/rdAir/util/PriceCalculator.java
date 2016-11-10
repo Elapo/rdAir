@@ -12,6 +12,8 @@ public class PriceCalculator {
 
     public static final double RDAIR_CREDITCARD_PROMO = 0.95;
 
+        //todo calculate order price for volume discounts
+
     public static double calculatePrice(Ticket t){
         FlightClass fc = t.getFlightClass();
         Flight f = t.getFlight();
@@ -31,17 +33,15 @@ public class PriceCalculator {
             Hibernate.initialize(f.getRoute().getModifiers());
             Hibernate.initialize(f.getRoute().getRdModifiers());
             //get all modifiers from db
-            for(PriceModifier pm: f.getRoute().getModifiers()){
-                if(isActive(pm)) {//if modifier is active
-                    if (pm.isPercent())//percentage needs to be multiplied
-                        basePrice *= pm.getAmount();
-                    else//flat amount just needs to be added
-                        basePrice += pm.getAmount();
-                }
-            }
+            basePrice = calcAirlinePrice(t);
             for(PriceModifier pm: f.getRoute().getRdModifiers()){
                 if(isActive(pm)){
                     basePrice += pm.getAmount();
+                }
+            }
+            for(PriceModifier pm: f.getRdAirModifiers()){
+                if(isActive(pm) && pm.isPercent()){
+                    basePrice *= pm.getAmount();
                 }
             }
             return basePrice;
@@ -54,6 +54,7 @@ public class PriceCalculator {
         Hibernate.initialize(fc);
         Hibernate.initialize(f);
         Hibernate.initialize(f.getRoute());
+        Hibernate.initialize(f.getPriceModifiers());
 
         double price = fc.getPrice();
         Hibernate.initialize(f.getRoute().getModifiers());
@@ -62,6 +63,14 @@ public class PriceCalculator {
                 price = price*pm.getAmount();
             }
             else if(isActive(pm) && ! pm.isPercent()){
+                price = price + pm.getAmount();
+            }
+        }
+        for (PriceModifier pm : f.getPriceModifiers()){
+            if(isActive(pm) && pm.isPercent()){
+                price = price*pm.getAmount();
+            }
+            else if(isActive(pm) && !pm.isPercent()){
                 price = price + pm.getAmount();
             }
         }

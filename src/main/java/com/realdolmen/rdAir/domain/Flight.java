@@ -1,5 +1,7 @@
 package com.realdolmen.rdAir.domain;
 
+import org.hibernate.Hibernate;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -12,15 +14,6 @@ import java.util.List;
 @Entity
 public class Flight implements Serializable{
 
-        /*
-    - seatcount
-    - class
-    - Airline
-    - departure/arrival, Region
-    - Date
-    - ReturnDate
-     */
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
@@ -31,6 +24,12 @@ public class Flight implements Serializable{
     @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
     private PriceModifier rdAirModifier;
 
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
+    private List<PriceModifier> priceModifiers;
+
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
+    private List<PriceModifier> rdAirModifiers;
+
     @Temporal(TemporalType.DATE)
     private Date departureTime;
 
@@ -39,6 +38,8 @@ public class Flight implements Serializable{
 
     @OneToMany(mappedBy = "flight", cascade = CascadeType.PERSIST)
     private List<FlightClass> availableClasses;
+
+    private int availableFirstClass;
 
     protected Flight() {
         super();
@@ -50,6 +51,8 @@ public class Flight implements Serializable{
         this.departureTime = departureTime;
         this.flightDuration = flightDuration;
         this.availableClasses = new ArrayList<>();
+        this.priceModifiers = new ArrayList<>();
+        this.rdAirModifiers = new ArrayList<>();
     }
 
     public PriceModifier getRdAirModifier() {
@@ -90,5 +93,41 @@ public class Flight implements Serializable{
 
     public List<FlightClass> getAvailableClasses() {
         return availableClasses;
+    }
+
+    public List<PriceModifier> getPriceModifiers() {
+        return priceModifiers;
+    }
+
+    public List<PriceModifier> getRdAirModifiers() {
+        return rdAirModifiers;
+    }
+
+    public int getAvailableFirstClass(){
+        Hibernate.initialize(availableClasses);
+        for(FlightClass fc: availableClasses){
+            if(fc.getName().equals("First Class")){
+                return fc.getAvailableSeatCount();
+            }
+        }
+        return 0;
+    }
+    public int getAvailableBusinessClass(){
+        Hibernate.initialize(availableClasses);
+        for(FlightClass fc: availableClasses){
+            if(fc.getName().equals("Business Class")){
+                return fc.getAvailableSeatCount();
+            }
+        }
+        return 0;
+    }
+    public int getAvailableEconomyClass(){
+        Hibernate.initialize(availableClasses);
+        for(FlightClass fc: availableClasses){
+            if(fc.getName().equals("Economy Class")){
+                return fc.getAvailableSeatCount();
+            }
+        }
+        return 0;
     }
 }

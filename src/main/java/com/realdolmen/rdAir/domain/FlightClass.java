@@ -20,6 +20,8 @@ public class FlightClass implements Serializable{
 
     private int availableSeatCount;
 
+    private int version;
+
     @ManyToOne(cascade = CascadeType.PERSIST)
     private Flight flight;
 
@@ -77,5 +79,15 @@ public class FlightClass implements Serializable{
 
     public void setFlight(Flight flight) {
         this.flight = flight;
+    }
+
+    @Version
+    @Column(name = "lockVersion")
+    public int getVersion() {
+        return version;
+    }
+
+    public void setVersion(int version) {
+        this.version = version;
     }
 }

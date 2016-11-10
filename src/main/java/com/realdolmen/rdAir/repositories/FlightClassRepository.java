@@ -1,20 +1,24 @@
 package com.realdolmen.rdAir.repositories;
 
 import com.realdolmen.rdAir.domain.FlightClass;
+import org.hibernate.StaleObjectStateException;
 
-import javax.persistence.EntityManager;
-import javax.persistence.NoResultException;
-import javax.persistence.PersistenceContext;
-import javax.persistence.Query;
+import javax.persistence.*;
 import java.util.List;
 
-public class FlightClassRepository {//todo test
+public class FlightClassRepository {
     @PersistenceContext
     EntityManager em;
 
     public FlightClass save(FlightClass fc){
-        em.persist(fc);
-        return fc;
+        try{
+            em.persist(fc);
+            em.flush();
+            return fc;
+        }
+        catch (StaleObjectStateException e){//todo test locking
+            return null;
+        }
     }
 
     public FlightClass findById(int id){
@@ -32,11 +36,17 @@ public class FlightClassRepository {//todo test
         }
     }
 
+    @SuppressWarnings(value = "all")
     public boolean delete(int id){
         FlightClass fc = em.getReference(FlightClass.class, id);
-        if (fc != null) {
-            em.remove(fc);
-            return true;
+        try{
+            if (fc != null) {
+                em.remove(fc);
+                return true;
+            }
+        }
+        catch (EntityNotFoundException e){
+            return false;
         }
         return false;
     }

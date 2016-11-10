@@ -4,6 +4,7 @@ import com.realdolmen.rdAir.domain.Location;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
+import javax.persistence.EntityNotFoundException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import java.util.List;
@@ -30,18 +31,25 @@ public class LocationRepository {//todo test
     }
 
     @SuppressWarnings(value = "all")
-    public List<Location> getPerPage(int currentPage, int perPage){//todo change formula so page starts from 1
+    public List<Location> getPerPage(int currentPage, int perPage){
+        if(currentPage <= 0 || perPage <= 0) return null;
         return em.createQuery("select l from Location l")
-                .setFirstResult(currentPage*perPage)
+                .setFirstResult((currentPage-1)*perPage)
                 .setMaxResults(perPage)
                 .getResultList();
     }
 
+    @SuppressWarnings(value = "all")
     public boolean delete(int id) {
         Location l = em.getReference(Location.class, id);
-        if(l != null) {
-            em.remove(l);
-            return true;
+        try {
+            if(l != null) {
+                em.remove(l);
+                return true;
+            }
+        }
+        catch (EntityNotFoundException e){
+            return false;
         }
         return false;
     }

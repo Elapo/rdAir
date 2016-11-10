@@ -18,6 +18,8 @@ public class Ticket implements Serializable{
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
     private FlightClass flightClass;
 
+    private double salesPrice;
+
     protected Ticket() {
     }
 
@@ -44,5 +46,13 @@ public class Ticket implements Serializable{
 
     public void setFlightClass(FlightClass flightClass) {
         this.flightClass = flightClass;
+    }
+
+    public double getSalesPrice() {
+        return salesPrice;
+    }
+
+    public void setSalesPrice(double salesPrice) {
+        this.salesPrice = salesPrice;
     }
 }

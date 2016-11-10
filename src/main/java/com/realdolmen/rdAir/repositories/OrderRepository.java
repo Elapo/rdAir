@@ -33,7 +33,7 @@ public class OrderRepository { //todo test
         try{
             return sql.setParameter(1,status).getResultList();
         }
-        catch (NotFoundException e) {
+        catch (NoResultException e) {
             return null;
         }
     }
@@ -46,6 +46,33 @@ public class OrderRepository { //todo test
     public int getPendingOrderCount(){
         Long l = (long)em.createQuery("select count(o) from Order o where o.status='pending'").getSingleResult();
         return l.intValue();
+    }
+
+    public double getAverageOrderPrice(){
+        try {
+            return (double) em.createQuery("select avg(o.orderPrice) from Order o").getSingleResult();//todo date
+        }
+        catch (NullPointerException e){
+            return 0;
+        }
+    }
+
+    public double getMinOrderPrice(){
+        try {
+            return (double)em.createQuery("select min(o.orderPrice) from Order o").getSingleResult();
+        }
+        catch (NullPointerException e ){
+            return 0;
+        }
+    }
+
+    public double getMaxOrderPrice(){
+        try {
+            return (double)em.createQuery("select max(o.orderPrice) from Order o").getSingleResult();
+        }
+        catch (NullPointerException e){
+            return 0;
+        }
     }
 
     @SuppressWarnings(value = "all")

@@ -53,8 +53,8 @@ public class TestLocationRepository extends JpaPersistenceTest {
         Location l =new Location("one", "two", new Region("three"));
         em.persist(l);
 
-        Assert.assertNotNull(lr.getPerPage(0,10));
-        Assert.assertNotEquals(0, lr.getPerPage(0,10));
+        Assert.assertNotNull(lr.getPerPage(1,10));
+        Assert.assertNotEquals(0, lr.getPerPage(1,10));
     }
 
     @Test
@@ -66,5 +66,10 @@ public class TestLocationRepository extends JpaPersistenceTest {
         Assert.assertNotNull(em.find(Location.class, id));
         lr.delete(id);
         Assert.assertNull(em.find(Location.class, id));
+    }
+
+    @Test
+    public void testLocationRepositoryDeleteFail(){
+        Assert.assertFalse(lr.delete(124345434));
     }
 }

@@ -9,7 +9,7 @@ import java.util.Date;
  */
 @Entity
 @Inheritance
-public class PriceModifier implements Serializable{
+public class PriceModifier implements Serializable{ //todo modifier based on volume
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
@@ -30,18 +30,21 @@ public class PriceModifier implements Serializable{
 
     private boolean isPercent;
 
+    private boolean isVolumeDiscount;
+
     private double amount;
 
     protected PriceModifier() {
     }
 
-    public PriceModifier(String name, Date startDate, Date endDate, Date startTime, Date endTime, boolean isPercent, double amount) {
+    public PriceModifier(String name, Date startDate, Date endDate, Date startTime, Date endTime, boolean isPercent, boolean isVolumeDiscount, double amount) {
         this.name = name;
         this.startDate = startDate;
         this.endDate = endDate;
         this.startTime = startTime;
         this.endTime = endTime;
         this.isPercent = isPercent;
+        this.isVolumeDiscount = isVolumeDiscount;
         this.amount = amount;
     }
 
@@ -105,4 +108,11 @@ public class PriceModifier implements Serializable{
         this.amount = amount;
     }
 
+    public boolean isVolumeDiscount() {
+        return isVolumeDiscount;
+    }
+
+    public void setVolumeDiscount(boolean volumeDiscount) {
+        isVolumeDiscount = volumeDiscount;
+    }
 }

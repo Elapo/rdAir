@@ -41,6 +41,11 @@ public class TestFlightClassRepository extends JpaPersistenceTest{
     }
 
     @Test
+    public void testFlightClassRepositoryFindByIdFail(){
+        Assert.assertEquals(0, fcr.findByName("dswfsqfd").size());
+    }
+
+    @Test
     public void testFlightClassRepositoryFindByName(){
         FlightClass fc = new FlightClass("first class", 50, 20, 15, null);
         em.persist(fc);
@@ -58,5 +63,9 @@ public class TestFlightClassRepository extends JpaPersistenceTest{
         Assert.assertNotNull(em.find(FlightClass.class, id));
         fcr.delete(id);
         Assert.assertNull(em.find(FlightClass.class, id));
+    }
+    @Test
+    public void testFlightClassRepositoryDeleteFail(){
+        Assert.assertFalse(fcr.delete(43543534));
     }
 }

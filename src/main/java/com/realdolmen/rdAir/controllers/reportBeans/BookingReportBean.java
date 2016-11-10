@@ -20,48 +20,25 @@ public class BookingReportBean {
 
     public int getAmountPaidTickets(){
         return or.getPaidOrderCount();
-
     }
 
     public int getAmountPendingTickets(){
         return or.getPendingOrderCount();
     }
 
-    public double calcAveragePrice(){
-        List<Order> orders = or.getAllOrders();
-        List<Double> prices = new ArrayList<>();
-        double average = 0;
-        if(orders != null){
-            for(Order o: orders){
-                for(Ticket t: o.getTickets()){
-                    Hibernate.initialize(t);
-                    prices.add(PriceCalculator.calculatePrice(t));//add all prices to lis
-                }
-            }
-            if(!prices.isEmpty()) {
-                for (Double price : prices) {
-                    average += price;
-                }
-                averagePrice = (average / prices.size());
-                return averagePrice;
-            }
-        }
-        return 0;
+    public double getSmallestOrder(){
+        return or.getMinOrderPrice();
     }
 
-    public double getCheapestSale(){
-        return 0;
-    }
-
-    public double getMostExpensiveSale(){
-        return 0;
+    public double getLargestOrder(){
+        return or.getMaxOrderPrice();
     }
 
     public double getAverageProfitMargin(){
         return 0;
-    }
+    }// TODO: 10/11/2016  
 
     public double getAveragePrice() {
-        return averagePrice;
+        return or.getAverageOrderPrice();
     }
 }

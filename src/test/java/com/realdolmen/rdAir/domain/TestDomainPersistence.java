@@ -83,7 +83,7 @@ public class TestDomainPersistence extends JpaPersistenceTest {
 
     @Test
     public void testPriceModifierPersistence(){
-        PriceModifier pm = new PriceModifier("Rich tax", new Date(), new Date(), new Date(), new Date(), true,20000000000d);
+        PriceModifier pm = new PriceModifier("Rich tax", new Date(), new Date(), new Date(), new Date(), true, false, 20000000000d);
 
         em.persist(pm);
         PriceModifier pmPersisted = em.find(PriceModifier.class, pm.getId());

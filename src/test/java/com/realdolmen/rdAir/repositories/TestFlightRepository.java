@@ -32,6 +32,29 @@ public class TestFlightRepository extends JpaPersistenceTest {
     }
 
     @Test
+    public void testFlightRepositoryGetByPage(){
+        Flight f1 = new Flight(null, null, new Date(), new Date());
+        Flight f2 = new Flight(null, null, new Date(), new Date());
+
+        em.persist(f1);
+        em.persist(f2);
+
+        Assert.assertNotNull(fr.getFlightsPerPage(1, 10));
+        Assert.assertNotEquals(0, fr.getFlightsPerPage(1,10).size());
+    }
+
+    @Test
+    public void testFlightRepositoryGetByPageFail(){
+        Flight f1 = new Flight(null, null, new Date(), new Date());
+        Flight f2 = new Flight(null, null, new Date(), new Date());
+
+        em.persist(f1);
+        em.persist(f2);
+
+        Assert.assertEquals(0, fr.getFlightsPerPage(2, 10).size());
+    }
+
+    @Test
     public void testFlightRepositoryDelete(){
         Flight f = new Flight(null, null, new Date(), new Date());
         em.persist(f);
@@ -40,5 +63,10 @@ public class TestFlightRepository extends JpaPersistenceTest {
         Assert.assertNotNull(em.find(Flight.class, id));
         fr.delete(id);
         Assert.assertNull(em.find(Flight.class, id));
+    }
+
+    @Test
+    public void testFlightRepositoryDeleteFail(){
+        Assert.assertFalse(fr.delete(213412345));
     }
 }

@@ -58,7 +58,7 @@ public class TestRouteRepository extends JpaPersistenceTest {
         em.persist(r);
         em.persist(r2);
 
-        List<Route> routes= rp.getPerPage(0,10);
+        List<Route> routes= rp.getPerPage(1,10);
         Assert.assertNotEquals(0, routes.size());
     }
 

@@ -56,8 +56,9 @@ public class UserRepository {
 
     @SuppressWarnings(value = "all")
     public <T extends User> List<T> getPerPage(int currentPage, int perPage, Class<T> type){
+        if(currentPage <= 0 || currentPage <= 0) return null;
         return em.createQuery("select o from "+type.getSimpleName()+" o")
-                .setFirstResult(currentPage*perPage)
+                .setFirstResult((currentPage-1)*perPage)
                 .setMaxResults(perPage)
                 .getResultList();
     }
@@ -70,4 +71,6 @@ public class UserRepository {
         }
         return false;
     }
+
+    //todo get per type paginated
 }
