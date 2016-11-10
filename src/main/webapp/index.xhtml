@@ -24,30 +24,30 @@
                 </div>
                 <div class="mdl-card__supporting-text planeImage">
                 <h:form>
-                    <h:panelGrid columns="2">
+                    <h:panelGrid columns="2" id="searchGrid">
                         <h:outputLabel value="#{msgs['Select.airline.company']}"/>
                         <h:panelGroup>
                          <h:selectOneMenu value="#{SearchFlightBean.preferredAirline}"
-                        styleClass="inputText" id="preferredAirlineInput">
+                        styleClass="inputText" id="preferredAirlineInput" required="true">
                             <!-- items uit db te halen, dit is maar een voorbeeld!!-->
                             <f:selectItem itemValue="#{msgs['First.airline']}" itemLabel="#{msgs['First.airline']}"/>
                             <f:selectItem itemValue="#{msgs['Second.airline']}" itemLabel="#{msgs['Second.airline']}"/>
                             </h:selectOneMenu>
-                            <p:message for="preferredAirlineInput" styleClass="error" />
+                            <p:message for="preferredAirlineInput" display="tooltip"/>
                         </h:panelGroup>
                         <h:outputLabel value="#{msgs['Select.class']}" />
                         <h:panelGroup>
                             <h:selectOneMenu value="#{SearchFlightBean.flightClass}"
-                                             styleClass="inputText" id="flightClassInput">
+                                             styleClass="inputText" id="flightClassInput" required="true">
                             <f:selectItem itemValue="#{msgs['Economy']}" itemLabel="#{msgs['Economy']}" />
                             <f:selectItem itemValue="#{msgs['Business']}" itemLabel="#{msgs['Business']}" />
                             <f:selectItem itemValue="#{msgs['First.class']}" itemLabel="#{msgs['First.class']}" />
                             </h:selectOneMenu>
-                            <p:message for="flightClassInput" styleClass="error" />
+                            <p:message for="flightClassInput" display="tooltip"/>
                         </h:panelGroup>
                         <h:outputLabel value="#{msgs['Ticket']}" />
                         <h:panelGroup>
-                            <h:selectOneRadio value="#{SearchFlightBean.flightWay}" styleClass="inputText" id="flightWayInput">
+                            <h:selectOneRadio value="#{SearchFlightBean.flightWay}" styleClass="inputText" id="flightWayInput" required="true" display="tooltip">
                                 <p:ajax process="@this" update="flightWayInput" listener="#{SearchFlightBean.listener1}" />
 
                                 <f:selectItem itemValue="#{msgs['Ticket.oneway']}"
@@ -57,28 +57,28 @@
                                       itemLabel="#{msgs['Ticket.return']}"/>
 
                             </h:selectOneRadio>
-                            <p:message for="flightWayInput" styleClass="error" />
+                            <p:message for="flightWayInput" display="tooltip"/>
 
                         </h:panelGroup>
                         <h:outputLabel for="popup" value="#{msgs['Date.departure']}" />
                         <h:panelGroup>
-                            <p:calendar id="popup" value="#{calendarViewBean.date}" />
-                            <p:message for="popup" styleClass="error" />
+                            <p:calendar id="popup" value="#{calendarViewBean.date}" required="true"/>
+                            <p:message for="popup" display="tooltip"/>
                         </h:panelGroup>
                         <h:outputLabel for="popup1" value="#{msgs['Date.return']}" rendered="#{SearchFlightBean.clickedReturn}"/>
                         <h:panelGroup>
-                            <p:calendar id="popup1" value="#{calendarViewBean.date}" rendered="#{SearchFlightBean.clickedReturn}"/>
-                            <p:message for="popup1" styleClass="error" />
+                            <p:calendar id="popup1" value="#{calendarViewBean.date}" rendered="#{SearchFlightBean.clickedReturn}" required="true"/>
+                            <p:message for="popup1" display="tooltip"/>
                         </h:panelGroup>
                         <br/>
                         <h:outputLabel value="#{msgs['Select.number.seats']}" />
                         <h:panelGroup>
-                            <h:inputText type="number" value="#{SearchFlightBean.desiredNrOfSeats}" styleClass="inputText" id="desiredNrOfSeatsInput" />
-                            <p:message for="desiredNrOfSeatsInput" styleClass="error" />
+                            <h:inputText type="number" value="#{SearchFlightBean.desiredNrOfSeats}" styleClass="inputText" id="desiredNrOfSeatsInput" required="true"/>
+                            <p:message for="desiredNrOfSeatsInput" display="tooltip"/>
                         </h:panelGroup>
                         <h:outputLabel value="#{msgs['Select.location']}"/>
                         <h:panelGrid columns="2">
-                            <h:selectOneRadio value="#{SearchFlightBean.locationOption}" styleClass="inputText" id="locationOptionInput">
+                            <h:selectOneRadio value="#{SearchFlightBean.locationOption}" styleClass="inputText" id="locationOptionInput" required="true">
                                 <p:ajax process="@this" update="locationOptionInput" listener="#{SearchFlightBean.listener}" />
 
                                 <f:selectItem itemValue="#{msgs['Select.location.departure.destination']}"
@@ -86,18 +86,18 @@
                                 <br></br>
                                     <h:panelGrid columns="2">
                                         <h:outputLabel value="#{msgs['Select.location.departure']}"/>
-                                        <h:selectOneMenu value="#{SearchFlightBean.departureLocation}" styleClass="inputText" id="departureLocationInput" rendered="#{SearchFlightBean.clickedLocationOptionOne}"/>
-                                        <p:message for="departureLocationInput" styleClass="error"/>
+                                        <h:selectOneMenu value="#{SearchFlightBean.departureLocation}" styleClass="inputText" id="departureLocationInput" rendered="#{SearchFlightBean.clickedLocationOptionOne}" required="true"/>
+                                        <p:message for="departureLocationInput" styleClass="error" display="tooltip"/>
                                         <h:outputLabel value="#{msgs['Select.location.destination']}"/>
-                                        <h:selectOneMenu value="#{SearchFlightBean.destinationLocation}" styleClass="inputText" id="destinationLocationInput" rendered="#{SearchFlightBean.clickedLocationOptionOne}"/>
-                                        <p:message for="destinationLocationInput" styleClass="error"/>
+                                        <h:selectOneMenu value="#{SearchFlightBean.destinationLocation}" styleClass="inputText" id="destinationLocationInput" rendered="#{SearchFlightBean.clickedLocationOptionOne}" required="true"/>
+                                        <p:message for="destinationLocationInput" display="tooltip"/>
                                     </h:panelGrid>
 
                                 <f:selectItem itemValue="#{msgs['Select.location.region']}"
                                           itemLabel="#{msgs['Select.location.region']}"/>
                                 <br></br>
                                     <h:outputLabel value="#{msgs['Select.location.region.world']}"/>
-                                    <h:selectOneMenu value="#{SearchFlightBean.globalRegion}" styleClass="inputText" id="regionInput" rendered="#{not SearchFlightBean.clickedLocationOptionOne}">
+                                    <h:selectOneMenu value="#{SearchFlightBean.globalRegion}" styleClass="inputText" id="regionInput" rendered="#{not SearchFlightBean.clickedLocationOptionOne}" required="true">
                                         <f:selectItem itemValue="#{msgs['Africa']}" itemLabel="#{msgs['Africa']}" />
                                         <f:selectItem itemValue="#{msgs['Antarctica']}" itemLabel="#{msgs['Antarctica']}" />
                                         <f:selectItem itemValue="#{msgs['Asia']}" itemLabel="#{msgs['Asia']}" />
@@ -106,14 +106,14 @@
                                         <f:selectItem itemValue="#{msgs['Oceania']}" itemLabel="#{msgs['Oceania']}" />
                                         <f:selectItem itemValue="#{msgs['South.america']}" itemLabel="#{msgs['South.america']}" />
                                     </h:selectOneMenu>
-                                    <p:message for="regionInput" styleClass="error"/>
+                                    <p:message for="regionInput" display="tooltip"/>
 
                             </h:selectOneRadio>
-                            <p:message for="locationOptionInput" styleClass="error" />
+                            <p:message for="locationOptionInput" display="tooltip"/>
                         </h:panelGrid>
                     </h:panelGrid>
                     <div class="mdl-card__actions mdl-card--border">
-                        <a class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--accent">
+                        <a class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--accent" href="searchresults.xhtml" update="searchGrid">
                             #{msgs['Search.button']}
                         </a>
                     </div>

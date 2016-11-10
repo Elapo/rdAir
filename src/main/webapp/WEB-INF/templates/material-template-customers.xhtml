@@ -32,12 +32,16 @@
                 <a class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">
                     #{msgs['Template.customers.button.two']}
                 </a>
-                <a class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">
+                <a class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" href="login.xhtml">
                     #{msgs['Template.customers.button.three']}
                 </a>
-                <a class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" href="login.xhtml">
-                    #{msgs['Template.customers.button.four']}
-                </a>
+                <h:panelGrid columns="2">
+                    #{msgs['Template.customers.language']}
+                    <h:selectOneMenu styleClass="#{languageBean.localeCode}" onchange="submit()"
+                                     valueChangeListener="#{languageBean.countryLocaleCodeChanged}">
+                        <f:selectItems value="#{languageBean.countriesInMap}" />
+                    </h:selectOneMenu>
+                </h:panelGrid>
                 <div class="mdl-textfield mdl-js-textfield mdl-textfield--expandable
                   mdl-textfield--floating-label mdl-textfield--align-right">
                     <label class="mdl-button mdl-js-button mdl-button--icon"

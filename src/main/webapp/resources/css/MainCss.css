@@ -124,6 +124,10 @@
     height: 300px;
 }
 
+/*.ui-widget {
+    font-size: 90%;
+}*/
+
 .mdl--social-buttons {
     display:flex;
     flex-direction:column;

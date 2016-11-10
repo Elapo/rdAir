@@ -9,15 +9,13 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
-/**
- * Created by Hade on 6/11/2016.
- */
+
 @ManagedBean
 @RequestScoped
 public class SearchFlightBean implements Serializable {
 
-    @NotNull //(message="{error.desiredNrOfSeats}")
-    @Size(min=1,max=189)
+    @NotNull (message="#{valmsgs['Search.error.desiredNrOfSeats']}")
+    @Size(min=1,max=853) //, message="#{valmsgs['Search.error.desiredNrOfSeats']}")
     private int desiredNrOfSeats;
 
     @NotNull //(message="{error.flightClass}")
