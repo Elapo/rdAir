@@ -53,7 +53,7 @@ public class TestUserRepository extends JpaPersistenceTest {
 
     @Test
     public void testUserRepositoryFindByEmail(){
-        Airline a = new Airline("Frederik", "Van Herbruggen", "FCL 34", "0474416357", "email@email.com", "freAir", "http://freAir.com","abc", null, null);
+        Airline a = new Airline("Frederik", "Van Herbruggen", "FCL 34", "0474416357", "email@email.com", "freAir", "http://freAir.com","abc");
         em.persist(a);
 
         Airline aPersisted = (Airline)ur.getUserByEmail("email@email.com");
@@ -86,7 +86,7 @@ public class TestUserRepository extends JpaPersistenceTest {
 
         Assert.assertNull(cPersisted);
 
-        Airline a = new Airline("Frederik", "Van Herbruggen", "FCL 34", "0474416357", "email@email.com", "freAir", "http://freAir.com","abc", null, null);
+        Airline a = new Airline("Frederik", "Van Herbruggen", "FCL 34", "0474416357", "email@email.com", "freAir", "http://freAir.com","abc");
         em.persist(a);
 
         Airline aPersisted = ur.findByName("freAir", Airline.class);

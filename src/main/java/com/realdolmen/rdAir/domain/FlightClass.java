@@ -20,7 +20,7 @@ public class FlightClass implements Serializable{
 
     private int availableSeatCount;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.PERSIST)
     private Flight flight;
 
     protected FlightClass() {

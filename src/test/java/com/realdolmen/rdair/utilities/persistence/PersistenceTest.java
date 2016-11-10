@@ -75,7 +75,7 @@ public abstract class PersistenceTest extends Assert {
         mysql("com.mysql.jdbc.Driver", "jdbc:mysql://localhost:3306/", "root", "", false),
 
         /**
-         * H2 based database enigne for running (fast) in-memory.
+         * H2 based database engine for running (fast) in-memory.
          */
         h2("org.h2.Driver", "jdbc:h2:mem:", "sa", "", true);
 

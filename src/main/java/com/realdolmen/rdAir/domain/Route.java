@@ -14,26 +14,30 @@ public class Route implements Serializable{
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @OneToOne(fetch = FetchType.LAZY)
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
     private Location departureLocation;
 
-    @OneToOne(fetch = FetchType.LAZY)
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
     private Location destination;
 
-    @OneToMany(fetch = FetchType.LAZY)
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
     private List<PriceModifier> modifiers;
 
-    @OneToMany(fetch = FetchType.LAZY)
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
     private List<PriceModifier> rdModifiers;
+
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
+    private Airline airline;
 
     protected Route() {
         modifiers = new ArrayList<>();
         rdModifiers = new ArrayList<>();
     }
 
-    public Route(Location departureLocation, Location destination, List<PriceModifier> modifiers, List<PriceModifier> rdModifiers) {
+    public Route(Location departureLocation, Location destination, List<PriceModifier> modifiers, List<PriceModifier> rdModifiers, Airline airline) {
         this.departureLocation = departureLocation;
         this.destination = destination;
+        this.airline = airline;
         this.modifiers = new ArrayList<>();
         this.rdModifiers = new ArrayList<>();
         this.modifiers = modifiers;
@@ -66,6 +70,14 @@ public class Route implements Serializable{
 
     public List<PriceModifier> getRdModifiers() {
         return rdModifiers;
+    }
+
+    public Airline getAirline() {
+        return airline;
+    }
+
+    public void setAirline(Airline airline) {
+        this.airline = airline;
     }
 }
 

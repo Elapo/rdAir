@@ -1,6 +1,5 @@
 package com.realdolmen.rdAir.repositories;
 
-import com.realdolmen.rdAir.domain.Customer;
 import com.realdolmen.rdAir.domain.Route;
 import com.realdolmen.rdAir.utilities.persistence.JpaPersistenceTest;
 import org.junit.Assert;
@@ -32,7 +31,7 @@ public class TestRouteRepository extends JpaPersistenceTest {
 
     @Test
     public void testRouteRepositorySave(){
-        Route r = rp.save(new Route(null, null, null, null));
+        Route r = rp.save(new Route(null, null, null, null, null));
 
         Route persisted = em.find(Route.class, r.getId());
 
@@ -42,7 +41,7 @@ public class TestRouteRepository extends JpaPersistenceTest {
 
     @Test
     public void testRouteRepositoryFindById(){
-        Route r = new Route(null,null,null,null);
+        Route r = new Route(null,null,null,null, null);
         em.persist(r);
 
         Route persisted = rp.findById(r.getId());
@@ -53,8 +52,8 @@ public class TestRouteRepository extends JpaPersistenceTest {
 
     @Test
     public void testRouteRepositoryGetPerPage(){
-        Route r = new Route(null,null,null,null);
-        Route r2 = new Route(null,null,null,null);
+        Route r = new Route(null,null,null,null, null);
+        Route r2 = new Route(null,null,null,null, null);
 
         em.persist(r);
         em.persist(r2);
@@ -65,7 +64,7 @@ public class TestRouteRepository extends JpaPersistenceTest {
 
     @Test
     public void testRouteRepositoryDelete(){
-        Route r = new Route(null,null,null,null);
+        Route r = new Route(null,null,null,null, null);
         em.persist(r);
         int id = r.getId();
         Route rPersisted = em.find(Route.class, id);

@@ -17,10 +17,10 @@ public class Airline extends User implements Serializable{
     @URL(message = "{validation.url.invalid}")
     private String website;
 
-    @OneToMany(fetch = FetchType.LAZY)
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "airline", cascade = CascadeType.PERSIST)
     private List<Route> routes;
 
-    @OneToMany(fetch = FetchType.LAZY)
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
     private List<Flight> flights;
 
     protected Airline() {
@@ -29,14 +29,12 @@ public class Airline extends User implements Serializable{
         this.flights = new ArrayList<>();
     }
 
-    public Airline(String firstName, String lastName, String address, String telephone, String email, String airlineName, String website, String passwordHash, List<Route> routes, List<Flight> flights) {
+    public Airline(String firstName, String lastName, String address, String telephone, String email, String airlineName, String website, String passwordHash) {
         super(firstName, lastName, address, telephone, email, passwordHash);
         this.routes = new ArrayList<>();
         this.flights = new ArrayList<>();
         this.airlineName = airlineName;
         this.website = website;
-        this.routes = routes;
-        this.flights = flights;
     }
 
     public String getAirlineName() {

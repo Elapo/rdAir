@@ -21,7 +21,7 @@ public class TestDomainPersistence extends JpaPersistenceTest {
     //todo test cascades
     @Test
     public void testAirlinePersistence(){
-        Airline a = new Airline("Frederik", "Van Herbruggen", "FCL 34", "0474416357", "email@email.com", "freAir", "http://freAir.com", "abc", null, null);
+        Airline a = new Airline("Frederik", "Van Herbruggen", "FCL 34", "0474416357", "email@email.com", "freAir", "http://freAir.com", "abc");
         em.persist(a);
 
         Airline aPersisted = em.find(Airline.class, a.getId());
@@ -116,7 +116,7 @@ public class TestDomainPersistence extends JpaPersistenceTest {
 
     @Test
     public void testRoutePersistence(){
-        Route r = new Route(null, null, null, null);
+        Route r = new Route(null, null, null, null, null);
 
         em.persist(r);
         Route rPersisted = em.find(Route.class, r.getId());

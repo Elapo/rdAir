@@ -2,7 +2,9 @@ package com.realdolmen.rdAir.domain;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by Frederik Van Herbruggen on 4/11/2016.
@@ -23,10 +25,10 @@ public class Flight implements Serializable{
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
     private Route route;
 
-    @OneToOne(fetch = FetchType.LAZY)
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
     private PriceModifier rdAirModifier;
 
     @Temporal(TemporalType.DATE)
@@ -34,6 +36,9 @@ public class Flight implements Serializable{
 
     @Temporal(TemporalType.TIME)
     private Date flightDuration;
+
+    @OneToMany(mappedBy = "flight", cascade = CascadeType.PERSIST)
+    private List<FlightClass> availableClasses;
 
     protected Flight() {
         super();
@@ -44,6 +49,7 @@ public class Flight implements Serializable{
         this.rdAirModifier = rdAirModifier;
         this.departureTime = departureTime;
         this.flightDuration = flightDuration;
+        this.availableClasses = new ArrayList<>();
     }
 
     public PriceModifier getRdAirModifier() {
@@ -80,5 +86,9 @@ public class Flight implements Serializable{
 
     public void setRoute(Route route) {
         this.route = route;
+    }
+
+    public List<FlightClass> getAvailableClasses() {
+        return availableClasses;
     }
 }

@@ -1,5 +1,7 @@
 package com.realdolmen.rdAir.util;
 
+import com.realdolmen.rdAir.services.MailService;
+
 public class TestMail {
     public static void main(String[] args) {
         MailService ms = new MailService();

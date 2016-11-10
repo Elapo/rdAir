@@ -2,14 +2,13 @@ package com.realdolmen.rdAir.controllers;
 
 import com.realdolmen.rdAir.domain.Customer;
 import com.realdolmen.rdAir.domain.Order;
-import com.realdolmen.rdAir.domain.Ticket;
+import com.realdolmen.rdAir.services.MailService;
 import com.realdolmen.rdAir.util.PriceCalculator;
 
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
-import javax.mail.Session;
 import java.util.Date;
 
 @ManagedBean
@@ -51,8 +50,8 @@ public class BookingBean {
     }
 
     private void sendMail(){
+        MailService ms = new MailService();
         String to = session.getUser().getEmail();
-
-        Session session = Session.getInstance(null, null);
+        ms.mail(to, "Your order #"+bookingOrder.getId()+" at rdAir", "");
     }
 }

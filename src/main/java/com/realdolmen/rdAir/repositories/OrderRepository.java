@@ -1,18 +1,22 @@
 package com.realdolmen.rdAir.repositories;
 
+import com.realdolmen.rdAir.domain.Customer;
 import com.realdolmen.rdAir.domain.Order;
 import com.realdolmen.rdAir.domain.Ticket;
+import com.sun.org.apache.xpath.internal.operations.Or;
+import org.hibernate.Hibernate;
 
-import javax.persistence.EntityManager;
-import javax.persistence.NoResultException;
-import javax.persistence.PersistenceContext;
-import javax.persistence.Query;
+import javax.persistence.*;
 import javax.ws.rs.NotFoundException;
 import java.util.List;
 
 public class OrderRepository { //todo test
     @PersistenceContext
     EntityManager em;
+
+    PersistenceUnitUtil util;
+
+    UserRepository ur;
 
     public Order save(Order order){
         em.persist(order);
