@@ -1,5 +1,6 @@
 package com.realdolmen.rdAir.controllers;
 
+import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import javax.validation.constraints.Future;
@@ -33,17 +34,21 @@ public class SearchFlightBean implements Serializable {
     @NotNull
     private String globalRegion;
 
-    @NotNull //(message="{error.dateOfDeparture}")
+    @NotNull(message="Date needs to be filled in!")
     @Future
     private Date dateOfDeparture;
 
     @NotNull
-    private List<String> flightWay;
+    private String flightWay;
     private boolean clickedReturn=false;
     @NotNull
     @Future
     private Date dateOfReturn;
 
+    @PostConstruct
+    public void init() {
+        flightWay = "One way";
+    }
 
     public int getDesiredNrOfSeats() {
         return desiredNrOfSeats;
@@ -82,7 +87,11 @@ public class SearchFlightBean implements Serializable {
     }
 
     public void listener1() {
-        clickedReturn = flightWay.contains("Return");
+        clickedReturn = flightWay.equals("Return");
+    }
+
+    public boolean getClickedReturn() {
+        return clickedReturn;
     }
 
     public boolean getClickedLocationOptionOne() {
@@ -92,10 +101,6 @@ public class SearchFlightBean implements Serializable {
 
     public void setClickedLocationOptionOne(boolean clickedLocationOptionOne) {
         this.clickedLocationOptionOne = clickedLocationOptionOne;
-    }
-
-    public boolean getClickedReturn() {
-        return clickedReturn;
     }
 
     public void setClickedReturn(boolean clickedReturn) {
@@ -134,11 +139,11 @@ public class SearchFlightBean implements Serializable {
         this.dateOfDeparture = dateOfDeparture;
     }
 
-    public List<String> getFlightWay() {
+    public String getFlightWay() {
         return flightWay;
     }
 
-    public void setFlightWay(List<String> flightWay) {
+    public void setFlightWay(String flightWay) {
         this.flightWay = flightWay;
     }
 
