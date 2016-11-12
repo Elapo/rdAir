@@ -1,60 +1,67 @@
 package com.realdolmen.rdAir.controllers;
 
+import com.realdolmen.rdAir.domain.*;
+
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.RequestScoped;
+import javax.faces.bean.SessionScoped;
 import javax.validation.constraints.Future;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 
 @ManagedBean
-@RequestScoped
+@SessionScoped
 public class SearchFlightBean implements Serializable {
 
-    @NotNull (message="#{valmsgs['Search.error.desiredNrOfSeats']}")
-    @Size(min=1,max=853) //, message="#{valmsgs['Search.error.desiredNrOfSeats']}")
-    private int desiredNrOfSeats;
 
-    @NotNull //(message="{error.flightClass}")
+    @NotNull(message="{Search.error.desiredNrOfSeats.null}")
+    @Min(value=1,message="{Search.error.desiredNrOfSeats}")
+    @Max(value=853, message="{Search.error.desiredNrOfSeats}")
+    private Integer desiredNrOfSeats;
+
+    @NotNull(message="{Search.error.flightClass.null}")
     private String flightClass;
-    @NotNull //(message="{error.preferredAirline}")
+    @NotNull(message="{Search.error.airlineCompany.null}")
     private String preferredAirline;
 
 
-    private List<String> locationOption;
+    private String locationOption;
     private boolean clickedLocationOptionOne=false;
-    @NotNull
+    private boolean clickedLocationOptionTwo=false;
+    @NotNull(message="{Search.error.departureLocation.null}")
     private String departureLocation;
-    @NotNull
+    @NotNull(message="{Search.error.destinationLocation.null}")
     private String destinationLocation;
-    @NotNull
+    @NotNull(message="{Search.error.globalRegion.null}")
     private String globalRegion;
 
-    @NotNull(message="Date needs to be filled in!")
-    @Future
+    @NotNull(message="{Search.error.dateOfDeparture.null}")
+    @Future(message="{Search.error.dateOfDeparture.future}")
     private Date dateOfDeparture;
 
-    @NotNull
+    @Future(message="{Search.error.dateOfReturn.future}")
+    private Date dateOfReturn;
+
     private String flightWay;
     private boolean clickedReturn=false;
-    @NotNull
-    @Future
-    private Date dateOfReturn;
 
     @PostConstruct
     public void init() {
         flightWay = "One way";
+        locationOption = "Departure location - Destination";
     }
 
-    public int getDesiredNrOfSeats() {
+    public Integer getDesiredNrOfSeats() {
         return desiredNrOfSeats;
     }
 
-    public void setDesiredNrOfSeats(int desiredNrOfSeats) {
+    public void setDesiredNrOfSeats(Integer desiredNrOfSeats) {
         this.desiredNrOfSeats = desiredNrOfSeats;
     }
 
@@ -74,19 +81,23 @@ public class SearchFlightBean implements Serializable {
         this.preferredAirline = preferredAirline;
     }
 
-    public List<String> getLocationOption() {
+    public String getLocationOption() {
         return locationOption;
     }
 
-    public void setLocationOption(List<String> locationOption) {
+    public void setLocationOption(String locationOption) {
         this.locationOption = locationOption;
     }
 
     public void listener() {
-        clickedLocationOptionOne = locationOption.contains("Departure Location - Destination Location");
+        System.err.println("LOCATION LISTENER CALLED");
+        clickedLocationOptionOne = locationOption.equals("Departure Location - Destination");
+        clickedLocationOptionTwo = locationOption.equals("World region");
+
     }
 
     public void listener1() {
+        System.err.println("DATE LISTENER CALLED");
         clickedReturn = flightWay.equals("Return");
     }
 
@@ -98,9 +109,15 @@ public class SearchFlightBean implements Serializable {
         return clickedLocationOptionOne;
     }
 
+    public boolean getClickedLocationOptionTwo() { return  clickedLocationOptionTwo; }
+
 
     public void setClickedLocationOptionOne(boolean clickedLocationOptionOne) {
         this.clickedLocationOptionOne = clickedLocationOptionOne;
+    }
+
+    public void setClickedLocationOptionTwo(boolean clickedLocationOptionTwo) {
+        this.clickedLocationOptionTwo = clickedLocationOptionTwo;
     }
 
     public void setClickedReturn(boolean clickedReturn) {
@@ -153,5 +170,28 @@ public class SearchFlightBean implements Serializable {
 
     public void setDateOfReturn(Date dateOfReturn) {
         this.dateOfReturn = dateOfReturn;
+    }
+
+    public String search(){
+        //TODO: give search criteria to sql search query
+        System.err.println("Pressed search button");
+        return "searchresults";
+    }
+
+    public List<Flight> getSearchResults(){
+        List<Flight> results = new ArrayList<Flight>();
+        //TODO: get flight search results from backend
+        for(int i = 0; i < 5; i++){
+            Location l1 = new Location("airportName"+i, "airportCode"+i, new Region("region"+i));
+            Route r1 = new Route(l1, l1, new ArrayList<PriceModifier>(),new ArrayList<PriceModifier>());
+
+            //String name, Date startDate, Date endDate, Date startTime, Date endTime, boolean isPercent, double amount
+            PriceModifier pm = new PriceModifier("name", new Date(), new Date(), new Date(), new Date(), true, 50);
+            //Route route, PriceModifier rdAirModifier, Date departureTime, Date flightDuration
+            Flight f = new Flight(r1, pm, new Date(), new Date());
+            results.add(f);
+        }
+
+        return results;
     }
 }

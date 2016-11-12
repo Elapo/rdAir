@@ -6,7 +6,7 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
 
-<f:view>
+<f:view locale="#{languageBean.localeCode}">
     <f:loadBundle basename="Messages" var="msgs" />
 
 <h:head>
@@ -66,55 +66,14 @@
                     <ui:insert name="content"/>
                 </div>
         </main>
-        <div class="mdl-mega-footer">
-            <div class="mdl-mega-footer--middle-section">
-                <div class="mdl-mega-footer--drop-down-section" id="leftPlaced">
-                    <input class="mdl-mega-footer__heading-checkbox" type="checkbox" checked="checked">
-                        <h1 class="mdl-mega-footer__heading">#{msgs['Template.customers.footer.heading.left']}</h1>
-                        <ul class="mdl-mega-footer__link-list">
-                            <li><a href="#">#{msgs['Template.customers.footer.links.left.one']}</a></li>
-                            <li><a href="#">#{msgs['Template.customers.footer.links.left.two']}</a></li>
-                            <li><a href="#">#{msgs['Template.customers.footer.links.left.three']}</a></li>
-                        </ul>
-                    </input>
-                </div>
-                <div class="mdl-mega-footer--drop-down-section" id="rightPlaced">
-                    <input class="mdl-mega-footer__heading-checkbox" type="checkbox" checked="checked">
-                        <h1 class="mdl-mega-footer__heading">#{msgs['Template.customers.footer.heading.right']}</h1>
-                        <ul class="mdl-mega-footer__link-list">
-                            <li><a href="">#{msgs['Template.customers.footer.heading.right.one']}</a></li>
-                            <li><a href="">#{msgs['Template.customers.footer.heading.right.two']}</a></li>
-                            <br></br>
-                            <div class="mdl--social-buttons">
-                            <a href="https://www.facebook.com/sharer/sharer.php?u=" title="#{msgs['Template.customers.footer.social.button.one.title']}" target="_blank" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--facebook">
-                                <i class="fa fa-facebook fa-fw"></i>#{msgs['Template.customers.footer.social.button.one']}</a>
-                            <a href="http://twitter.com/home?status=" title="#{msgs['Template.customers.footer.social.button.two.title']}" target="_blank" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--twitter">
-                                <i class="fa fa-twitter fa-fw"></i>#{msgs['Template.customers.footer.social.button.two']}</a>
-                            <a href="http://www.stumbleupon.com/submit?url=" title="#{msgs['Template.customers.footer.social.button.three.title']}" target="_blank" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--stumbleupon">
-                                <i class="fa fa-stumbleupon fa-fw"></i>#{msgs['Template.customers.footer.social.button.three']}</a>
-                            </div>
-                        </ul>
-                    </input>
-                </div>
+        <footer class="mdl-mini-footer">
+            <div class="mdl-logo">
+                #{msgs['Template.customers.footer.copyright.logo']}
             </div>
-            <div class="mdl-mega-footer--bottom-section" id="middlePlaced">
+        </footer>
 
-                <div class="mdl-logo">
-                    #{msgs['Template.customers.footer.copyright.logo']}
-                </div>
-            </div>
-        </div>
     </div>
-    <!--<script type="text/javascript">
-        document.addEventListener("DOMContentLoaded", function(event) {
-            alert(window.location.pathname);
-            if(window.location.pathname.indexOf("index") &lt; -1) {
-                var e = document.getElementById("main");
-                e.removeAttribute("style");
 
-            }
-        });
-    </script>-->
 </h:body>
 </f:view>
 </html>

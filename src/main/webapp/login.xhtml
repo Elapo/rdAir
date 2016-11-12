@@ -19,21 +19,26 @@
     </div>
     <div class="mdl-card__supporting-text" id="loginBackground">
         <h:form>
+            <p:messages/>
             <h:outputLabel>#{msgs['Login.email']}</h:outputLabel>
             <br></br>
-            <p:inputText value="#{loginBean.email}"/>
+            <p:inputText value="#{loginBean.email}" id="emailInput"/>
+            <p:message for="emailInput"/>
             <br></br>
             <br></br>
             <h:outputLabel>#{msgs['Login.password']}</h:outputLabel>
             <br></br>
-            <p:inputText type="password" value="#{loginBean.password}"/>
+            <p:inputText type="password" value="#{loginBean.password}" id="passwordInput"/>
+            <p:message for="passwordInput"/>
             <br></br>
+
+            <p:commandButton value="Login!" action="#{loginBean.doLogin}" ajax="false"/>
 
         </h:form>
     </div>
     <div class="mdl-card__actions mdl-card--border" id="loginCardEndButton">
         <!-- linken nr home page of verder booking (als men hiervan komt)-->
-        <a class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--accent"> <!--href=".xhtml"-->
+        <a class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--accent" href="index.index1.xhtml">
             #{msgs['Login.login.button']}
         </a>
         <br></br>

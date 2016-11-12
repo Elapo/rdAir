@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+<ui:composition template="WEB-INF/templates/material-template-customers.xhtml">
+
+    <ui:define name="title">#{msgs['Index.welcome']}</ui:define>
+    <ui:define name="content">
+
+        <h2 id="headerIndex">#{msgs['Index.slogan']}</h2>
+        <br></br>
+        <br></br>
+
+
+        <div class="mdl-grid">
+        <div class="demo-card-wide mdl-card mdl-shadow--2dp">
+        <div class="mdl-card__title">
+            <h2 class="mdl-card__title-text">#{msgs['Search.flight']}</h2>
+        </div>
+        <div class="mdl-card__supporting-text planeImage">
+                    <h:form>
+                        <p:messages/>
+                        <h:panelGrid columns="3" id="searchGrid">
+
+                            <h:outputLabel value="#{msgs['Select.airline.company']}"/>
+                            <h:panelGroup>
+                                <h:selectOneMenu value="#{searchFlightBean.preferredAirline}"
+                                                 styleClass="inputText" id="preferredAirlineInput">
+                                    <!-- items uit db te halen, dit is maar een voorbeeld!!-->
+                                    <f:selectItem itemValue="#{msgs['First.airline']}" itemLabel="#{msgs['First.airline']}"/>
+                                    <f:selectItem itemValue="#{msgs['Second.airline']}" itemLabel="#{msgs['Second.airline']}"/>
+                                </h:selectOneMenu>
+                            </h:panelGroup>
+                            <p:message for="preferredAirlineInput"/>
+
+
+
+                            <h:outputLabel value="#{msgs['Select.class']}" />
+                            <h:panelGroup>
+                                <h:selectOneMenu value="#{searchFlightBean.flightClass}"
+                                                 styleClass="inputText" id="flightClassInput">
+                                    <f:selectItem itemValue="#{msgs['Economy']}" itemLabel="#{msgs['Economy']}" />
+                                    <f:selectItem itemValue="#{msgs['Business']}" itemLabel="#{msgs['Business']}" />
+                                    <f:selectItem itemValue="#{msgs['First.class']}" itemLabel="#{msgs['First.class']}" />
+                                </h:selectOneMenu>
+                            </h:panelGroup>
+                            <p:message for="flightClassInput"/>
+
+
+                            <h:outputLabel for="popup" value="#{msgs['Date.departure']}" />
+                            <h:panelGroup>
+                                <p:calendar id="popup" value="#{calendarViewBean.date}"/>
+                            </h:panelGroup>
+                            <h:panelGroup>
+                                <!-- third column-->
+                                <p:message for="popup"/>
+                            </h:panelGroup>
+
+
+                            <h:panelGroup id="popup1label">
+                                <!-- CONDITIONAL ON RADIOBUTTON -->
+                                <h:outputLabel for="popup1" value="#{msgs['Date.return']}" rendered="#{searchFlightBean.clickedReturn}"/>
+                            </h:panelGroup>
+                            <h:panelGroup >
+                                <p:calendar id="popup1" value="#{calendarViewBean.date}" rendered="#{searchFlightBean.clickedReturn}"/>
+                            </h:panelGroup>
+                            <h:panelGroup>
+                                <!-- third column-->
+                                <p:message for="popup1"/>
+                            </h:panelGroup>
+
+
+                            <h:panelGroup>
+                            <h:outputLabel value="#{msgs['Select.number.seats']}"/>
+                            </h:panelGroup>
+                            <h:panelGroup>
+                                <p:inputText type="number" value="#{searchFlightBean.desiredNrOfSeats}" styleClass="inputText" id="desiredNrOfSeatsInput"/>
+                            </h:panelGroup>
+                            <h:panelGroup>
+                                <!-- third column-->
+                                <p:message for="desiredNrOfSeatsInput"/>
+                            </h:panelGroup>
+
+                            <h:panelGroup>
+                                <!-- CONDITIONAL ON RADIOBUTTON 1-->
+                                <h:outputLabel value="#{msgs['Select.location.departure']}" id="option1-1label"/>
+                            </h:panelGroup>
+                            <h:panelGroup id="option1-1">
+                                <h:selectOneMenu value="#{searchFlightBean.departureLocation}" styleClass="inputText" id="departureLocationInput">
+                                    <!--vben, list nog uit db te halen!-->
+                                    <f:selectItem itemLabel="x" itemValue="x"/>
+                                    <f:selectItem itemLabel="y" itemValue="y"/>
+                                </h:selectOneMenu>
+                            </h:panelGroup>
+                            <h:panelGroup>
+                                <p:message for="departureLocationInput"/>
+                            </h:panelGroup>
+
+
+
+                            <h:panelGroup>
+                                <!-- CONDITIONAL ON RADIOBUTTON 1-->
+                            <h:outputLabel value="#{msgs['Select.location.destination']}" id="option1-2label" />
+                            </h:panelGroup>
+                            <h:panelGroup id="option1-2">
+                                <h:selectOneMenu value="#{searchFlightBean.destinationLocation}" styleClass="inputText" id="destinationLocationInput">
+                                    <!--vben, list nog uit db te halen!-->
+                                    <f:selectItem itemLabel="x" itemValue="x"/>
+                                    <f:selectItem itemLabel="y" itemValue="y"/>
+                                </h:selectOneMenu>
+                            </h:panelGroup>
+                            <h:panelGroup>
+                                <p:message for="destinationLocationInput"/>
+                            </h:panelGroup>
+
+
+
+                            <h:panelGroup>
+                                <!-- CONDITIONAL ON RADIOBUTTON 2-->
+                                <h:outputLabel value="#{msgs['Select.location.region.world']}" id="option2label"/>
+                            </h:panelGroup>
+                            <h:panelGroup id="option2">
+                                <h:selectOneMenu value="#{searchFlightBean.globalRegion}" styleClass="inputText" id="regionInput">
+                                    <!--vben, list nog uit db te halen!-->
+                                    <f:selectItem itemLabel="#{msgs['Asia']}" itemValue="#{msgs['Asia']}"/>
+                                    <f:selectItem itemLabel="#{msgs['North.america']}" itemValue="#{msgs['North.america']}"/>
+                                </h:selectOneMenu>
+                            </h:panelGroup>
+                            <h:panelGroup>
+                            <p:message for="regionInput"/>
+                            </h:panelGroup>
+
+
+
+                        </h:panelGrid>
+                        <br></br>
+                        <br></br>
+                        <p:commandButton value="#{msgs['Search.button']}" action="#{searchFlightBean.search()}" ajax="false"/>
+
+                        <br/>
+
+
+                    </h:form>
+        </div>
+        </div>
+        </div>
+
+
+
+
+
+
+
+    </ui:define>
+</ui:composition>
+</html>
