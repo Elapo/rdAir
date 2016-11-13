@@ -12,7 +12,7 @@
     <ui:define name="content">
         <h:form>
 
-            <b:dataTable var="" value="" style="margin-bottom:40px" select="true">
+            <b:dataTable var="f" value="listOfFlightsFromSearchResults" style="margin-bottom:40px">
                 <b:column label="#{msgs['Search.results.title.column.one']}">
                     <h:outputText value="#{searchFlightBean.destinationLocation}" />
                 </b:column>
@@ -35,6 +35,12 @@
                 <b:column label="#{msgs['Search.results.title.column.six']}">
                     <!--<h:outputText value="#{beanname.field}" />-->
                     <h:outputText value="HIER MOET DISCOUNT VOOR FLIGHT KOMEN" />
+                </b:column>
+                <b:column label="#{msgs['Search.results.title.column.seven']}">
+                    <b:navLink value="#{msgs['Search.details.button']}"
+                                          outcome="searchedandselectedflightdetails.xhtml">
+                        <f:param name="flightId" value="1" />
+                    </b:navLink>
                 </b:column>
             </b:dataTable>
 

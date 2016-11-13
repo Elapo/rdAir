@@ -14,7 +14,7 @@ public class BundleProducer {
     @Produces
     public PropertyResourceBundle getBundle() {
         FacesContext context = FacesContext.getCurrentInstance();
-        return context.getApplication().evaluateExpressionGet(context, "#{valmsgs}", PropertyResourceBundle.class);
+        return context.getApplication().evaluateExpressionGet(context, "#{msgs}", PropertyResourceBundle.class);
     }
 
 }

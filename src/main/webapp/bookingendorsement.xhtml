@@ -6,23 +6,19 @@
                 xmlns:b="http://bootsfaces.net/ui"
                 template="WEB-INF/templates/template.xhtml">
 
-
-    <ui:define name="title">#{msgs['Thankyou.thankyou']}</ui:define>
+    <ui:define name="title">#{msgs['Booking.booking']}</ui:define>
     <ui:define name="content">
 
         <br></br>
-        <h2>#{msgs['Thankyou.message']}</h2>
+        <h3>#{msgs['Booking.endorsement']}</h3>
         <br></br>
         <br></br>
-        <br></br>
-        <h3>#{msgs['Thankyou.slogan']}</h3>
-        <br></br>
-        <br></br>
-        <br></br>
-        <b:button value="#{msgs['Thankyou.index.button']}" outcome="index.xhtml"/>
+        <h:form>
+        <!-- commandButton + e-mail!!-->
+        <b:button value="#{msgs['Invoices.button']}" outcome="invoices.xhtml"/>
         <br></br>
         <br></br>
-
+        </h:form>
 
     </ui:define>
 </ui:composition>

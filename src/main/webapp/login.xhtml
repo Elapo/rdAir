@@ -1,55 +1,43 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:f="http://xmlns.jcp.org/jsf/core"
-      xmlns:p="http://primefaces.org/ui">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:b="http://bootsfaces.net/ui"
+                template="WEB-INF/templates/template.xhtml">
 
 
-<ui:composition template="WEB-INF/templates/material-template-customers.xhtml">
+
     <ui:define name="title">#{msgs['Login.login']}</ui:define>
 
     <ui:define name="content">
 
-    <div class="demo-card-wide mdl-card mdl-shadow--2dp">
-    <div class="mdl-card__title" id="loginCardTitle">
-        <h2 class="mdl-card__title-text">#{msgs['Login.registered.user.login']}</h2>
-    </div>
-    <div class="mdl-card__supporting-text" id="loginBackground">
-        <h:form>
-            <p:messages/>
-            <h:outputLabel>#{msgs['Login.email']}</h:outputLabel>
-            <br></br>
-            <p:inputText value="#{loginBean.email}" id="emailInput"/>
-            <p:message for="emailInput"/>
-            <br></br>
-            <br></br>
-            <h:outputLabel>#{msgs['Login.password']}</h:outputLabel>
-            <br></br>
-            <p:inputText type="password" value="#{loginBean.password}" id="passwordInput"/>
-            <p:message for="passwordInput"/>
-            <br></br>
 
-            <p:commandButton value="Login!" action="#{loginBean.doLogin}" ajax="false"/>
+        <h2>#{msgs['Login.registered.user.login']}</h2>
+
+        <h:form>
+            <b:messages/>
+                <h:outputLabel>#{msgs['Login.email']}</h:outputLabel>
+                <br></br>
+                <b:inputText value="#{loginBean.email}" id="emailInput"/>
+                <b:message for="emailInput"/>
+                <br></br>
+                <br></br>
+                <h:outputLabel>#{msgs['Login.password']}</h:outputLabel>
+                <br></br>
+                <b:inputText type="password" value="#{loginBean.password}" id="passwordInput"/>
+                <b:message for="passwordInput"/>
+                <br></br>
+
+                <b:commandButton value="#{msgs['Login.login.button']}" action="#{loginBean.doLogin}" ajax="false"/>
+
+            <h:panelGroup>
+                <b:button value="#{msgs['Login.register.button']}" rendered="#{not registrationBean.registered}" outcome="register.xhtml"/>
+            </h:panelGroup>
+
+
 
         </h:form>
-    </div>
-    <div class="mdl-card__actions mdl-card--border" id="loginCardEndButton">
-        <!-- linken nr home page of verder booking (als men hiervan komt)-->
-        <a class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--accent" href="index.index1.xhtml">
-            #{msgs['Login.login.button']}
-        </a>
-        <br></br>
-        <br></br>
-        <a class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--accent" href="register.xhtml">
-            #{msgs['Login.register.button']}
-        </a>
-    </div>
-    </div>
-
 
     </ui:define>
     </ui:composition>
-</html>

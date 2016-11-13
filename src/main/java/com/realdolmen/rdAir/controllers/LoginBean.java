@@ -16,6 +16,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
+import java.util.PropertyResourceBundle;
 
 @ManagedBean
 @SessionScoped
@@ -26,14 +27,16 @@ public class LoginBean implements Serializable{
     @Inject
     private UserRepository ur;
 
+    private transient @Inject PropertyResourceBundle bundle;
+
     private boolean loggedIn = false;
 
-    @NotEmpty(message="Your email must be filled in!")
-    @Email(message="Your email should be like 'example@example.com'!")
+    @NotEmpty(message="{Login.email.empty}")
+    @Email(message="{Login.email.wrong}")
     private String email;
-    @Size(min=8, max=30, message="Your password should have at least 8 tokens(combination of basic letters and digits)!")
-    @NotNull(message="Your password should have at least 8 tokens(combination of basic letters and digits)!")
-    @Pattern(regexp = "[a-zA-Z0-9]{8,30}")
+    @Size(min=8, max=30, message="{Login.password.size}")
+    @NotNull(message="{Login.password.null}")
+    @Pattern(regexp = "[a-zA-Z0-9]{8,30}", message="{Login.password.pattern}")
     private String password;
 
     public String doLogin() {
@@ -48,7 +51,8 @@ public class LoginBean implements Serializable{
             System.out.println("Logged in user "+ user.getFirstName());
             return "pretty:view-index";
         }
-        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "{Messages.invalid.login}", "{Message.invalid.login}"));
+        String errorMessage = bundle.getString("Messages.invalid.login");
+        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, errorMessage, null));
         return "";
     }
 

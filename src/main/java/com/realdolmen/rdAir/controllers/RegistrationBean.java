@@ -7,6 +7,7 @@ import org.hibernate.validator.constraints.NotEmpty;
 import org.mindrot.jbcrypt.BCrypt;
 
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.SessionScoped;
 import javax.faces.bean.ViewScoped;
 import javax.inject.Inject;
 import javax.validation.constraints.NotNull;
@@ -14,7 +15,7 @@ import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
 @ManagedBean
-@ViewScoped
+@SessionScoped
 public class RegistrationBean {
     @Inject
     UserRepository ur;
@@ -24,31 +25,34 @@ public class RegistrationBean {
 
     private Customer user;
 
-    @NotNull(message="Your first name should be filled in!")
-    @Size(min=1, max=50, message="Your first name should have at least 1 letter!")
+    @NotNull(message="{Register.fname.null}")
+    @Size(min=1, max=50, message="{Register.fname.size}")
     private String fName;
 
-    @NotNull(message="Your last name should be filled in!")
-    @Size(min=1, max=50, message="Your last name should have at least 1 letter!")
+    @NotNull(message="{Register.lname.null'}")
+    @Size(min=1, max=50, message="{Register.lname.size}")
     private String lName;
 
-    @NotNull(message="Your address should be filled in!")
-    @Size(min=1, max=100, message="Your address should have at least 1 letter!")
+    @NotNull(message="{Register.address.null}")
+    @Size(min=1, max=100, message="{Register.address.size}")
     private String address;
 
-    @NotNull(message="Your phone number should be filled in!")
-    @Size(min=5, max=10, message="Your phone number should have at least 5 digits and maximum 10 digits!")
-    @Pattern(regexp = "[0-9]{5,10}",message = "Your phone number should only contain digits.")
+    @NotNull(message="{Register.phnumber.null}")
+    @Size(min=5, max=10, message="{Register.phnumber.size}")
+    @Pattern(regexp = "[0-9]{5,10}",message = "{Register.phnumber.pattern}")
     private String telephone;
 
-    @NotEmpty(message="Your email must be filled in!")
-    @Email(message="Your email should be like 'example@example.com'!")
+    @NotEmpty(message="{Register.email.empty}")
+    @Email(message="{Register.email.email}")
     private String email;
 
-    @Pattern(regexp = "[a-zA-Z]{8,30}",message = "Your password should contain at least 8 and maximum 30 letters and/or digits!")
+    @NotEmpty(message="{Register.password.null}")
+    @Pattern(regexp = "[a-zA-Z0-9]{8,30}",message = "{Register.password.pattern}")
     private String password;
 
     private String passwordHash;
+
+    private boolean registered;
 
     public String doRegistration(){
         System.err.println("Succesfully registered customer: " + lName);
@@ -57,6 +61,8 @@ public class RegistrationBean {
         ur.save(user);
         login.setUser(user);
         login.setLoggedIn(true);
+        registered= true;
+        System.err.println("Registered boolean value: " + registered);
         return "pretty:view-login";
     }
 
@@ -115,4 +121,8 @@ public class RegistrationBean {
     public void setPasswordHash(String passwordHash) {
         this.passwordHash = passwordHash;
     }
+
+    public void setRegistered(boolean registered) {this.registered = registered; }
+
+    public boolean getRegistered() {return registered;}
 }

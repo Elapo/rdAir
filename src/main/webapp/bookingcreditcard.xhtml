@@ -1,0 +1,50 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:b="http://bootsfaces.net/ui"
+                template="WEB-INF/templates/template.xhtml">
+
+    <ui:define name="title">#{msgs['Booking.booking']}</ui:define>
+    <ui:define name="content">
+
+        <h2>#{msgs['Booking.creditcard']}</h2>
+        <br></br>
+
+        <h:form>
+            <b:messages/>
+            <h:panelGrid columns="3">
+
+                <h:panelGroup>
+                    <h:outputLabel>#{msgs['Booking.creditcardNumber']} </h:outputLabel>
+                </h:panelGroup>
+                <h:panelGroup>
+                    <b:inputText value="#{bookingBean.creditcardNumber}" styleClass="inputText" id="creditcardNumberInput"/>
+                </h:panelGroup>
+                <h:panelGroup>
+                    <b:message for="creditcardNumberInput"/>
+                </h:panelGroup>
+
+
+                <h:panelGroup>
+                    <h:outputLabel>#{msgs['Booking.creditcardExpDate']} &#160;</h:outputLabel>
+                </h:panelGroup>
+                <h:panelGroup>
+                    <b:inputText value="#{bookingBean.creditcardExpDate}" styleClass="inputText" id="creditcardExpDateInput"/>
+                </h:panelGroup>
+                <h:panelGroup>
+                    <b:message for="creditcardExpDateInput"/>
+                </h:panelGroup>
+
+            </h:panelGrid>
+            <br></br>
+            <!-- commandButton + email!! -->
+            <b:commandButton value="#{msgs['Booking.creditcard.button']}" action="#{bookingBean.bookingCreditcard}"/>
+
+        </h:form>
+
+
+
+    </ui:define>
+</ui:composition>

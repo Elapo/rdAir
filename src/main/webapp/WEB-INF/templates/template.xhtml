@@ -48,7 +48,7 @@
                     class="navbar-form navbar-right hidden-md hidden-sm hidden-xs"
                     role="submit">
                 <b:commandButton
-                        value="Logout #{loginBean.user.firstName} #{loginBean.user.lastName}"
+                        value="#{msgs['Navbar.logout']} #{loginBean.user.firstName} #{loginBean.user.lastName}"
                         action="#{loginBean.doLogout}"
                         iconAwesome="user"
                         rendered="#{loginBean.loggedIn}">
