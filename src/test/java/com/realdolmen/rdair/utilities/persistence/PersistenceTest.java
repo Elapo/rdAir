@@ -72,7 +72,8 @@ public abstract class PersistenceTest extends Assert {
         /**
          * MySQL based database engine for running against a production-mirror.
          */
-        mysql("com.mysql.jdbc.Driver", "jdbc:mysql://localhost:3306/", "root", "", false),
+        //FIXME IF tests fail with access denied, this is the place to be
+        mysql("com.mysql.jdbc.Driver", "jdbc:mysql://localhost:3306/", "root", "9cnHadtZTjoGtzUPY8ge", false),
 
         /**
          * H2 based database engine for running (fast) in-memory.

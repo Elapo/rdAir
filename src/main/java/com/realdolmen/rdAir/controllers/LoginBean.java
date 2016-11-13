@@ -47,8 +47,8 @@ public class LoginBean implements Serializable{
     }
 
     public String doLogout(){
-        loggedIn = false;
-        return "pretty:view-home"; //todo redirect to home
+        FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
+        return "pretty:view-index";
     }
 
     public void addToOrder(Ticket t){

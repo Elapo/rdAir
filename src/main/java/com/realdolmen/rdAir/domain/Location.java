@@ -16,7 +16,7 @@ public class Location implements Serializable{
 
     private String airportCode;
 
-    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
+    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
     private Region region;
 
     public Location() {

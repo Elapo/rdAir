@@ -3,10 +3,7 @@ package com.realdolmen.rdAir.repositories;
 import com.realdolmen.rdAir.domain.Location;
 
 import javax.ejb.Stateless;
-import javax.persistence.EntityManager;
-import javax.persistence.EntityNotFoundException;
-import javax.persistence.PersistenceContext;
-import javax.persistence.Query;
+import javax.persistence.*;
 import java.util.List;
 
 @Stateless
@@ -16,7 +13,7 @@ public class LocationRepository {//todo test
     EntityManager em;
 
     public Location save(Location loc){
-        em.persist(loc);
+        em.merge(loc);
         return loc;
     }
 
@@ -37,6 +34,16 @@ public class LocationRepository {//todo test
                 .setFirstResult((currentPage-1)*perPage)
                 .setMaxResults(perPage)
                 .getResultList();
+    }
+
+    @SuppressWarnings(value = "all")
+    public List<Location> getAllLocations(){
+        try {
+            return em.createQuery("select l from Location l").getResultList();
+        }
+        catch (NoResultException e){
+            return null;
+        }
     }
 
     @SuppressWarnings(value = "all")
