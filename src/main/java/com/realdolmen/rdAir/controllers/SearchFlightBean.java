@@ -1,10 +1,15 @@
 package com.realdolmen.rdAir.controllers;
 
 import com.realdolmen.rdAir.domain.*;
+import com.realdolmen.rdAir.repositories.CriteriaSearchRepository;
+import com.realdolmen.rdAir.util.PriceCalculator;
 
 import javax.annotation.PostConstruct;
+import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.inject.Inject;
+import javax.inject.Named;
 import javax.validation.constraints.Future;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
@@ -15,10 +20,17 @@ import java.util.Date;
 import java.util.List;
 
 
-@ManagedBean
+@Named
 @SessionScoped
 public class SearchFlightBean implements Serializable {
 
+//    @Inject
+//    private CriteriaSearchRepository criteriaSearchRepository;
+
+    @Inject
+    private SearchresultsBean searchResultsBean;
+
+    private Integer id;
 
     @NotNull(message="{Search.error.desiredNrOfSeats.null}")
     @Min(value=1,message="{Search.error.desiredNrOfSeats}")
@@ -174,24 +186,15 @@ public class SearchFlightBean implements Serializable {
 
     public String search(){
         //TODO: give search criteria to sql search query
+        //SHOULD GIVE search results but returns null..
+        //  can't even inject this
+//        searchResultsBean.setSearchResults(criteriaSearchRepository.searchFlights(desiredNrOfSeats, flightClass, preferredAirline, departureLocation,
+//                destinationLocation, globalRegion, dateOfDeparture));
+
+
         System.err.println("Pressed search button");
         return "searchresults";
     }
 
-    public List<Flight> getSearchResults(){
-        List<Flight> results = new ArrayList<Flight>();
-        //TODO: get flight search results from backend
-        for(int i = 0; i < 5; i++){
-            Location l1 = new Location("airportName"+i, "airportCode"+i, new Region("region"+i));
-            Route r1 = new Route(l1, l1, new ArrayList<PriceModifier>(),new ArrayList<PriceModifier>(), null);
 
-            //String name, Date startDate, Date endDate, Date startTime, Date endTime, boolean isPercent, double amount
-            PriceModifier pm = new PriceModifier("name", new Date(), new Date(), new Date(), new Date(), true, true, 50);
-            //Route route, PriceModifier rdAirModifier, Date departureTime, Date flightDuration
-            Flight f = new Flight(r1, pm, new Date(), new Date());
-            results.add(f);
-        }
-
-        return results;
-    }
 }

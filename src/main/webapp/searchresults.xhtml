@@ -11,34 +11,29 @@
     <ui:define name="content">
         <h:form>
 
-            <b:dataTable var="f" value="listOfFlightsFromSearchResults" style="margin-bottom:40px">
+            <b:dataTable var="f" value="#{searchResultsBean.flights}" style="margin-bottom:40px">
                 <b:column label="#{msgs['Search.results.title.column.one']}">
-                    <h:outputText value="#{searchFlightBean.destinationLocation}" />
+                    <h:outputText value="#{f.route.destination}" />
                 </b:column>
                 <b:column label="#{msgs['Search.results.title.column.two']}">
-                    <!--<h:outputText value="#{beanname.field}" />-->
-                    <h:outputText value="#{searchFlightBean.preferredAirline}" />
+                    <h:outputText value="#{f.route.airline}" />
                 </b:column>
                 <b:column label="#{msgs['Search.results.title.column.three']}">
-                    <!--<h:outputText value="#{beanname.field}" />-->
-                    <h:outputText value="#{searchFlightBean.dateOfDeparture}" />
+                    <h:outputText value="#{f.departureTime}" />
                 </b:column>
                 <b:column label="#{msgs['Search.results.title.column.four']}">
-                    <!--<h:outputText value="#{beanname.field}" />-->
-                    <h:outputText value="HIER MOET FLIGHT ARRIVAL TIME KOMEN UIT FLIGHT" />
+                    <h:outputText value="#{f.flightDuration}" />
                 </b:column>
                 <b:column label="#{msgs['Search.results.title.column.five']}">
-                    <!--<h:outputText value="#{beanname.field}" />-->
-                    <h:outputText value="HIER MOET PRICE VOOR FLIGHT KOMEN" />
+                    <h:outputText value="#{SearchresultsBean.calculatePrice}" />
                 </b:column>
                 <b:column label="#{msgs['Search.results.title.column.six']}">
-                    <!--<h:outputText value="#{beanname.field}" />-->
-                    <h:outputText value="HIER MOET DISCOUNT VOOR FLIGHT KOMEN" />
+                    <h:outputText value="#{SearchresultsBean.calculateDiscount}" />
                 </b:column>
                 <b:column label="#{msgs['Search.results.title.column.seven']}">
                     <b:navLink value="#{msgs['Search.details.button']}"
                                           outcome="searchedandselectedflightdetails.xhtml">
-                        <f:param name="flightId" value="1" />
+                        <f:param name="flightId" value="#{f.id}" />-->
                     </b:navLink>
                 </b:column>
             </b:dataTable>

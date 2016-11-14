@@ -1,55 +1,60 @@
 package com.realdolmen.rdAir.controllers;
 
-import com.realdolmen.rdAir.domain.Customer;
-import com.realdolmen.rdAir.domain.Order;
-import com.realdolmen.rdAir.services.MailService;
-import com.realdolmen.rdAir.util.PriceCalculator;
-import javax.annotation.PostConstruct;
+import com.realdolmen.rdAir.util.PaymentValidator;
+import org.hibernate.validator.constraints.NotEmpty;
+
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ManagedProperty;
-import javax.faces.bean.ViewScoped;
-import java.util.Date;
+import javax.faces.bean.SessionScoped;
+import javax.validation.constraints.*;
+import java.io.Serializable;
+
 @ManagedBean
-@ViewScoped
-public class BookingBean {
-    @ManagedProperty(value = "#{loginBean}")
-    LoginBean session;
+@SessionScoped
+public class BookingBean implements Serializable {
 
-    Order bookingOrder;
+    private boolean isBooked;
 
-    public String creditCard;
-    public Date expirationDate;
+    @NotEmpty(message="{Booking.creditcardNumber.null}")
+    @Pattern(regexp="[0-9]{16}", message="{Booking.creditcardNumber.pattern}")
+    private String creditcardNumber;
 
-    @PostConstruct
-    public void init(){
-        bookingOrder.getTickets().addAll(session.getBooking().getTickets());
-        bookingOrder.setOrderPrice(bookingOrder.getOrderPrice() + session.getBooking().getOrderPrice());
+    @NotEmpty(message="{Booking.creditcardExpDate.null}")
+    @Pattern(regexp="(0[1-9]|1[0-2])(1[7-9]|[2-9][0-9])", message="{Booking.creditcardExpDate.pattern}")
+    private String creditcardExpDate;
+
+
+    public String getCreditcardNumber() {
+        return creditcardNumber;
     }
 
-    public String doPayment(String method){
-        if(method.equals("Credit")) {
-            bookingOrder.setOrderPrice(bookingOrder.getOrderPrice() * PriceCalculator.RDAIR_CREDITCARD_PROMO);
-            if (expirationDate != null && expirationDate.after(new Date()) && !creditCard.trim().isEmpty()) {
-                bookingOrder.setStatus("Accepted");
-                Customer c = (Customer)session.getUser();
-                c.getOrders().add(bookingOrder);
-                session.getUr().save(c);
-                return "pretty:view-thanks";
-            }
-        }
-        else if(method.equals("Transfer")){
-            bookingOrder.setStatus("Pending");
-            Customer c = (Customer) session.getUser();
-            c.getOrders().add(bookingOrder);
-            session.getUr().save(c);
-            return "pretty:view-thanks";
-        }
-        return "pretty:view-index";
+    public void setCreditcardNumber(String creditcardNumber) {
+        this.creditcardNumber = creditcardNumber;
     }
 
-    private void sendMail(){
-        MailService ms = new MailService();
-        String to = session.getUser().getEmail();
-        ms.mail(to, "Your order #"+bookingOrder.getId()+" at rdAir", "");
+    public String getCreditcardExpDate() {
+        return creditcardExpDate;
+    }
+
+    public void setCreditcardExpDate(String creditcardExpDate) {
+        this.creditcardExpDate = creditcardExpDate;
+    }
+
+
+    public boolean isBooked() {
+        return isBooked;
+    }
+
+    public void setBooked(boolean booked) {
+        isBooked = booked;
+    }
+
+    public String bookingCreditcard(){
+        if (!PaymentValidator.creditcardValidation()) {
+            return "pretty:view-index";
+        } else {
+            System.err.println("Booked via creditcard!!!");
+            isBooked = true;
+            return "pretty:view-bookingcreditcard";
+        }
     }
 }

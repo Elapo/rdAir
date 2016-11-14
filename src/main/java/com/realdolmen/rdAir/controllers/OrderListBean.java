@@ -7,13 +7,15 @@ import org.hibernate.Hibernate;
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
+import javax.faces.bean.SessionScoped;
 import javax.faces.bean.ViewScoped;
+import javax.inject.Named;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-@ManagedBean
-@ViewScoped
+@Named
+@SessionScoped
 public class OrderListBean implements Serializable {
 
     private List<Order> orders;
