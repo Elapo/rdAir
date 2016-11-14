@@ -63,7 +63,18 @@ public class UserRepository {
                 .getResultList();
     }
 
-    public <T extends User> boolean delete(int id, Class<T> type){
+    @SuppressWarnings(value = "all")
+    public <T extends User> List<T> getAllUsers(Class<T> type) {
+        try{
+            return em.createQuery("select o from " + type.getSimpleName() + " o").getResultList();
+        }
+        catch (NoResultException e){
+            return null;
+        }
+    }
+
+
+        public <T extends User> boolean delete(int id, Class<T> type){
         User u = em.getReference(type, id);
         if(u!=null) {
             em.remove(em.getReference(type, id));

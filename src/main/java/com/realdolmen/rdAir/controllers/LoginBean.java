@@ -38,6 +38,7 @@ public class LoginBean implements Serializable{
     @NotEmpty(message="{Login.email.empty}")
     @Email(message="{Login.email.wrong}")
     private String email;
+
     @Size(min=8, max=30, message="{Login.password.size}")
     @NotNull(message="{Login.password.null}")
     @Pattern(regexp = "[a-zA-Z0-9]{8,30}", message="{Login.password.pattern}")

@@ -183,10 +183,10 @@ public class SearchFlightBean implements Serializable {
         //TODO: get flight search results from backend
         for(int i = 0; i < 5; i++){
             Location l1 = new Location("airportName"+i, "airportCode"+i, new Region("region"+i));
-            Route r1 = new Route(l1, l1, new ArrayList<PriceModifier>(),new ArrayList<PriceModifier>());
+            Route r1 = new Route(l1, l1, new ArrayList<PriceModifier>(),new ArrayList<PriceModifier>(), null);
 
             //String name, Date startDate, Date endDate, Date startTime, Date endTime, boolean isPercent, double amount
-            PriceModifier pm = new PriceModifier("name", new Date(), new Date(), new Date(), new Date(), true, 50);
+            PriceModifier pm = new PriceModifier("name", new Date(), new Date(), new Date(), new Date(), true, true, 50);
             //Route route, PriceModifier rdAirModifier, Date departureTime, Date flightDuration
             Flight f = new Flight(r1, pm, new Date(), new Date());
             results.add(f);

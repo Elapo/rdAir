@@ -15,14 +15,85 @@
                     <div class="mdl-card__title-text">Partners:</div>
                 </div>
                 <div class="mdl-card__supporting-text">
-                    <p:dataTable var="partner" rows="20" paginator="true"
-                                 paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
-                                 value="#{partnerListBean.partners}">
-                        <p:column headerText="Name"><h:outputText value="#{partner.airlineName}"/></p:column>
-                        <p:column headerText="Website"><h:outputText value="#{partner.website}"/></p:column>
-                        <p:column headerText="Contact"><h:outputText value="#{partner.firstName} #{partner.lastName}"/></p:column>
-                        <p:column headerText="Phone"><h:outputText value="#{partner.telephone}"/></p:column>
-                    </p:dataTable>
+                    <h:form id="partnerlist">
+                        <p:dataTable id="partnerDt" var="partner" rows="20" paginator="true" editable="true"
+                                     paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                     value="#{partnerListBean.partners}" rowKey="#{partner.id}" selectionMode="single" selection="#{partnerListBean.selected}">
+                            <p:column headerText="Name">
+                                <p:cellEditor>
+                                    <f:facet name="output"><h:outputText value="#{partner.airlineName}"/></f:facet>
+                                    <f:facet name="input"><p:inputText value="#{partner.airlineName}"/></f:facet>
+                                </p:cellEditor>
+                            </p:column>
+                            <p:column headerText="Website">
+                                <p:cellEditor>
+                                    <f:facet name="output"><h:outputText value="#{partner.website}"/></f:facet>
+                                    <f:facet name="input"><p:inputText value="#{partner.website}"/></f:facet>
+                                </p:cellEditor>
+                            </p:column>
+                            <p:column headerText="Contact first name">
+                                <p:cellEditor>
+                                    <f:facet name="output"><h:outputText value="#{partner.firstName}"/></f:facet>
+                                    <f:facet name="input"><p:inputText value="#{partner.firstName}"/></f:facet>
+                                </p:cellEditor>
+                            </p:column>
+                            <p:column headerText="Contact last name">
+                                <p:cellEditor>
+                                    <f:facet name="output"><h:outputText value=" #{partner.lastName}"/></f:facet>
+                                    <f:facet name="input"><p:inputText value="#{partner.lastName}"/></f:facet>
+                                </p:cellEditor>
+                            </p:column>
+                            <p:column headerText="Phone">
+                                <p:cellEditor>
+                                    <f:facet name="output"><h:outputText value="#{partner.telephone}"/></f:facet>
+                                    <f:facet name="input"><p:inputText value="#{partner.telephone}"/></f:facet>
+                                </p:cellEditor>
+                            </p:column>
+                            <p:column headerText="details">
+                                <p:commandButton action="#{partnerListBean.getDetailsUrl(partner.id)}"/>
+                            </p:column>
+                            <p:column style="width: 32px">
+                                <p:rowEditor/>
+                            </p:column>
+                            <p:contextMenu for="partnerDt">
+                                <p:submenu label="Actions">
+                                    <p:menuitem value="Delete" update="@form" icon="ui-icon-close" actionListener="#{locationListBean.deleteLocation}">
+                                        <p:ajax process="@form" update="@form"/>
+                                    </p:menuitem>
+                                </p:submenu>
+                            </p:contextMenu>
+                        </p:dataTable>
+                    </h:form>
+                </div>
+            </div>
+        </div>
+        <div class="mdl-color--white mdl-shadow--2dp mdl-cell mdl-cell--12-col mdl-grid">
+            <div class="mdl-card mdl-cell mdl-cell--12-col">
+                <div class="mdl-card__title mdl-card--border">
+                    <div class="mdl-card__title-text">Add a partner:</div>
+                </div>
+                <div class="mdl-card__supporting-text">
+                    <h:form>
+                        <p:outputLabel for="airlineName" value="Airline Name:"/><br/>
+                        <p:inputText id="airlineName" required="true" value="#{partnerListBean.airlineName}"/><br/>
+                        <p:outputLabel for="cfName" value="Contact first name:"/><br/>
+                        <p:inputText id="cfName" required="true" value="#{partnerListBean.contactFName}"/><br/>
+                        <p:outputLabel for="clName" value="Contact last name:"/><br/>
+                        <p:inputText id="clName" required="true" value="#{partnerListBean.contactLName}"/><br/>
+                        <p:outputLabel for="website" value="Website:"/><br/>
+                        <p:inputText id="website" required="true" value="#{partnerListBean.website}"/><br/>
+                        <p:outputLabel for="address" value="Address:"/><br/>
+                        <p:inputText id="address" required="true" value="#{partnerListBean.address}"/><br/>
+                        <p:outputLabel for="telephone" value="Telephone:"/><br/>
+                        <p:inputText id="telephone" value="#{partnerListBean.telephone}"/><br/>
+                        <p:outputLabel for="email" value="Email:"/><br/>
+                        <p:inputText id="email" required="true" value="#{partnerListBean.email}"/><br/>
+                        <p:outputLabel for="passwd" value="Password:"/><br/>
+                        <p:inputText id="passwd" required="true" type="password" value="#{partnerListBean.password}"/><br/>
+                        <p:commandButton value="Add" action="#{partnerListBean.addPartner}" update=":partnerlist:partnerDt"><br/>
+                            <p:ajax render=":partnerlist:partnerDt"/>
+                        </p:commandButton>
+                    </h:form>
                 </div>
             </div>
         </div>

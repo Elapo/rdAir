@@ -7,6 +7,7 @@ import org.hibernate.validator.constraints.NotEmpty;
 import org.mindrot.jbcrypt.BCrypt;
 
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
 import javax.faces.bean.ViewScoped;
 import javax.inject.Inject;
@@ -21,6 +22,9 @@ public class RegistrationBean {
     UserRepository ur;
 
     private Customer user;
+
+    @Inject
+    private LoginBean login;
 
     @NotNull(message="{Register.fname.null}")
     @Size(min=1, max=50, message="{Register.fname.size}")

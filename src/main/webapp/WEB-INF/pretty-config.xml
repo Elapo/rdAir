@@ -35,6 +35,10 @@
         <pattern value="/admin/partners"/>
         <view-id value="/account/admin/partners.xhtml"/>
     </url-mapping>
+    <url-mapping id="view-admin-partners-details">
+        <pattern value="/admin/partners/#{id}"/>
+        <view-id value="/account/admin/partnerdetails.xhtml"/>
+    </url-mapping>
     <url-mapping id="view-admin-reports">
         <pattern value="/admin/reports"/>
         <view-id value="/account/admin/reports.xhtml"/>

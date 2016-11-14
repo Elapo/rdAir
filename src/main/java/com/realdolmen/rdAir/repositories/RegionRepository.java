@@ -28,6 +28,16 @@ public class RegionRepository {
         }
     }
 
+    @SuppressWarnings(value = "all")
+    public List<Region> getAllRegions(){
+        try {
+            return em.createQuery("select r from Region r").getResultList();
+        }
+        catch (NoResultException e){
+            return null;
+        }
+    }
+
     public Region getRegionByName(String name){
         try {
             Query sql = em.createQuery("select r from Region r where r.name=:name");
