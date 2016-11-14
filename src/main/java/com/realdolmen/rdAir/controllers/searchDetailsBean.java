@@ -20,6 +20,10 @@ public class searchDetailsBean implements Serializable {
 
     @ManagedProperty(value="#{loginBean}")
     private LoginBean login;
-    
+
+    @PostConstruct
+    public void init() {
+
+    }
 
 }

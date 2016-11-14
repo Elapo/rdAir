@@ -11,7 +11,7 @@ import javax.faces.bean.ViewScoped;
 import java.util.Date;
 @ManagedBean
 @ViewScoped
-public class bookingBean {
+public class BookingBean {
     @ManagedProperty(value = "#{loginBean}")
     LoginBean session;
 
