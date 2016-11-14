@@ -2,6 +2,7 @@ package com.realdolmen.rdAir.controllers.employeeBeans;
 
 import com.realdolmen.rdAir.domain.Airline;
 import com.realdolmen.rdAir.repositories.UserRepository;
+import org.primefaces.event.RowEditEvent;
 
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
@@ -33,6 +34,18 @@ public class PartnerListBean {
     public void addPartner(){
         System.out.println("Adding partner");
         ur.save(new Airline(contactFName, contactLName, address, telephone, email, airlineName, website, password));
+        partners = ur.getAllUsers(Airline.class);
+    }
+
+    public void deletePartner(){
+        ur.delete(selected.getId(), Airline.class);
+        partners = ur.getAllUsers(Airline.class);
+    }
+
+    public void editPartner(RowEditEvent e){
+        Airline toEdit = (Airline) e.getObject();
+        ur.save(toEdit);
+        System.out.println("Edited Partner");
         partners = ur.getAllUsers(Airline.class);
     }
 

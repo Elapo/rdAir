@@ -55,6 +55,10 @@
         <pattern value="/admin/partners"/>
         <view-id value="/account/admin/partners.xhtml"/>
     </url-mapping>
+    <url-mapping id="view-admin-partner-details">
+        <pattern value="admin/partner/#{id}"/>
+        <view-id value="/account/admin/partnerdetails.xhtml"/>
+    </url-mapping>
     <url-mapping id="view-admin-partners-details">
         <pattern value="/admin/partners/#{id}"/>
         <view-id value="/account/admin/partnerdetails.xhtml"/>
@@ -62,5 +66,25 @@
     <url-mapping id="view-admin-reports">
         <pattern value="/admin/reports"/>
         <view-id value="/account/admin/reports.xhtml"/>
+    </url-mapping>
+    <url-mapping id="view-partner-home">
+        <pattern value="/partner/dashboard"/>
+        <view-id value="/account/partner/dashboard.xhtml"/>
+    </url-mapping>
+    <url-mapping id="view-partner-routes">
+        <pattern value="/partner/routes"/>
+        <view-id value="/account/partner/routes.xhtml"/>
+    </url-mapping>
+    <url-mapping id="view-partner-flights">
+        <pattern value="/partner/flights"/>
+        <view-id value="/account/partner/flights.xhtml"/>
+    </url-mapping>
+    <url-mapping id="view-partner-promo">
+        <pattern value="/partner/promo"/>
+        <view-id value="/account/partner/promo.xhtml"/>
+    </url-mapping>
+    <url-mapping id="view-partner-reports">
+        <pattern value="/partner/reports"/>
+        <view-id value="/account/partner/reports.xhtml"/>
     </url-mapping>
 </pretty-config>

@@ -21,13 +21,13 @@ public class Flight implements Serializable{
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
     private Route route;
 
-    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private PriceModifier rdAirModifier;
 
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<PriceModifier> priceModifiers;
 
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<PriceModifier> rdAirModifiers;
 
     @Temporal(TemporalType.DATE)
@@ -36,7 +36,7 @@ public class Flight implements Serializable{
     @Temporal(TemporalType.TIME)
     private Date flightDuration;
 
-    @OneToMany(mappedBy = "flight", cascade = CascadeType.PERSIST)
+    @OneToMany(mappedBy = "flight", cascade = CascadeType.ALL)
     private List<FlightClass> availableClasses;
 
     private int availableFirstClass;

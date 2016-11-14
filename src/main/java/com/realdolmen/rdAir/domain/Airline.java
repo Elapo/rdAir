@@ -17,10 +17,10 @@ public class Airline extends User implements Serializable{
     @URL(message = "{validation.url.invalid}")
     private String website;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "airline", cascade = CascadeType.PERSIST)
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "airline", cascade = CascadeType.ALL)
     private List<Route> routes;
 
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<Flight> flights;
 
     protected Airline() {

@@ -14,7 +14,6 @@ public class TestSearchRepository extends JpaPersistenceTest {
 
     EntityManager em;
     SearchRepository search;
-    CriteriaSearchRepository csr;
 
     Flight f;
     FlightClass fc;
@@ -26,21 +25,25 @@ public class TestSearchRepository extends JpaPersistenceTest {
         search = new SearchRepository();
         search.em = em;
 
-        csr = new CriteriaSearchRepository();
-
         Region r = new Region("America");
+        em.persist(r);
         Location l1 = new Location("Airport", "APT", r);
         Location l2 = new Location("SecondAirport", "SPT", r);
+        em.persist(l1);
+        em.persist(l2);
         Airline a = new Airline("Frederik", "Van Herbruggen", "FCL34", "0474416357", "realdolmenair@gmail.com",
                 "rdair", "http://rdair.com", "abc");
 
         Route route = new Route(l1, l2, null, null, a);
+        em.persist(route);
         a.getRoutes().add(route);
         f = new Flight(route, null, new Date(), new Date());
         a.getFlights().add(f);
         fc = new FlightClass("First Class", 50, 30, 30, f);
         f.getAvailableClasses().add(fc);
 
+        em.persist(f);
+        em.persist(fc);
         em.persist(a);
         em.flush();
     }
@@ -64,7 +67,8 @@ public class TestSearchRepository extends JpaPersistenceTest {
     }
 
     @Test
-    public void testOtherSearch(){
-        System.out.println(csr.searchFlights(0, "", "rdair", "", "", "", null));
+    public void testSearchForFlight(){
+        List<Flight> flights = search.searchForFlights(2, "First Class", "rdair", "", "", "America", null);
+
     }
 }
