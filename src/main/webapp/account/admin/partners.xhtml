@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+<ui:composition template="/WEB-INF/templates/admin-template.xhtml">
+    <ui:define name="username">user</ui:define>
+    <ui:define name="content">
+        <div class="mdl-color--white mdl-shadow--2dp mdl-cell mdl-cell--12-col mdl-grid">
+            <div class="mdl-card mdl-cell mdl-cell--12-col">
+                <div class="mdl-card__title mdl-card--border">
+                    <div class="mdl-card__title-text">Partners:</div>
+                </div>
+                <div class="mdl-card__supporting-text">
+                    <p:dataTable var="partner" rows="20" paginator="true"
+                                 paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                 value="#{partnerListBean.partners}">
+                        <p:column headerText="Name"><h:outputText value="#{partner.airlineName}"/></p:column>
+                        <p:column headerText="Website"><h:outputText value="#{partner.website}"/></p:column>
+                        <p:column headerText="Contact"><h:outputText value="#{partner.firstName} #{partner.lastName}"/></p:column>
+                        <p:column headerText="Phone"><h:outputText value="#{partner.telephone}"/></p:column>
+                    </p:dataTable>
+                </div>
+            </div>
+        </div>
+    </ui:define>
+</ui:composition>
+</html>

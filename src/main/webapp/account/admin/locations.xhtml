@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
+<ui:composition template="/WEB-INF/templates/admin-template.xhtml">
+    <ui:define name="username">user</ui:define>
+    <ui:define name="content">
+        <div class="mdl-color--white mdl-shadow--2dp mdl-cell mdl-cell--12-col mdl-grid">
+            <div class="mdl-card mdl-cell mdl-cell--12-col">
+                <div class="mdl-card__title mdl-card--border">
+                    <div class="mdl-card__title-text">Locations:</div>
+                </div>
+                <div class="mdl-card__supporting-text">
+                    <h:form id="locationlist">
+                        <p:dataTable id="locationDt" var="location" rows="20" paginator="true" editable="true" editMode="cell"
+                                     paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                     value="#{locationListBean.locations}" rowKey="#{location.id}" selectionMode="single" selection="#{locationListBean.selected}">
+                            <p:ajax event="rowEdit" listener="#{locationListBean.editLocation}" update=":locationlist:locationDt"/>
+                            <p:ajax event="rowEditCancel" listener="#{locationListBean.onEditCancel}" />
+                            <p:column headerText="Name">
+                                <p:cellEditor>
+                                    <f:facet name="output"><h:outputText value="#{location.airportName}"/></f:facet>
+                                    <f:facet name="input"><p:inputText id="apNameInput" value="#{location.airportName}"/></f:facet>
+                                </p:cellEditor>
+                            </p:column>
+                            <p:column headerText="Code">
+                                <p:cellEditor>
+                                    <f:facet name="output"><h:outputText value="#{location.airportCode}"/></f:facet>
+                                    <f:facet name="input"><p:inputText id="apCodeInput" value="#{location.airportCode}"/></f:facet>
+                                </p:cellEditor>
+                            </p:column>
+                            <p:column headerText="Region">
+                                <p:cellEditor>
+                                    <f:facet name="output"><h:outputText value="#{location.region.name}"/></f:facet>
+                                    <f:facet name="input">
+                                        <p:selectOneMenu>
+                                            <f:selectItems value="#{locationListBean.regions}"/>
+                                        </p:selectOneMenu>
+                                    </f:facet>
+                                </p:cellEditor>
+                            </p:column>
+                        </p:dataTable>
+                        <p:contextMenu for="locationDt">
+                            <p:submenu label="Actions">
+                                <p:menuitem value="Edit" update="@form" icon="ui-icon-edit" onclick="PF('editdialog').show()" title="edit"/>
+                                <p:menuitem value="Delete" update="@form" icon="ui-icon-close" actionListener="#{locationListBean.deleteLocation}">
+                                    <p:ajax process="@form" update="@form"/>
+                                </p:menuitem>
+                            </p:submenu>
+                        </p:contextMenu>
+                    </h:form>
+                </div>
+            </div>
+        </div>
+
+        <div class="mdl-color--white mdl-shadow--2dp mdl-cell mdl-cell--12-col mdl-grid">
+        <div class="mdl-card mdl-cell mdl-cell--12-col">
+            <div class="mdl-card__title mdl-card--border">
+                <div class="mdl-card__title-text">Add a location:</div>
+            </div>
+            <div class="mdl-card__supporting-text">
+                <h:form>
+                    <p:outputLabel for="regionSelect" value="Region:"/><br/>
+                    <p:selectOneMenu id="regionSelect" value="#{locationListBean.region}">
+                        <f:selectItems value="#{locationListBean.regions}"/>
+                    </p:selectOneMenu><br/>
+                    <p:outputLabel for="airportName" value="Airport name:"/><br/>
+                    <p:inputText id="airportName" required="true" value="#{locationListBean.name}"/><br/>
+                    <p:outputLabel for="airportCode" value="Airport code:"/><br/>
+                    <p:inputText id="airportCode" required="true" value="#{locationListBean.code}" maxlength="3"/><br/>
+                    <p:commandButton value="Add" action="#{locationListBean.addLocation}" update=":locationlist"><br/>
+                        <p:ajax render=":locationlist:locationDt"/>
+                    </p:commandButton>
+                </h:form>
+            </div>
+        </div>
+    </div>
+    </ui:define>
+</ui:composition>
+</html>
