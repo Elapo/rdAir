@@ -23,9 +23,7 @@
                 <h:panelGroup>
                     <b:selectOneMenu value="#{searchFlightBean.preferredAirline}"
                                      styleClass="inputText" id="preferredAirlineInput">
-                        <!-- items uit db te halen, dit is maar een voorbeeld!!-->
-                        <f:selectItem itemValue="#{msgs['First.airline']}" itemLabel="#{msgs['First.airline']}"/>
-                        <f:selectItem itemValue="#{msgs['Second.airline']}" itemLabel="#{msgs['Second.airline']}"/>
+                        <f:selectItems value="#{searchFlightBean.airlines}" var="a" itemLabel="#{a.airlineName}" itemValue="#{a.airlineName}" />
                     </b:selectOneMenu>
                 </h:panelGroup>
                 <b:message for="preferredAirlineInput"/>
@@ -36,9 +34,9 @@
                 <h:panelGroup>
                     <b:selectOneMenu value="#{searchFlightBean.flightClass}"
                                      styleClass="inputText" id="flightClassInput">
-                        <f:selectItem itemValue="#{msgs['Economy']}" itemLabel="#{msgs['Economy.label']}" />
-                        <f:selectItem itemValue="#{msgs['Business']}" itemLabel="#{msgs['Business.label']}" />
-                        <f:selectItem itemValue="#{msgs['First.class']}" itemLabel="#{msgs['First.class.label']}" />
+                        <f:selectItem itemValue="Economy Class" itemLabel="#{msgs['Economy.label']}" />
+                        <f:selectItem itemValue="Business Class" itemLabel="#{msgs['Business.label']}" />
+                        <f:selectItem itemValue="First Class" itemLabel="#{msgs['First.class.label']}" />
                     </b:selectOneMenu>
                 </h:panelGroup>
                 <b:message for="flightClassInput"/>
@@ -83,9 +81,7 @@
                 </h:panelGroup>
                 <h:panelGroup id="option1-1">
                     <b:selectOneMenu value="#{searchFlightBean.departureLocation}" styleClass="inputText" id="departureLocationInput">
-                        <!--vben, list nog uit db te halen!-->
-                        <f:selectItem itemLabel="x" itemValue="x"/>
-                        <f:selectItem itemLabel="y" itemValue="y"/>
+                        <f:selectItems value="#{searchFlightBean.locations}" var="l" itemLabel="#{l}" itemValue="#{l.airportName}" />
                     </b:selectOneMenu>
                 </h:panelGroup>
                 <h:panelGroup>
@@ -99,9 +95,7 @@
                 </h:panelGroup>
                 <h:panelGroup id="option1-2">
                     <b:selectOneMenu value="#{searchFlightBean.destinationLocation}" styleClass="inputText" id="destinationLocationInput">
-                        <!--vben, list nog uit db te halen!-->
-                        <f:selectItem itemLabel="x" itemValue="x"/>
-                        <f:selectItem itemLabel="y" itemValue="y"/>
+                        <f:selectItems value="#{searchFlightBean.locations}" var="l" itemLabel="#{l}" itemValue="#{l.airportName}" />
                     </b:selectOneMenu>
                 </h:panelGroup>
                 <h:panelGroup>
@@ -115,9 +109,7 @@
                 </h:panelGroup>
                 <h:panelGroup id="option2">
                     <b:selectOneMenu value="#{searchFlightBean.globalRegion}" styleClass="inputText" id="regionInput">
-                        <!--vben, list nog uit db te halen!-->
-                        <f:selectItem itemLabel="#{msgs['Asia']}" itemValue="#{msgs['Asia']}"/>
-                        <f:selectItem itemLabel="#{msgs['North.america']}" itemValue="#{msgs['North.america']}"/>
+                        <f:selectItems value="#{searchFlightBean.regions}" var="r" itemLabel="#{r.name}" itemValue="#{r.name}" />
                     </b:selectOneMenu>
                 </h:panelGroup>
                 <h:panelGroup>

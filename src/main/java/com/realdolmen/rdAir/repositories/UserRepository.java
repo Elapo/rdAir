@@ -20,7 +20,7 @@ public class UserRepository {
     }
 
     public User save(User user){
-        em.persist(user);
+        em.merge(user);
         return user;
     }
 

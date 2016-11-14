@@ -13,7 +13,6 @@ public class PriceCalculator {
     public static final double RDAIR_CREDITCARD_PROMO = 0.95;
 
         //todo calculate order price for volume discounts
-
     public static double calculatePrice(Ticket t){
         FlightClass fc = t.getFlightClass();
         Flight f = t.getFlight();

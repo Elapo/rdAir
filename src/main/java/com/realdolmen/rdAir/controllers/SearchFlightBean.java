@@ -1,8 +1,9 @@
 package com.realdolmen.rdAir.controllers;
 
 import com.realdolmen.rdAir.domain.*;
-import com.realdolmen.rdAir.repositories.CriteriaSearchRepository;
+import com.realdolmen.rdAir.repositories.*;
 import com.realdolmen.rdAir.util.PriceCalculator;
+import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
@@ -26,9 +27,20 @@ public class SearchFlightBean implements Serializable {
 
 //    @Inject
 //    private CriteriaSearchRepository criteriaSearchRepository;
+    @Inject
+    private SearchRepository searchRepository;
+
+    @Inject
+    private AirlineRepository airlineRepository;
+
+    @Inject
+    private LocationRepository locationRepository;
 
     @Inject
     private SearchresultsBean searchResultsBean;
+
+    @Inject
+    private RegionRepository regionRepository;
 
     private Integer id;
 
@@ -37,7 +49,7 @@ public class SearchFlightBean implements Serializable {
     @Max(value=853, message="{Search.error.desiredNrOfSeats}")
     private Integer desiredNrOfSeats;
 
-    @NotNull(message="{Search.error.flightClass.null}")
+    @NotEmpty(message="{Search.error.flightClass.null}")
     private String flightClass;
     @NotNull(message="{Search.error.airlineCompany.null}")
     private String preferredAirline;
@@ -184,16 +196,40 @@ public class SearchFlightBean implements Serializable {
         this.dateOfReturn = dateOfReturn;
     }
 
+    public List<Location> getLocations(){
+        return locationRepository.getAllLocations();
+    }
+
+    public List<Airline> getAirlines(){
+        return airlineRepository.getAllAirlines();
+    }
+
+    public List<Region> getRegions(){
+        return regionRepository.getAllRegions();
+    }
+
     public String search(){
         //TODO: give search criteria to sql search query
         //SHOULD GIVE search results but returns null..
         //  can't even inject this
 //        searchResultsBean.setSearchResults(criteriaSearchRepository.searchFlights(desiredNrOfSeats, flightClass, preferredAirline, departureLocation,
 //                destinationLocation, globalRegion, dateOfDeparture));
+        if(searchRepository==null){System.err.println("Searchrepo is null");return "";}
+        if(flightClass==null){System.err.println("flightclass is null " + flightClass);return "";}
+        if(preferredAirline==null){System.err.println("preferedairline is null");return "";}
+        if(departureLocation==null){System.err.println("departureloc is null");return "";}
+        if(destinationLocation==null){System.err.println("destloc is null");return "";}
+        if(globalRegion==null){System.err.println("globalregion is null");return "";}
+        if(dateOfDeparture==null){System.err.println("datedepart is null");return "";}
+        if(searchResultsBean==null){System.err.println("searResultsBean is null"); return "";}
+
+        searchResultsBean.setSearchResults(searchRepository.searchForFlights(desiredNrOfSeats,flightClass,preferredAirline,
+                departureLocation,destinationLocation,globalRegion,dateOfDeparture));
+        //(int seats, String fClass, String airComp, String dep, String dest, String region, Date departureDate)
 
 
         System.err.println("Pressed search button");
-        return "searchresults";
+        return "pretty:view-search";
     }
 
 

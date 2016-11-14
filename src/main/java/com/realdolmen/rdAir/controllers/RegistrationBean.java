@@ -8,6 +8,9 @@ import org.hibernate.validator.constraints.NotEmpty;
 import org.mindrot.jbcrypt.BCrypt;
 
 import javax.faces.bean.ManagedBean;
+
+import javax.faces.bean.ManagedProperty;
+import javax.faces.bean.SessionScoped;
 import javax.faces.bean.ViewScoped;
 import javax.inject.Inject;
 import javax.validation.constraints.NotNull;
@@ -52,7 +55,7 @@ public class RegistrationBean {
 
     private String passwordHash;
 
-    private boolean registered;
+    private boolean registered = false;
 
     public String doRegistration(){
         System.err.println("Succesfully registered customer: " + lName);

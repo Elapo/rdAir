@@ -19,6 +19,7 @@
                         <p:dataTable id="partnerDt" var="partner" rows="20" paginator="true" editable="true"
                                      paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
                                      value="#{partnerListBean.partners}" rowKey="#{partner.id}" selectionMode="single" selection="#{partnerListBean.selected}">
+                            <p:ajax event="rowEdit" listener="#{partnerListBean.editPartner}" update=":partnerlist:partnerDt"/>
                             <p:column headerText="Name">
                                 <p:cellEditor>
                                     <f:facet name="output"><h:outputText value="#{partner.airlineName}"/></f:facet>
@@ -55,14 +56,14 @@
                             <p:column style="width: 32px">
                                 <p:rowEditor/>
                             </p:column>
-                            <p:contextMenu for="partnerDt">
-                                <p:submenu label="Actions">
-                                    <p:menuitem value="Delete" update="@form" icon="ui-icon-close" actionListener="#{locationListBean.deleteLocation}">
-                                        <p:ajax process="@form" update="@form"/>
-                                    </p:menuitem>
-                                </p:submenu>
-                            </p:contextMenu>
                         </p:dataTable>
+                        <p:contextMenu for="partnerDt">
+                        <p:submenu label="Actions">
+                            <p:menuitem value="Delete" update="@form" icon="ui-icon-close" actionListener="#{partnerListBean.deletePartner}">
+                                <p:ajax process="@form" update="@form"/>
+                            </p:menuitem>
+                        </p:submenu>
+                    </p:contextMenu>
                     </h:form>
                 </div>
             </div>
