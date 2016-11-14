@@ -4,16 +4,14 @@ import com.realdolmen.rdAir.domain.Customer;
 import com.realdolmen.rdAir.domain.Order;
 import com.realdolmen.rdAir.services.MailService;
 import com.realdolmen.rdAir.util.PriceCalculator;
-
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
 import java.util.Date;
-
 @ManagedBean
 @ViewScoped
-public class BookingBean {
+public class bookingBean {
     @ManagedProperty(value = "#{loginBean}")
     LoginBean session;
 
