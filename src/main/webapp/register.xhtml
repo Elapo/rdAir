@@ -1,9 +1,106 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:b="http://bootsfaces.net/ui"
+                template="WEB-INF/templates/template.xhtml">
 
-</html>
+    <ui:define name="title">#{msgs['Register.register']}</ui:define>
+    <ui:define name="content">
+
+
+                <h2>#{msgs['Register.yourself']}</h2>
+
+                <h:form>
+                    <b:messages/>
+                    <h:panelGrid columns="3">
+
+                       <h:panelGroup>
+                            <h:outputLabel>#{msgs['Register.first.name']}</h:outputLabel>
+                       </h:panelGroup>
+                        <h:panelGroup>
+                            <b:inputText value="#{registrationBean.fName}" styleClass="inputText" id="firstNameInput"/>
+                        </h:panelGroup>
+                        <h:panelGroup>
+                            <b:message for="firstNameInput"/>
+                        </h:panelGroup>
+
+
+                        <h:panelGroup>
+                            <h:outputLabel>#{msgs['Register.last.name']} </h:outputLabel>
+                        </h:panelGroup>
+                        <h:panelGroup>
+                            <b:inputText value="#{registrationBean.lName}" styleClass="inputText" id="lastNameInput"/>
+                        </h:panelGroup>
+                        <h:panelGroup>
+                            <b:message for="lastNameInput"/>
+                        </h:panelGroup>
+
+                        <h:panelGroup>
+                            <h:outputLabel>#{msgs['Register.address']} </h:outputLabel>
+                        </h:panelGroup>
+                        <h:panelGroup>
+                            <b:inputText value="#{registrationBean.address}" styleClass="inputText" id="addressInput"/>
+                        </h:panelGroup>
+                        <h:panelGroup>
+                            <b:message for="addressInput"/>
+                        </h:panelGroup>
+
+
+                        <h:panelGroup>
+                            <h:outputLabel>#{msgs['Register.telephone']} </h:outputLabel>
+                        </h:panelGroup>
+                        <h:panelGroup>
+                            <b:inputText type="telephone" value="#{registrationBean.telephone}" styleClass="inputText"
+                                         id="telephoneInput"/>
+                        </h:panelGroup>
+                        <h:panelGroup>
+                            <b:message for="telephoneInput"/>
+                        </h:panelGroup>
+
+
+                        <h:panelGroup>
+                            <h:outputLabel>#{msgs['Register.email']} </h:outputLabel>
+                        </h:panelGroup>
+                        <h:panelGroup>
+                            <b:inputText type="email" value="#{registrationBean.email}" styleClass="inputText"
+                                         id="emailInput"/>
+                        </h:panelGroup>
+                        <h:panelGroup>
+                            <b:message for="emailInput"/>
+                        </h:panelGroup>
+
+                        <h:panelGroup>
+                            <h:outputLabel>#{msgs['Register.password']} </h:outputLabel>
+                        </h:panelGroup>
+                        <h:panelGroup>
+                            <b:inputText type="password" value="#{registrationBean.password}" styleClass="inputText"
+                                         id="passwordInput"/>
+                        </h:panelGroup>
+                        <h:panelGroup>
+                            <b:message for="passwordInput"/>
+                        </h:panelGroup>
+
+
+                        <h:panelGroup>
+                            <h:outputLabel>#{msgs['Register.password.repeat']}</h:outputLabel>
+                        </h:panelGroup>
+                        <h:panelGroup>
+                            <b:inputText type="password" value="#{registrationBean.password}" styleClass="inputText"
+                                         id="passwordRepeatInput"/>
+                        </h:panelGroup>
+                        <h:panelGroup>
+                            <b:message for="passwordRepeatInput"/>
+                        </h:panelGroup>
+
+                    </h:panelGrid>
+
+                    <b:commandButton value="#{msgs['Register.button']}" action="#{registrationBean.doRegistration}" ajax="false"/>
+
+                </h:form>
+
+
+
+    </ui:define>
+</ui:composition>

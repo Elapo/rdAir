@@ -1,0 +1,49 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:b="http://bootsfaces.net/ui"
+      template="WEB-INF/templates/template.xhtml">
+
+
+
+    <ui:define name="title">#{msgs['Search.results.title']}</ui:define>
+    <ui:define name="content">
+        <h:form>
+
+            <b:dataTable var="f" value="listOfFlightsFromSearchResults" style="margin-bottom:40px">
+                <b:column label="#{msgs['Search.results.title.column.one']}">
+                    <h:outputText value="#{searchFlightBean.destinationLocation}" />
+                </b:column>
+                <b:column label="#{msgs['Search.results.title.column.two']}">
+                    <!--<h:outputText value="#{beanname.field}" />-->
+                    <h:outputText value="#{searchFlightBean.preferredAirline}" />
+                </b:column>
+                <b:column label="#{msgs['Search.results.title.column.three']}">
+                    <!--<h:outputText value="#{beanname.field}" />-->
+                    <h:outputText value="#{searchFlightBean.dateOfDeparture}" />
+                </b:column>
+                <b:column label="#{msgs['Search.results.title.column.four']}">
+                    <!--<h:outputText value="#{beanname.field}" />-->
+                    <h:outputText value="HIER MOET FLIGHT ARRIVAL TIME KOMEN UIT FLIGHT" />
+                </b:column>
+                <b:column label="#{msgs['Search.results.title.column.five']}">
+                    <!--<h:outputText value="#{beanname.field}" />-->
+                    <h:outputText value="HIER MOET PRICE VOOR FLIGHT KOMEN" />
+                </b:column>
+                <b:column label="#{msgs['Search.results.title.column.six']}">
+                    <!--<h:outputText value="#{beanname.field}" />-->
+                    <h:outputText value="HIER MOET DISCOUNT VOOR FLIGHT KOMEN" />
+                </b:column>
+                <b:column label="#{msgs['Search.results.title.column.seven']}">
+                    <b:navLink value="#{msgs['Search.details.button']}"
+                                          outcome="searchedandselectedflightdetails.xhtml">
+                        <f:param name="flightId" value="1" />
+                    </b:navLink>
+                </b:column>
+            </b:dataTable>
+
+        </h:form>
+    </ui:define>
+</ui:composition>

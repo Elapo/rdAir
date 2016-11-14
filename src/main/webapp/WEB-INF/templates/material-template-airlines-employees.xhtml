@@ -7,13 +7,15 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core">
 
 <f:view>
+    <f:loadBundle basename="Messages" var="msgs" />
+
 <h:head>
     <h:outputStylesheet library="css" name="material.min.css" />
     <h:outputStylesheet library="css" name="MainCss.css" />
     <h:outputScript library="js" name="material.min.js"/>
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons"/>
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet"/>
-    <title><ui:insert name="title">Placeholder</ui:insert></title>
+    <title><ui:insert name="title">#{msgs['Template.airlines.employees.placeholder']}</ui:insert></title>
 </h:head>
 <h:body>
 <!-- The drawer is always open in large screens. The header is always shown,
@@ -24,18 +26,23 @@
     <div class="mdl-layout__header-row">
         <div class="mdl-layout-spacer">
         </div>
-        <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">
-            Button 1
-        </button>
-        <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">
-            Button 2
-        </button>
-        <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">
-            Button 3
-        </button>
-        <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">
-            Button 4
-        </button>
+        <a class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" href="index.xhtml">
+            #{msgs['Template.airlines.employees.button.one']}
+        </a>
+        <a class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">
+            #{msgs['Template.airlines.employees.button.two']}
+        </a>
+        <a class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" href="login.xhtml">
+            #{msgs['Template.airlines.employees.button.three']}
+        </a>
+        <h:panelGrid columns="2">
+            #{msgs['Template.airlines.employees.language']}
+            <h:selectOneMenu styleClass="#{languageBean.localeCode}" onchange="submit()"
+                             valueChangeListener="#{languageBean.countryLocaleCodeChanged}">
+                <f:selectItems value="#{languageBean.countriesInMap}" />
+            </h:selectOneMenu>
+        </h:panelGrid>
+        <br></br>
         <div class="mdl-textfield mdl-js-textfield mdl-textfield--expandable
                   mdl-textfield--floating-label mdl-textfield--align-right">
             <label class="mdl-button mdl-js-button mdl-button--icon"
@@ -44,8 +51,8 @@
             </label>
             <div class="mdl-textfield__expandable-holder searchBar">
                 <input class="mdl-textfield__input" type="text" pattern="[a-zA-Z0-9ÀÁÂÄÇÈÉÊËÌÍÏÒÓÔÖÙÚÛÜßàáâäçèéêëìíïòóôöùúûüŒœ]+((. |-| ?)[a-zA-Z0-9ÀÁÂÄÇÈÉÊËÌÍÏÒÓÔÖÙÚÛÜßàáâäçèéêëìíïòóôöùúûüŒœ]+)*"
-                       id="fixed-header-drawer-exp" placeholder="Search the site"/>
-                <span class="mdl-textfield__error">Only letters, digits, and "-"," " or ". " in between!</span>
+                       id="fixed-header-drawer-exp" placeholder="#{msgs['Template.airlines.employees.placeholder.searchbar']}"/>
+                <span class="mdl-textfield__error">#{msgs['Template.airline.employees.placeholder.searchbar.error']}</span>
             </div>
         </div>
     </div>
@@ -54,7 +61,7 @@
 <main id="mainEmployeesAirlines" class="mdl-layout__content">
 
     <h1>
-        <ui:insert name="title">Placeholder</ui:insert>
+        <ui:insert name="title">#{msgs['Template.airlines.employees.placeholder.main.title']}</ui:insert>
     </h1>
     <div class="page-content">
         <ui:insert name="content"/>
@@ -64,20 +71,20 @@
 <div class="mdl-mega-footer--middle-section">
 <div class="mdl-mega-footer--drop-down-section" id="leftPlaced">
     <input class="mdl-mega-footer__heading-checkbox" type="checkbox" checked="checked">
-        <h1 class="mdl-mega-footer__heading">RdAir and Partners</h1>
+        <h1 class="mdl-mega-footer__heading">#{msgs['Template.airlines.employees.footer.heading.left']}</h1>
         <ul class="mdl-mega-footer__link-list">
-            <li><a href="#">About RdAir</a></li>
-            <li><a href="#">Terms of Use</a></li>
-            <li><a href="#">Airline Partners</a></li>
+            <li><a href="#">#{msgs['Template.airlines.employees.footer.links.left.one']}</a></li>
+            <li><a href="#">#{msgs['Template.airlines.employees.footer.links.left.two']}</a></li>
+            <li><a href="#">#{msgs['Template.airlienes.employees.footer.links.left.three']}</a></li>
         </ul>
     </input>
 </div>
 <div class="mdl-mega-footer--drop-down-section" id="rightPlaced">
 <input class="mdl-mega-footer__heading-checkbox" type="checkbox" checked="checked">
-<h1 class="mdl-mega-footer__heading">Other useful links</h1>
+<h1 class="mdl-mega-footer__heading">#{msgs['Template.airlines.employees.footer.heading.right']}</h1>
 <ul class="mdl-mega-footer__link-list">
-<li><a href="">FAQ</a></li>
-<li><a href="">Contact Us</a></li>
+<li><a href="">#{msgs['Template.airlines.employees.footer.heading.right.one']}</a></li>
+<li><a href="">#{msgs['Template.airlines.employees.footer.heading.right.two']}</a></li>
 </ul>
 </input>
 </div>
@@ -85,7 +92,7 @@
     <div class="mdl-mega-footer--bottom-section" id="middlePlaced">
 
         <div class="mdl-logo">
-            Copyright 2016 RdAir.
+            #{msgs['Template.airlines.employees.footer.copyright.logo']}
         </div>
     </div>
 </div>

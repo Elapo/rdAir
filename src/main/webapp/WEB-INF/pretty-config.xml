@@ -9,7 +9,11 @@
     </url-mapping>
     <url-mapping id="view-login">
         <pattern value="/login" />
-        <view-id value="/logintest.xhtml" />
+        <view-id value="/login.xhtml" />
+    </url-mapping>
+    <url-mapping id="view-booking">
+        <pattern value="/booking" />
+        <view-id value="/booking.xhtml" />
     </url-mapping>
     <url-mapping id="view-profile">
         <pattern value="/account/profile"/>

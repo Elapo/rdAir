@@ -16,7 +16,7 @@ import java.util.Date;
  */
 
 @ManagedBean
-public class calenderViewBean {
+public class CalendarViewBean {
 
     @NotNull
     @Future

@@ -35,9 +35,9 @@
 }
 
 .demo-card-wide{
-    height: 400px;
+    height: 700px;
     background-color: floralwhite;
-    overflow: hidden;
+    overflow: scroll;
 }
 
 .demo-card-wide.mdl-card {
@@ -51,43 +51,77 @@
 }
 
 
-.mdl-card__supporting-text {
+.mdl-card__supporting-text.planeImage {
     background-image: url(#{resource['images/Transport-Airplane-Takeoff-icon1.png']});
     background-repeat: no-repeat;
     background-position: center;
     height: 300px;
 }
 
-.promoCard.mdl-card__supporting-text {
+/*.promoCard.mdl-card__supporting-text {
     background-image: url(#{resource['.png']});
     background-repeat: no-repeat;
     background-position: center;
+}*/
+
+#loginCardTitle {
+    display:flex;
+    flex-direction: row;
+    justify-content: center;
 }
 
-#loginCard {
+#loginBackground {
     background-color:floralwhite;
+    display:flex;
+    flex-direction: column;
+    align-items: center;
 }
 
-.mdl-mega-footer {
-    height: 300px;
-    background-color: #222;
+#loginCardEndButton {
+    display:flex;
+    flex-direction: row;
+    justify-content: center;
 }
+
+#registerCardTitle {
+    display:flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+#registerBackground {
+    background-color:floralwhite;
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/*.mdl-mega-footer {
+    height: 20px;
+    background-color: #222;
+}*/
 
 #leftPlaced {
     float: left;
     padding-left: 10%;
 }
 
-#rightPlaced {
+/*#rightPlaced {
     float: right;
     padding-right: 10%;
-}
+}*/
 
-#middlePlaced {
+/*.mdl-mini-footer__social-btn {
+    display:flex;
+    flex-direction:row;
+    justify-content:space-around;
+}*/
+
+/*#middlePlaced {
     display:flex;
     flex-direction: row;
     justify-content: center;
-}
+}*/
 
 #promotionImage {
     background-image: url(#{resource['images/Inle-Lake-best-places-to-visit-in-southeast-asia.jpg']});
@@ -96,11 +130,11 @@
     height: 300px;
 }
 
-.mdl--social-buttons {
-    display:flex;
-    flex-direction:column;
-    align-items:flex-start;
-}
+/*.ui-widget {
+    font-size: 90%;
+}*/
+
+
 
 .mdl-button.mdl-button--twitter {
     color: #3f51b5;

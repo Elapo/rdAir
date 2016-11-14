@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:c="http://java.sun.com/jsp/jstl/core"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:b="http://bootsfaces.net/ui">
+
+<f:view>
+    <f:loadBundle basename="Messages" var="msgs"/>
+    <f:loadBundle basename="ValidationMessages" var="valmsgs"/>
+
+    <h:head>
+        <f:facet name="extra">
+            <h:outputStylesheet library="css" name="extra.css"/>
+        </f:facet>
+
+        <title><ui:insert name="title">#{msgs['Template.customers.placeholder']}</ui:insert></title>
+    </h:head>
+
+    <h:body>
+        <b:navBar>
+            <!--<b:navbarLinks >
+                <b:dropMenu value="Dropdown"
+                            icon="book" rendered="true">
+                    <b:navLink value="#{msgs['Template.customers.button.three']}" href="" iconAwesome="user"></b:navLink>
+                    <b:navLink value="#{msgs['Template.customers.button.three']}" href="login.xhtml"
+                               iconAwesome="user"></b:navLink>
+                </b:dropMenu>
+            </b:navbarLinks>-->
+
+            <h:form class="navbar-form navbar-right hidden-md hidden-sm hidden-xs dropdown" role="submit">
+                <h:outputLabel value="#{msgs['Template.customers.language']} &#160; &#160;"/>
+                <b:selectOneMenu styleClass="#{languageBean.localeCode}" onchange="submit()"
+                                 valueChangeListener="#{languageBean.countryLocaleCodeChanged}" icon="flag">
+                    <f:selectItems value="#{languageBean.countriesInMap}"/>
+                </b:selectOneMenu>
+            </h:form>
+
+            <b:navbarLinks pull="left" styleClass="hidden-xs navbar-right">
+                <b:navLink value="#{msgs['Template.customers.button.one']}" href="index.xhtml" iconAwesome="home" />
+                <b:navLink value="#{msgs['Template.customers.button.three']}" href="login.xhtml" iconAwesome="user"
+                rendered="#{not loginBean.loggedIn}"></b:navLink>
+            </b:navbarLinks>
+            <!-- Button needs to be in a h:form, not in navbarLinks -->
+            <h:form
+                    class="navbar-form navbar-right hidden-md hidden-sm hidden-xs"
+                    role="submit">
+                <b:commandButton
+                        value="#{msgs['Navbar.logout']} #{loginBean.user.firstName} #{loginBean.user.lastName}"
+                        action="#{loginBean.doLogout}"
+                        iconAwesome="user"
+                        rendered="#{loginBean.loggedIn}">
+                </b:commandButton>
+            </h:form>
+
+
+        </b:navBar>
+
+
+        <b:container>
+            <header>
+                <h1>
+                    <ui:insert name="title">#{msgs['Template.customers.placeholder.main.title']}</ui:insert>
+                </h1>
+            </header>
+            <main>
+                <ui:insert name="content">
+
+                </ui:insert>
+            </main>
+            <br/>
+            <br/>
+            <p>#{msgs['Template.customers.footer.copyright.logo']}</p>
+        </b:container>
+    </h:body>
+</f:view>
+
+
+</html>

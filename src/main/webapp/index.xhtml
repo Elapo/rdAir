@@ -1,126 +1,139 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:b="http://bootsfaces.net/ui"
+      template="WEB-INF/templates/template.xhtml">
 
-<ui:composition template="WEB-INF/templates/material-template-customers.xhtml">
 
-        <ui:define name="title">Welcome to RdAir!</ui:define>
-        <ui:define name="content">
+    <ui:define name="title">#{msgs['Index.welcome']}</ui:define>
+    <ui:define name="content">
 
-            <h2 id="headerIndex">Fly everywhere... with RdAir!</h2>
+        <h2 id="headerIndex">#{msgs['Index.slogan']}</h2>
+        <br></br>
+        <br></br>
+
+        <h:form>
+            <b:messages/>
+            <h:panelGrid columns="3" id="searchGrid">
+
+                <h:outputLabel value="#{msgs['Select.airline.company']}"/>
+                <h:panelGroup>
+                    <b:selectOneMenu value="#{searchFlightBean.preferredAirline}"
+                                     styleClass="inputText" id="preferredAirlineInput">
+                        <!-- items uit db te halen, dit is maar een voorbeeld!!-->
+                        <f:selectItem itemValue="#{msgs['First.airline']}" itemLabel="#{msgs['First.airline']}"/>
+                        <f:selectItem itemValue="#{msgs['Second.airline']}" itemLabel="#{msgs['Second.airline']}"/>
+                    </b:selectOneMenu>
+                </h:panelGroup>
+                <b:message for="preferredAirlineInput"/>
+
+
+
+                <h:outputLabel value="#{msgs['Select.class']}" />
+                <h:panelGroup>
+                    <b:selectOneMenu value="#{searchFlightBean.flightClass}"
+                                     styleClass="inputText" id="flightClassInput">
+                        <f:selectItem itemValue="#{msgs['Economy']}" itemLabel="#{msgs['Economy']}" />
+                        <f:selectItem itemValue="#{msgs['Business']}" itemLabel="#{msgs['Business']}" />
+                        <f:selectItem itemValue="#{msgs['First.class']}" itemLabel="#{msgs['First.class']}" />
+                    </b:selectOneMenu>
+                </h:panelGroup>
+                <b:message for="flightClassInput"/>
+
+
+                <h:outputLabel for="popup" value="#{msgs['Date.departure']}" />
+                <h:panelGroup>
+                    <b:datepicker class="inputSmaller" id="popup" mode="icon-popup" value="#{searchFlightBean.dateOfDeparture}"/>
+                </h:panelGroup>
+                <h:panelGroup>
+                    <!-- third column-->
+                    <b:message for="popup"/>
+                </h:panelGroup>
+
+
+                <h:panelGroup id="popup1label">
+                    <h:outputLabel for="popup1" value="#{msgs['Date.return']}"/>
+                </h:panelGroup>
+                <h:panelGroup >
+                    <b:datepicker class="inputSmaller" id="popup1" mode="icon-popup" value="#{searchFlightBean.dateOfReturn}"/>
+                    <!--  rendered="#{searchFlightBean.clickedReturn}"-->
+                </h:panelGroup>
+                <h:panelGroup>
+                    <!-- third column-->
+                    <b:message for="popup1"/>
+                </h:panelGroup>
+
+
+                <h:panelGroup>
+                    <h:outputLabel value="#{msgs['Select.number.seats']}"/>
+                </h:panelGroup>
+                <h:panelGroup>
+                    <b:inputText type="number" value="#{searchFlightBean.desiredNrOfSeats}" styleClass="inputText" id="desiredNrOfSeatsInput"/>
+                </h:panelGroup>
+                <h:panelGroup>
+                    <!-- third column-->
+                    <b:message for="desiredNrOfSeatsInput"/>
+                </h:panelGroup>
+
+                <h:panelGroup>
+                    <h:outputLabel value="#{msgs['Select.location.departure']}" id="option1-1label"/>
+                </h:panelGroup>
+                <h:panelGroup id="option1-1">
+                    <b:selectOneMenu value="#{searchFlightBean.departureLocation}" styleClass="inputText" id="departureLocationInput">
+                        <!--vben, list nog uit db te halen!-->
+                        <f:selectItem itemLabel="x" itemValue="x"/>
+                        <f:selectItem itemLabel="y" itemValue="y"/>
+                    </b:selectOneMenu>
+                </h:panelGroup>
+                <h:panelGroup>
+                    <b:message for="departureLocationInput"/>
+                </h:panelGroup>
+
+
+
+                <h:panelGroup>
+                    <h:outputLabel value="#{msgs['Select.location.destination']}" id="option1-2label" />
+                </h:panelGroup>
+                <h:panelGroup id="option1-2">
+                    <b:selectOneMenu value="#{searchFlightBean.destinationLocation}" styleClass="inputText" id="destinationLocationInput">
+                        <!--vben, list nog uit db te halen!-->
+                        <f:selectItem itemLabel="x" itemValue="x"/>
+                        <f:selectItem itemLabel="y" itemValue="y"/>
+                    </b:selectOneMenu>
+                </h:panelGroup>
+                <h:panelGroup>
+                    <b:message for="destinationLocationInput"/>
+                </h:panelGroup>
+
+
+
+                <h:panelGroup>
+                    <h:outputLabel value="#{msgs['Select.location.region.world']}" id="option2label"/>
+                </h:panelGroup>
+                <h:panelGroup id="option2">
+                    <b:selectOneMenu value="#{searchFlightBean.globalRegion}" styleClass="inputText" id="regionInput">
+                        <!--vben, list nog uit db te halen!-->
+                        <f:selectItem itemLabel="#{msgs['Asia']}" itemValue="#{msgs['Asia']}"/>
+                        <f:selectItem itemLabel="#{msgs['North.america']}" itemValue="#{msgs['North.america']}"/>
+                    </b:selectOneMenu>
+                </h:panelGroup>
+                <h:panelGroup>
+                    <b:message for="regionInput"/>
+                </h:panelGroup>
+
+
+
+            </h:panelGrid>
             <br></br>
             <br></br>
+            <b:commandButton value="#{msgs['Search.button']}" action="#{searchFlightBean.search()}"/>
+
+            <br/>
 
 
-            <div class="mdl-grid">
-            <div class="demo-card-wide mdl-card mdl-shadow--2dp">
-                <div class="mdl-card__title">
-                    <h2 class="mdl-card__title-text">Search here for a flight</h2>
-                </div>
-                <div class="mdl-card__supporting-text">
-                <h:form>
-                    <h:panelGrid columns="2">
-                        <h:outputLabel value="Select your preferred airline company: " />
-                        <h:panelGroup>
-                         <h:selectOneMenu value="#{searchFlightBean.preferredAirline}"
-                        styleClass="inputText" id="preferredAirlineInput">Input van db</h:selectOneMenu>
-                            <h:message for="preferredAirlineInput" styleClass="error" />
-                        </h:panelGroup>
-                        <h:outputLabel value="Select your traveling class: " />
-                        <h:panelGroup>
-                            <h:selectOneMenu value="#{searchFlightBean.flightClass}"
-                                             styleClass="inputText" id="flightClassInput">
-                            <f:selectItem itemValue="Economy" itemLabel="Economy" />
-                            <f:selectItem itemValue="Business" itemLabel="Business" />
-                            <f:selectItem itemValue="First Class" itemLabel="First Class" />
-                            </h:selectOneMenu>
-                            <h:message for="flightClassInput" styleClass="error" />
-                            <h:outputText styleClass="outputText" id="accountNumberOutput"
-                                          value="#{searchFlightBean.flightClass}" />
-                        </h:panelGroup>
-                        <h:outputLabel value="Ticket: " />
-                        <h:panelGroup>
-                            <h:selectOneRadio value="#{searchFlightBean.flightWay}" styleClass="inputText" id="flightWayInput">
-                                <p:ajax process="@this" update="flightWayInput" listener="#{searchFlightBean.listener1}" />
+        </h:form>
 
-                                <f:selectItem itemValue="One way"
-                                      itemLabel="One way"/>
-
-                                <f:selectItem itemValue="Return"
-                                      itemLabel="Return"/>
-
-                            </h:selectOneRadio>
-                            <h:message for="flightWayInput" styleClass="error" />
-
-                        </h:panelGroup>
-                        <h:outputLabel for="popup" value="Select your date of departure: " />
-                        <h:panelGroup>
-                            <p:calendar id="popup" value="#{calendarViewBean.date}" />
-                        </h:panelGroup>
-                        <h:outputLabel for="popup1" value="Select your date of return: " rendered="#{searchFlightBean.clickedReturn}"/>
-                        <h:panelGroup>
-                            <p:calendar id="popup1" value="#{calendarViewBean.date}" rendered="#{searchFlightBean.clickedReturn}"/>
-                        </h:panelGroup>
-                        <br/>
-                        <h:outputLabel value="Select your number of seats: " />
-                        <h:panelGroup>
-                            <h:inputText type="number" value="#{searchFlightBean.desiredNrOfSeats}" styleClass="inputText" id="desiredNrOfSeatsInput" />
-                            <h:message for="desiredNrOfSeatsInput" styleClass="error" />
-                        </h:panelGroup>
-                        <h:outputLabel value="Select your flight location(s): "/>
-                        <h:panelGrid columns="3">
-                            <h:selectOneRadio value="#{searchFlightBean.locationOption}" styleClass="inputText" id="locationOptionInput">
-                                <p:ajax process="@this" update="locationOptionInput" listener="#{searchFlightBean.listener}" />
-                                <f:selectItem itemValue="Departure Location - Destination Location"
-                                          itemLabel="Departure Location - Destination Location"/>
-                                    <h:outputLabel value="Select your departure location: "/>
-                                    <h:selectOneMenu value="#{searchFlightBean.departureLocation}" styleClass="inputText" id="departureLocationInput" rendered="#{searchFlightBean.clickedLocationOptionOne}"/>
-                                    <h:outputLabel value="Select your destination location: "/>
-                                    <h:selectOneMenu value="#{searchFlightBean.destinationLocation}" styleClass="inputText" id="destinationLocationInput" rendered="#{searchFlightBean.clickedLocationOptionOne}"/>
-
-                                    <f:selectItem itemValue="World Region"
-                                          itemLabel="World Region"/>
-                                    <h:outputLabel value="Select your world region: "/>
-                                    <h:selectOneMenu value="#{searchFlightBean.globalRegion}" styleClass="inputText" id="regionInput" rendered="#{not searchFlightBean.clickedLocationOptionOne}"/>
-
-                            </h:selectOneRadio>
-                            <h:message for="locationOptionInput" styleClass="error" />
-                        </h:panelGrid>
-                    </h:panelGrid>
-                    <div class="mdl-card__actions mdl-card--border">
-                        <a class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--accent">
-                            Search!
-                        </a>
-                    </div>
-                </h:form>
-                </div>
-                </div>
-            </div>
-
-
-
-
-            <div class="demo-card-wide mdl-card mdl-shadow--2dp promoCard">
-            <div class="mdl-card__title">
-                <h2 class="mdl-card__title-text">Promotions</h2>
-            </div>
-            <div class="mdl-card__supporting-text">
-                NEW OFFER! Get 5% off now!
-            </div>
-            <div class="mdl-card__actions mdl-card--border">
-                <a class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--accent" href="promotions.xhtml">
-                    Go!
-                </a>
-            </div>
-            </div>
-
-
-
-        </ui:define>
+    </ui:define>
 </ui:composition>
-</html>

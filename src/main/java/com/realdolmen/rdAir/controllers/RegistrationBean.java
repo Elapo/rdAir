@@ -2,11 +2,19 @@ package com.realdolmen.rdAir.controllers;
 
 import com.realdolmen.rdAir.domain.Customer;
 import com.realdolmen.rdAir.repositories.UserRepository;
+import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.NotEmpty;
 import org.mindrot.jbcrypt.BCrypt;
 
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.SessionScoped;
 import javax.faces.bean.ViewScoped;
 import javax.inject.Inject;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 
+@ManagedBean
 @ViewScoped
 public class RegistrationBean {
     @Inject
@@ -14,24 +22,44 @@ public class RegistrationBean {
 
     private Customer user;
 
+    @NotNull(message="{Register.fname.null}")
+    @Size(min=1, max=50, message="{Register.fname.size}")
     private String fName;
 
+    @NotNull(message="{Register.lname.null'}")
+    @Size(min=1, max=50, message="{Register.lname.size}")
     private String lName;
 
+    @NotNull(message="{Register.address.null}")
+    @Size(min=1, max=100, message="{Register.address.size}")
     private String address;
 
+    @NotNull(message="{Register.phnumber.null}")
+    @Size(min=5, max=10, message="{Register.phnumber.size}")
+    @Pattern(regexp = "[0-9]{5,10}",message = "{Register.phnumber.pattern}")
     private String telephone;
 
+    @NotEmpty(message="{Register.email.empty}")
+    @Email(message="{Register.email.email}")
     private String email;
 
+    @NotEmpty(message="{Register.password.null}")
+    @Pattern(regexp = "[a-zA-Z0-9]{8,30}",message = "{Register.password.pattern}")
     private String password;
 
     private String passwordHash;
 
+    private boolean registered;
+
     public String doRegistration(){
+        System.err.println("Succesfully registered customer: " + lName);
         passwordHash = BCrypt.hashpw(password, BCrypt.gensalt());
         user = new Customer(fName, lName, address, telephone, email, passwordHash, null);
         ur.save(user);
+        login.setUser(user);
+        login.setLoggedIn(true);
+        registered= true;
+        System.err.println("Registered boolean value: " + registered);
         return "pretty:view-login";
     }
 
@@ -91,4 +119,7 @@ public class RegistrationBean {
         this.passwordHash = passwordHash;
     }
 
+    public void setRegistered(boolean registered) {this.registered = registered; }
+
+    public boolean getRegistered() {return registered;}
 }
