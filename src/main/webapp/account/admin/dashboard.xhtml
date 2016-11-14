@@ -14,18 +14,17 @@
                     <div class="mdl-card__title-text">Orders</div>
                 </div>
                 <div class="mdl-card__supporting-text">
-                    <canvas id="OrderChart" width="400" height="400">
+                    <canvas id="OrderChart" width="400" height="200">
 
                     </canvas>
                 </div>
             </div>
         </div>
-        <h:inputSecret
-        <h:outputScript value="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.bundle.min.js"/>
-        <script type="javascript">
-            var val = [#{}];
-        </script>
-        <h:outputScript library="js" value="Orderchart.js"/>
+        <h:inputHidden type="hidden" id="accepted" value="#{dashboardBean.acceptedOrders}"/>
+        <h:inputHidden id="pending" value="#{dashboardBean.pendingOrders}"/>
+        <h:inputHidden id="cancelled" value="0"/>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.bundle.min.js"></script>
+        <h:outputScript target="body" library="js" name="Orderchart.js"/>
     </ui:define>
 </ui:composition>
 </html>

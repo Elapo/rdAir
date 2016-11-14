@@ -32,6 +32,8 @@ public class PriceModifier implements Serializable{ //todo modifier based on vol
 
     private boolean isVolumeDiscount;
 
+    private int volumeThreshold;
+
     private double amount;
 
     protected PriceModifier() {
@@ -114,5 +116,13 @@ public class PriceModifier implements Serializable{ //todo modifier based on vol
 
     public void setVolumeDiscount(boolean volumeDiscount) {
         isVolumeDiscount = volumeDiscount;
+    }
+
+    public int getVolumeThreshold() {
+        return volumeThreshold;
+    }
+
+    public void setVolumeThreshold(int volumeThreshold) {
+        this.volumeThreshold = volumeThreshold;
     }
 }

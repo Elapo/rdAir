@@ -1,5 +1,6 @@
 package com.realdolmen.rdAir.controllers;
 
+import com.realdolmen.rdAir.domain.Flight;
 import com.realdolmen.rdAir.domain.Order;
 import com.realdolmen.rdAir.domain.Ticket;
 import com.realdolmen.rdAir.domain.User;
@@ -69,14 +70,14 @@ public class LoginBean implements Serializable{
         return "pretty:view-index";
     }
 
-    public void addToOrder(Ticket t){
+    public void addToOrder(Flight f){
         if(user.getClass().getSimpleName().equals("Customer")){
             if (booking == null) {
                 booking = new Order(null, new Date());
             }
-            booking.getTickets().add(t);
-            t.setSalesPrice(PriceCalculator.calculatePrice(t));
-            booking.setOrderPrice(booking.getOrderPrice() + t.getSalesPrice());
+//            booking.getTickets().add(t);
+//            t.setSalesPrice(PriceCalculator.calculatePrice(t));
+//            booking.setOrderPrice(booking.getOrderPrice() + t.getSalesPrice());
         }
     }
 
