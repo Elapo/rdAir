@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+<f:view>
+<h:head>
+    <h:outputStylesheet library="css" name="material.min.css" />
+    <h:outputStylesheet library="css" name="MainCss.css" />
+    <h:outputScript library="js" name="material.min.js"/>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons"/>
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet"/>
+    <title><ui:insert name="title">Placeholder</ui:insert></title>
+</h:head>
+<h:body>
+<!-- The drawer is always open in large screens. The header is always shown,
+  even in small screens. -->
+<div class="mdl-layout mdl-js-layout
+            mdl-layout--fixed-header autoHeight">
+<header class="mdl-layout__header">
+    <div class="mdl-layout__header-row">
+        <div class="mdl-layout-spacer">
+        </div>
+        <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">
+            Button 1
+        </button>
+        <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">
+            Button 2
+        </button>
+        <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">
+            Button 3
+        </button>
+        <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">
+            Button 4
+        </button>
+        <div class="mdl-textfield mdl-js-textfield mdl-textfield--expandable
+                  mdl-textfield--floating-label mdl-textfield--align-right">
+            <label class="mdl-button mdl-js-button mdl-button--icon"
+                   for="fixed-header-drawer-exp">
+                <i class="material-icons">search</i>
+            </label>
+            <div class="mdl-textfield__expandable-holder searchBar">
+                <input class="mdl-textfield__input" type="text" pattern="[a-zA-Z0-9ÀÁÂÄÇÈÉÊËÌÍÏÒÓÔÖÙÚÛÜßàáâäçèéêëìíïòóôöùúûüŒœ]+((. |-| ?)[a-zA-Z0-9ÀÁÂÄÇÈÉÊËÌÍÏÒÓÔÖÙÚÛÜßàáâäçèéêëìíïòóôöùúûüŒœ]+)*"
+                       id="fixed-header-drawer-exp" placeholder="Search the site"/>
+                <span class="mdl-textfield__error">Only letters, digits, and "-"," " or ". " in between!</span>
+            </div>
+        </div>
+    </div>
+</header>
+
+<main id="mainEmployeesAirlines" class="mdl-layout__content">
+
+    <h1>
+        <ui:insert name="title">Placeholder</ui:insert>
+    </h1>
+    <div class="page-content">
+        <ui:insert name="content"/>
+    </div>
+</main>
+<div class="mdl-mega-footer">
+<div class="mdl-mega-footer--middle-section">
+<div class="mdl-mega-footer--drop-down-section" id="leftPlaced">
+    <input class="mdl-mega-footer__heading-checkbox" type="checkbox" checked="checked">
+        <h1 class="mdl-mega-footer__heading">RdAir and Partners</h1>
+        <ul class="mdl-mega-footer__link-list">
+            <li><a href="#">About RdAir</a></li>
+            <li><a href="#">Terms of Use</a></li>
+            <li><a href="#">Airline Partners</a></li>
+        </ul>
+    </input>
+</div>
+<div class="mdl-mega-footer--drop-down-section" id="rightPlaced">
+<input class="mdl-mega-footer__heading-checkbox" type="checkbox" checked="checked">
+<h1 class="mdl-mega-footer__heading">Other useful links</h1>
+<ul class="mdl-mega-footer__link-list">
+<li><a href="">FAQ</a></li>
+<li><a href="">Contact Us</a></li>
+</ul>
+</input>
+</div>
+</div>
+    <div class="mdl-mega-footer--bottom-section" id="middlePlaced">
+
+        <div class="mdl-logo">
+            Copyright 2016 RdAir.
+        </div>
+    </div>
+</div>
+</div>
+</h:body>
+</f:view>
+
+
+</html>
