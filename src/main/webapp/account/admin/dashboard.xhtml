@@ -8,7 +8,24 @@
 <ui:composition template="/WEB-INF/templates/admin-template.xhtml">
     <ui:define name="username">user</ui:define>
     <ui:define name="content">
+        <div class="mdl-color--white mdl-shadow--2dp mdl-cell mdl-cell--12-col mdl-grid">
+            <div class="mdl-card mdl-cell mdl-cell--12-col">
+                <div class="mdl-card__title mdl-card--border">
+                    <div class="mdl-card__title-text">Orders</div>
+                </div>
+                <div class="mdl-card__supporting-text">
+                    <canvas id="OrderChart" width="400" height="400">
 
+                    </canvas>
+                </div>
+            </div>
+        </div>
+        <h:inputSecret
+        <h:outputScript value="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.bundle.min.js"/>
+        <script type="javascript">
+            var val = [#{}];
+        </script>
+        <h:outputScript library="js" value="Orderchart.js"/>
     </ui:define>
 </ui:composition>
 </html>

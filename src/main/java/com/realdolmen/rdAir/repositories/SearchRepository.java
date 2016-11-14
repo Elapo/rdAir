@@ -15,12 +15,6 @@ import java.util.List;
  * Created by Frederik on 09/11/2016.
  */
 public class SearchRepository{
-    //todo list:
-    /*
-        1. get a simple search running using a long query with ands and null checks
-        2. Price modifier per flight
-        3. Test cascades in persistence tests
-     */
     @PersistenceContext
     EntityManager em;
 
@@ -29,11 +23,12 @@ public class SearchRepository{
         String query = "select f from Flight f ";
 
         if(seats != 0 && fClass != null){
-            query += "join f.availableClasses as classes where classes.name=:fClass and classes.availableSeats >=:seats ";
+            query += "where exists (select fc from FlightClass fc where fc.name=:fClass and fc.availableSeatCount>=:seats) ";
             availableParams.add("class");
         }
         else query+= "where ";
         if(!airComp.trim().isEmpty()){
+            if(availableParams.contains("class")) query+= "and ";
             query += "f.route.airline.airlineName=:aircomp ";
             availableParams.add("airline");
         }
