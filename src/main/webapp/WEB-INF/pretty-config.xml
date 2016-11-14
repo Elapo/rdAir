@@ -7,6 +7,18 @@
         <pattern value="/" />
         <view-id value="/index.xhtml" />
     </url-mapping>
+    <url-mapping id="view-search">
+        <pattern value="/searchresult" />
+        <view-id value="/searchresults.xhtml" />
+    </url-mapping>
+    <url-mapping id="view-details">
+        <pattern value="/searchdetails" />
+        <view-id value="/searchedandselectedflightdetails.xhtml" />
+    </url-mapping>
+    <url-mapping id="view-index">
+        <pattern value="/" />
+        <view-id value="/index.xhtml" />
+    </url-mapping>
     <url-mapping id="view-login">
         <pattern value="/login" />
         <view-id value="/login.xhtml" />
