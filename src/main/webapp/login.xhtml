@@ -6,7 +6,9 @@
                 xmlns:b="http://bootsfaces.net/ui"
                 template="WEB-INF/templates/template.xhtml">
 
-
+    <f:metadata>
+        <f:viewParam name="view" value="#{loginBean.originUrl}"/>
+    </f:metadata>
 
     <ui:define name="title">#{msgs['Login.login']}</ui:define>
 
@@ -29,7 +31,8 @@
                 <b:message for="passwordInput"/>
                 <br></br>
 
-                <b:commandButton value="#{msgs['Login.login.button']}" action="#{loginBean.doLogin}" ajax="false"/>
+                <b:commandButton value="#{msgs['Login.login.button']}" action="#{loginBean.doLogin}" ajax="false">
+                </b:commandButton>
 
             <h:panelGroup>
                 <b:button value="#{msgs['Login.register.button']}" rendered="#{not registrationBean.registered}" outcome="register.xhtml"/>

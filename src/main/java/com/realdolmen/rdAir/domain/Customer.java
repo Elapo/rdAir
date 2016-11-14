@@ -10,7 +10,7 @@ import java.util.List;
 @Entity
 public class Customer extends User implements Serializable{
 
-    @OneToMany(fetch = FetchType.LAZY)
+    @OneToMany(fetch = FetchType.EAGER)
     private List<Order> orders;
 
     protected Customer() {

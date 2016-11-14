@@ -22,6 +22,8 @@ import java.util.PropertyResourceBundle;
 @SessionScoped
 public class LoginBean implements Serializable{
 
+    private String originUrl;
+
     private User user;
 
     @Inject
@@ -49,7 +51,7 @@ public class LoginBean implements Serializable{
             loggedIn = true;
             password = ""; //get rid of pass in mem;
             System.out.println("Logged in user "+ user.getFirstName());
-            return "pretty:view-index";
+            return "pretty:view-index"; // voorlopig!!
         }
         String errorMessage = bundle.getString("Messages.invalid.login");
         FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, errorMessage, null));
@@ -58,7 +60,7 @@ public class LoginBean implements Serializable{
 
     public String doLogout(){
         loggedIn = false;
-        return "pretty:view-home"; //todo redirect to home
+        return "pretty:view-index";
     }
 
     public boolean isLoggedIn() {
@@ -93,5 +95,13 @@ public class LoginBean implements Serializable{
         return this.password;
     }
 
+
+    public String getOriginUrl() {
+        return originUrl;
+    }
+
+    public void setOriginUrl(String originUrl) {
+        this.originUrl = originUrl;
+    }
 
 }

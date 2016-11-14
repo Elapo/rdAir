@@ -6,15 +6,18 @@
                 xmlns:b="http://bootsfaces.net/ui"
                 template="WEB-INF/templates/template.xhtml">
 
+
     <ui:define name="title">#{msgs['Booking.booking']}</ui:define>
     <ui:define name="content">
 
+        <h:panelGroup rendered="#{not bookingBean.booked}">
         <h2>#{msgs['Booking.creditcard']}</h2>
+        </h:panelGroup>
         <br></br>
 
         <h:form>
             <b:messages/>
-            <h:panelGrid columns="3">
+            <h:panelGrid columns="3" rendered="#{not bookingBean.booked}">
 
                 <h:panelGroup>
                     <h:outputLabel>#{msgs['Booking.creditcardNumber']} </h:outputLabel>
@@ -38,9 +41,18 @@
                 </h:panelGroup>
 
             </h:panelGrid>
+
+            <h:panelGroup rendered="#{bookingBean.booked}">
+                #{msgs['Booking.payment.succeeded']}
+            </h:panelGroup>
             <br></br>
-            <!-- commandButton + email!! -->
-            <b:commandButton value="#{msgs['Booking.creditcard.button']}" action="#{bookingBean.bookingCreditcard}"/>
+            <!-- + email!! +invoice!! -->
+            <h:panelGroup update="@form" rendered="#{not bookingBean.booked}">
+                <b:commandButton value="#{msgs['Booking.creditcard.button']}" action="#{bookingBean.bookingCreditcard}"/>
+            </h:panelGroup>
+            <h:panelGroup rendered="#{bookingBean.booked}">
+                <b:commandButton update="@form" value="#{msgs['Invoices.button']}" action="pretty:view-invoices"/>
+            </h:panelGroup>
 
         </h:form>
 

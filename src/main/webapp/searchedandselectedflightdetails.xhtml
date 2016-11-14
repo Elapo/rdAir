@@ -54,7 +54,9 @@
                 <b:button value="#{msgs['Booking.button']}" rendered="#{loginBean.loggedIn}" outcome="booking.xhtml"/>
             </h:panelGroup>
             <h:panelGroup>
-                <b:button value="#{msgs['Search.details.login.button']}" rendered="#{not loginBean.loggedIn}" outcome="login.xhtml"/>
+                <b:button value="#{msgs['Search.details.login.button']}" rendered="#{not loginBean.loggedIn}" outcome="login.xhtml">
+                    <!--<f:param name="view" value="details"/>-->
+                </b:button>
             </h:panelGroup>
 
 
