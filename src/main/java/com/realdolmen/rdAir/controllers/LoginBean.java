@@ -26,6 +26,8 @@ import java.util.PropertyResourceBundle;
 @SessionScoped
 public class LoginBean implements Serializable{
 
+    private String originUrl;
+
     private User user;
 
     @Inject
@@ -38,7 +40,6 @@ public class LoginBean implements Serializable{
     @NotEmpty(message="{Login.email.empty}")
     @Email(message="{Login.email.wrong}")
     private String email;
-
     @Size(min=8, max=30, message="{Login.password.size}")
     @NotNull(message="{Login.password.null}")
     @Pattern(regexp = "[a-zA-Z0-9]{8,30}", message="{Login.password.pattern}")
@@ -56,7 +57,7 @@ public class LoginBean implements Serializable{
             loggedIn = true;
             password = ""; //get rid of pass in mem
             System.out.println("Logged in user "+ user.getFirstName());
-            return "pretty:view-index";
+            return "pretty:view-index"; // voorlopig!!
         }
         String errorMessage = bundle.getString("Messages.invalid.login");
         FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, errorMessage, null));
@@ -118,4 +119,12 @@ public class LoginBean implements Serializable{
     public UserRepository getUr() {
         return ur;
     }
+    public String getOriginUrl() {
+        return originUrl;
+    }
+
+    public void setOriginUrl(String originUrl) {
+        this.originUrl = originUrl;
+    }
+
 }

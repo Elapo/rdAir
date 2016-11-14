@@ -11,8 +11,16 @@
     <ui:define name="content">
 
         <h:form>
-            <b:dataTable>
-                <!-- invoice with qr code and link-->
+            <b:dataTable var="order" value="#{orderListBean.orders}">
+                <b:column label="#{msgs['Invoices.table.date']}">
+                    <h:outputText value="#{order.orderDate}"/>
+                </b:column>
+                <b:column label="#{msgs['Invoices.table.price']}">
+                    <!--<h:outputText value="#{order.orderPrice}"/>--> €
+                </b:column>
+                <b:column label="#{msgs['Invoices.table.status']}">
+                    <h:outputText value="#{order.status}"/>
+                </b:column>
             </b:dataTable>
 
         <br></br>

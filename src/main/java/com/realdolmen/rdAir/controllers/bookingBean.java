@@ -1,5 +1,6 @@
 package com.realdolmen.rdAir.controllers;
 
+import com.realdolmen.rdAir.util.PaymentValidator;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.faces.bean.ManagedBean;
@@ -10,6 +11,8 @@ import java.io.Serializable;
 @ManagedBean
 @SessionScoped
 public class bookingBean implements Serializable {
+
+    private boolean isBooked;
 
     @NotEmpty(message="{Booking.creditcardNumber.null}")
     @Pattern(regexp="[0-9]{16}", message="{Booking.creditcardNumber.pattern}")
@@ -36,8 +39,22 @@ public class bookingBean implements Serializable {
         this.creditcardExpDate = creditcardExpDate;
     }
 
+
+    public boolean isBooked() {
+        return isBooked;
+    }
+
+    public void setBooked(boolean booked) {
+        isBooked = booked;
+    }
+
     public String bookingCreditcard(){
-        System.err.println("Booked via creditcard!!!");
-        return "invoices.xhtml";
+        if (!PaymentValidator.creditcardValidation()) {
+            return "pretty:view-index";
+        } else {
+            System.err.println("Booked via creditcard!!!");
+            isBooked = true;
+            return "pretty:view-bookingcreditcard";
+        }
     }
 }

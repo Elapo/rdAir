@@ -41,7 +41,8 @@
             <b:navbarLinks pull="left" styleClass="hidden-xs navbar-right">
                 <b:navLink value="#{msgs['Template.customers.button.one']}" href="index.xhtml" iconAwesome="home" />
                 <b:navLink value="#{msgs['Template.customers.button.three']}" href="login.xhtml" iconAwesome="user"
-                rendered="#{not loginBean.loggedIn}"></b:navLink>
+                rendered="#{not loginBean.loggedIn}">
+                </b:navLink>
             </b:navbarLinks>
             <!-- Button needs to be in a h:form, not in navbarLinks -->
             <h:form

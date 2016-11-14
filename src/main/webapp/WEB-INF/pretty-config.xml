@@ -7,13 +7,33 @@
         <pattern value="/" />
         <view-id value="/index.xhtml" />
     </url-mapping>
+    <url-mapping id="view-search">
+        <pattern value="/searchresult" />
+        <view-id value="/searchresults.xhtml" />
+    </url-mapping>
+    <url-mapping id="view-details">
+        <pattern value="/searchdetails" />
+        <view-id value="/searchedandselectedflightdetails.xhtml" />
+    </url-mapping>
     <url-mapping id="view-login">
         <pattern value="/login" />
         <view-id value="/login.xhtml" />
     </url-mapping>
+    <url-mapping id="view-register">
+        <pattern value="/register" />
+        <view-id value="/register.xhtml" />
+    </url-mapping>
     <url-mapping id="view-booking">
         <pattern value="/booking" />
         <view-id value="/booking.xhtml" />
+    </url-mapping>
+    <url-mapping id="view-bookingcreditcard">
+        <pattern value="/bookingcreditcard" />
+        <view-id value="/bookingcreditcard.xhtml" />
+    </url-mapping>
+    <url-mapping id="view-invoices">
+        <pattern value="/invoices" />
+        <view-id value="/invoices.xhtml" />
     </url-mapping>
     <url-mapping id="view-profile">
         <pattern value="/account/profile"/>

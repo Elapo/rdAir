@@ -6,6 +6,10 @@
                 xmlns:b="http://bootsfaces.net/ui"
                 template="WEB-INF/templates/template.xhtml">
 
+    <f:metadata>
+        <f:viewParam name="view" value="#{loginBean.originUrl}"/>
+    </f:metadata>
+
     <ui:define name="title">#{msgs['Booking.booking']}</ui:define>
     <ui:define name="content">
 

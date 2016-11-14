@@ -1,25 +1,21 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:f="http://xmlns.jcp.org/jsf/core"
-      xmlns:p="http://primefaces.org/ui">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:b="http://bootsfaces.net/ui"
+                template="WEB-INF/templates/template.xhtml">
 
-<ui:composition template="WEB-INF/templates/material-template-customers.xhtml">
+
 
     <ui:define name="title">#{msgs['Promotions.promotions']}</ui:define>
     <ui:define name="content">
 
 
-        <div class="demo-card-wide mdl-card mdl-shadow--2dp">
-        <div class="mdl-card__title" id="promoCardTitle">
-        <h2 class="mdl-card__title-text">
-            #{msgs['Promotions.week']}
-        </h2>
-        </div>
-            <div class="mdl-card__supporting-text" id="promotionImage">
+
+            <h2>#{msgs['Promotions.week']}</h2>
+
+
                 <h3>
                     #{msgs['Promotions.supporting.text.promotion.one']}
                 </h3>
@@ -27,17 +23,17 @@
                 <h4>
                     #{msgs['Promotions.supporting.text.promotion.one.extra']}
                 </h4>
-            </div>
-            <div class="mdl-card__actions mdl-card--border">
-                <a class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--accent" href="booking.xhtml">
-                    #{msgs['Promotions.book.button']}
-                </a>
-            </div>
-        </div>
+
+        <h:panelGroup>
+            <b:button value="#{msgs['Promotions.book.button']}" rendered="#{loginBean.loggedIn}" outcome="booking.xhtml"/>
+        </h:panelGroup>
+        <h:panelGroup>
+            <b:button value="#{msgs['Promtions.login.button']}" rendered="#{not loginBean.loggedIn}" outcome="login.xhtml"/>
+        </h:panelGroup>
+
 
 
 
     </ui:define>
 
 </ui:composition>
-</html>

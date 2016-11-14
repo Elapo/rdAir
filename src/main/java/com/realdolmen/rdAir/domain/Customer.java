@@ -10,7 +10,7 @@ import java.util.List;
 @Entity
 public class Customer extends User implements Serializable{
 
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
     private List<Order> orders;
 
     protected Customer() {

@@ -7,6 +7,7 @@
       template="WEB-INF/templates/template.xhtml">
 
 
+
     <ui:define name="title">#{msgs['Index.welcome']}</ui:define>
     <ui:define name="content">
 
@@ -128,8 +129,17 @@
             </h:panelGrid>
             <br></br>
             <br></br>
-            <b:commandButton value="#{msgs['Search.button']}" action="#{searchFlightBean.search()}"/>
+            <h:panelGrid columns="3">
 
+                <h:panelGroup>
+                    <b:commandButton value="#{msgs['Search.button']}" action="#{searchFlightBean.search()}"/>
+                </h:panelGroup>
+                <div style="width:450px"></div>
+                <h:panelGroup>
+                    <b:button value="#{msgs['Index.promotions.button']}" outcome="promotions.xhtml"/>
+                </h:panelGroup>
+
+            </h:panelGrid>
             <br/>
 
 
