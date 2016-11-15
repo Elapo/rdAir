@@ -35,7 +35,7 @@ public class SearchRepository{
             availableParams.add("airline");
         }
         if(!dep.trim().isEmpty() && !dest.trim().isEmpty()){
-            query+= "and f.route.departureLocation.airportName=:depart and t.flight.route.destination.airportName=:dest ";
+            query+= "and f.route.departureLocation.airportName=:depart and f.route.destination.airportName=:dest ";
             availableParams.add("location");
         }
         else if(!region.trim().isEmpty()) {
@@ -43,7 +43,7 @@ public class SearchRepository{
             availableParams.add("region");
         }
         if(departureDate != null){
-            query += "and date(f.departureDate)=:departureDate";
+            query += "and f.departureTime=:departureDate";
             availableParams.add("depdate");
         }
 
