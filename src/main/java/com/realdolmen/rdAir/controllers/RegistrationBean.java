@@ -21,7 +21,7 @@ import javax.validation.constraints.Size;
 @ViewScoped
 public class RegistrationBean {
     @Inject
-    UserRepository ur;
+    private UserRepository ur;
 
     private Customer user;
 

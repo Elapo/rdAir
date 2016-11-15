@@ -6,7 +6,6 @@ import com.realdolmen.rdAir.util.PriceCalculator;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.annotation.PostConstruct;
-import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.inject.Inject;
@@ -21,7 +20,7 @@ import java.util.Date;
 import java.util.List;
 
 
-@Named
+@ManagedBean
 @SessionScoped
 public class SearchFlightBean implements Serializable {
 
@@ -49,7 +48,7 @@ public class SearchFlightBean implements Serializable {
     @Max(value=853, message="{Search.error.desiredNrOfSeats}")
     private Integer desiredNrOfSeats;
 
-    @NotEmpty(message="{Search.error.flightClass.null}")
+    @NotNull(message="{Search.error.flightClass.null}")
     private String flightClass;
     @NotNull(message="{Search.error.airlineCompany.null}")
     private String preferredAirline;
@@ -209,11 +208,7 @@ public class SearchFlightBean implements Serializable {
     }
 
     public String search(){
-        //TODO: give search criteria to sql search query
-        //SHOULD GIVE search results but returns null..
-        //  can't even inject this
-//        searchResultsBean.setSearchResults(criteriaSearchRepository.searchFlights(desiredNrOfSeats, flightClass, preferredAirline, departureLocation,
-//                destinationLocation, globalRegion, dateOfDeparture));
+
         if(searchRepository==null){System.err.println("Searchrepo is null");return "";}
         if(flightClass==null){System.err.println("flightclass is null " + flightClass);return "";}
         if(preferredAirline==null){System.err.println("preferedairline is null");return "";}
@@ -223,13 +218,13 @@ public class SearchFlightBean implements Serializable {
         if(dateOfDeparture==null){System.err.println("datedepart is null");return "";}
         if(searchResultsBean==null){System.err.println("searResultsBean is null"); return "";}
 
-        searchResultsBean.setSearchResults(searchRepository.searchForFlights(desiredNrOfSeats,flightClass,preferredAirline,
+        searchResultsBean.setSearchResults(searchRepository.searchForFlights(desiredNrOfSeats,"",preferredAirline,
                 departureLocation,destinationLocation,globalRegion,dateOfDeparture));
         //(int seats, String fClass, String airComp, String dep, String dest, String region, Date departureDate)
 
 
         System.err.println("Pressed search button");
-        return "pretty:view-search";
+        return "/searchresults.xhtml";
     }
 
 

@@ -11,7 +11,7 @@
     <ui:define name="content">
         <h:form>
 
-            <b:dataTable var="f" value="#{searchResultsBean.flights}" style="margin-bottom:40px">
+            <b:dataTable var="f" value="#{f.flights}" style="margin-bottom:40px">
                 <b:column label="#{msgs['Search.results.title.column.one']}">
                     <h:outputText value="#{f.route.destination}" />
                 </b:column>
@@ -32,7 +32,7 @@
                 </b:column>
                 <b:column label="#{msgs['Search.results.title.column.seven']}">
                     <b:navLink value="#{msgs['Search.details.button']}"
-                                          outcome="searchedandselectedflightdetails.xhtml">
+                                          outcome="pretty:view-details">
                         <f:param name="flightId" value="#{f.id}" />-->
                     </b:navLink>
                 </b:column>
