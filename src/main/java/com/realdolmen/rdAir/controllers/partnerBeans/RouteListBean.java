@@ -26,7 +26,7 @@ import java.util.List;
 public class RouteListBean implements Serializable{
     private List<Route> routes;
 
-    @ManagedProperty(value = "#{loginBean}")
+    @Inject
     private LoginBean session;
 
     @Inject
@@ -43,10 +43,15 @@ public class RouteListBean implements Serializable{
 
     @PostConstruct
     public void init(){
-        routes = new ArrayList<>();
-        locations = new ArrayList<>();
         routes = rr.getAllForAirline((Airline) session.getUser());
         locations = lr.getAllLocations();
+        if (routes == null) {
+            routes = new ArrayList<>();
+        }
+        if (locations == null) {
+            locations = new ArrayList<>();
+        }
+
     }
 
     public void editRoute(RowEditEvent e){
@@ -76,4 +81,35 @@ public class RouteListBean implements Serializable{
         this.selected = selected;
     }
 
+    public LoginBean getSession() {
+        return session;
+    }
+
+    public void setSession(LoginBean session) {
+        this.session = session;
+    }
+
+    public Location getDep() {
+        return dep;
+    }
+
+    public void setDep(Location dep) {
+        this.dep = dep;
+    }
+
+    public Location getDest() {
+        return dest;
+    }
+
+    public void setDest(Location dest) {
+        this.dest = dest;
+    }
+
+    public List<Location> getLocations() {
+        return locations;
+    }
+
+    public void setLocations(List<Location> locations) {
+        this.locations = locations;
+    }
 }

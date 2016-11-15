@@ -68,7 +68,7 @@
         <view-id value="/account/admin/reports.xhtml"/>
     </url-mapping>
     <url-mapping id="view-partner-home">
-        <pattern value="/partner/dashboard"/>
+        <pattern value="/partner"/>
         <view-id value="/account/partner/dashboard.xhtml"/>
     </url-mapping>
     <url-mapping id="view-partner-routes">

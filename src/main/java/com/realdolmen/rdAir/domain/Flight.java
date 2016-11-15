@@ -39,8 +39,6 @@ public class Flight implements Serializable{
     @OneToMany(mappedBy = "flight", cascade = CascadeType.ALL)
     private List<FlightClass> availableClasses;
 
-    private int availableFirstClass;
-
     protected Flight() {
         super();
     }

@@ -41,7 +41,7 @@ public class SearchRepository{
             availableParams.add("region");
         }
         if(departureDate != null){
-            query += "and f.departureDate=:departureDate";
+            query += "and date(f.departureDate)=:departureDate";
             availableParams.add("depdate");
         }
 
