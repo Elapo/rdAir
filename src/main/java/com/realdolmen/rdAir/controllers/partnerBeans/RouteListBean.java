@@ -55,7 +55,7 @@ public class RouteListBean implements Serializable{
     }
 
     public void editRoute(RowEditEvent e){
-        
+
         routes = rr.getAllForAirline((Airline) session.getUser());
     }
 
