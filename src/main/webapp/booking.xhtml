@@ -23,9 +23,15 @@
 
         <br/>
 
+        <h:panelGrid columns="3">
+        <h:panelGroup>
         <b:button value="#{msgs['Booking.button.creditcard']}" outcome="bookingcreditcard.xhtml"/>
-
+        </h:panelGroup>
+        <div style="width:20px"></div>
+        <h:panelGroup>
         <b:button value="#{msgs['Booking.button.endorsement']}" outcome ="bookingendorsement.xhtml"/>
+        </h:panelGroup>
+        </h:panelGrid>
 
     </ui:define>
 </ui:composition>
