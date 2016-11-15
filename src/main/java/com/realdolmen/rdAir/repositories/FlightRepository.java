@@ -23,6 +23,7 @@ public class FlightRepository {
         return flight;
     }
 
+
     public Flight findById(int id){
         Flight f = em.find(Flight.class, id);
         Hibernate.initialize(f.getAvailableClasses());

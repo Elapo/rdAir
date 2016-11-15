@@ -31,12 +31,16 @@
                 <b:message for="passwordInput"/>
                 <br></br>
 
+            <h:panelGrid columns="3">
+            <h:panelGroup>
                 <b:commandButton value="#{msgs['Login.login.button']}" action="#{loginBean.doLogin}" ajax="false">
                 </b:commandButton>
-
+            </h:panelGroup>
+            <div style="width:20px"></div>
             <h:panelGroup>
                 <b:button value="#{msgs['Login.register.button']}" rendered="#{not registrationBean.registered}" outcome="pretty:view-register"/>
             </h:panelGroup>
+            </h:panelGrid>
 
 
 
