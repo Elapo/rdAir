@@ -6,43 +6,46 @@
       xmlns:b="http://bootsfaces.net/ui"
       template="WEB-INF/templates/template.xhtml">
 
+    <f:metadata>
+        <f:viewParam name="id" value="#{searchDetailsBean.id}"/>
+    </f:metadata>
 
     <ui:define name="title">#{msgs['Flight.details.title']}</ui:define>
     <ui:define name="content">
 
         <h:form>
-                    <b:dataTable var="" value="" style="margin-bottom:40px">
+                    <b:dataTable var="d" value="#{searchDetailsBean.details}" style="margin-bottom:40px">
                         <b:column label="#{msgs['Search.details.traveling.class']}">
-                            <h:outputText value="Economy"/>
+                            <h:outputText value="#{d.}"/>
                         </b:column>
                         <b:column label="#{msgs['Search.details.seats']}">
-                            <h:outputText value="2"/>
+                            <h:outputText value="#{d.}"/>
                         </b:column>
                         <b:column label="#{msgs['Search.details.departure.location']}">
                             <!-- + codes-->
-                            <h:outputText value="x"/>
+                            <h:outputText value="#{d.}"/>
                         </b:column>
                         <b:column label="#{msgs['Search.details.departure.time']}">
-                            <h:outputText value="11:00"/>
+                            <h:outputText value="#{d.}"/>
                         </b:column>
                         <b:column label="#{msgs['Search.details.destination']}">
                             <!-- + codes-->
-                            <h:outputText value="y"/>
+                            <h:outputText value="#{d.}"/>
                         </b:column>
                         <b:column label="#{msgs['Search.details.destiantion.time']}">
-                            <h:outputText value="12:30"/>
+                            <h:outputText value="#{d.}"/>
                         </b:column>
                         <b:column label="#{msgs['Search.details.flight.duration']}">
-                            <h:outputText value="1h30"/>
+                            <h:outputText value="#{d.}"/>
                         </b:column>
                         <b:column label="#{msgs['Search.details.price.ticket']}">
-                            <h:outputText value="10"/>
+                            <h:outputText value="#{d.}"/>
                         </b:column>
                         <b:column label="#{msgs['Search.details.price.total']}">
-                            <h:outputText value="20"/>
+                            <h:outputText value="#{d.}"/>
                         </b:column>
                         <b:column label="#{msgs['Search.details.airline.company']}">
-                            <h:outputText value="Bull Airlines"/>
+                            <h:outputText value="#{d.}"/>
                         </b:column>
 
                     </b:dataTable>
