@@ -38,6 +38,7 @@ public class FlightDetailBean {
 
     public double calculateFlightPrice(Flight f, String fClass) {
         FlightClass toCalc = null;
+        if(f.getAvailableClasses() == null) return 0;
         for(FlightClass fc :f.getAvailableClasses()){
             if (fc.getName().equals(fClass)){
                 toCalc = fc;
@@ -52,6 +53,7 @@ public class FlightDetailBean {
 
     public double calculateDiscount(Flight f, String fClass) {
         FlightClass toCalc = null;
+        if(f.getAvailableClasses() == null) return 0;
         for (FlightClass fc : f.getAvailableClasses()) {
             if (fc.getName().equals(fClass)) {
                 toCalc = fc;

@@ -2,6 +2,7 @@ package com.realdolmen.rdAir.repositories;
 
 import com.realdolmen.rdAir.domain.Flight;
 import com.realdolmen.rdAir.domain.Route;
+import org.hibernate.Hibernate;
 
 import javax.ejb.Stateless;
 import javax.persistence.*;
@@ -23,7 +24,9 @@ public class FlightRepository {
     }
 
     public Flight findById(int id){
-        return em.find(Flight.class, id);
+        Flight f = em.find(Flight.class, id);
+        Hibernate.initialize(f.getAvailableClasses());
+        return f;
     }
 
     @SuppressWarnings(value = "all")

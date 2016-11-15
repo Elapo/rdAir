@@ -44,6 +44,11 @@ public class Route implements Serializable{
         this.rdModifiers = rdModifiers;
     }
 
+    @Override
+    public String toString() {
+        return departureLocation.getAirportName() +" to "+destination.getAirportName();
+    }
+
     public int getId() {
         return id;
     }

@@ -9,7 +9,44 @@
 <ui:composition template="/WEB-INF/templates/partner-template.xhtml">
     <ui:define name="username">user</ui:define>
     <ui:define name="content">
-
+        <div class="mdl-card__supporting-text">
+            <h:form id="flightlist">
+                <p:dataTable id="flightDt" var="flight" rows="20" paginator="true" editable="true"
+                             paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                             value="#{flightListBean.flights}" rowKey="#{flight.id}">
+                    <p:ajax event="rowEdit" listener="#{flightListBean.editFlight}" update=":flightlist:flightDt"/>
+                    <p:column headerText="Route">
+                        <p:cellEditor>
+                            <f:facet name="output"><h:outputText value="#{flightListBean.route}}"/></f:facet>
+                            <f:facet name="input">
+                                <p:selectOneMenu value="#{flightListBean.route}">
+                                    <f:selectItems value="#{flightListBean.routes}"/>
+                                </p:selectOneMenu>
+                            </f:facet>
+                        </p:cellEditor>
+                    </p:column>
+                    <p:column headerText="Departure Date">
+                        <p:cellEditor>
+                            <f:facet name="output"><h:outputText value="#{flight.departureTime}}"/></f:facet>
+                            <f:facet name="input">
+                                <p:calendar pattern="MM/dd/yyyy HH:mm" value="#{flightListBean.departure}"/>
+                            </f:facet>
+                        </p:cellEditor>
+                    </p:column>
+                    <p:column headerText="Flight duration">
+                        <p:cellEditor>
+                            <f:facet name="output"><h:outputText value="#{flight.flightDuration}"/></f:facet>
+                            <f:facet name="input">
+                                <p:calendar value="#{flightListBean.duration}" timeOnly="true" pattern="HH:mm"/>
+                            </f:facet>
+                        </p:cellEditor>
+                    </p:column>
+                    <p:column style="width: 32px">
+                        <p:rowEditor/>
+                    </p:column>
+                </p:dataTable>
+            </h:form>
+        </div>
     </ui:define>
 </ui:composition>
 </html>
