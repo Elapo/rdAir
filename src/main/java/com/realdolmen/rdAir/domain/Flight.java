@@ -101,6 +101,10 @@ public class Flight implements Serializable{
         return rdAirModifiers;
     }
 
+    public void addClass(FlightClass fc){
+        availableClasses.add(fc);
+    }
+
     public int getAvailableFirstClass(){
         Hibernate.initialize(availableClasses);
         for(FlightClass fc: availableClasses){

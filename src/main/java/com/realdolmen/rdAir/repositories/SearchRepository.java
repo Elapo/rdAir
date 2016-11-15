@@ -4,6 +4,7 @@ import com.realdolmen.rdAir.domain.Flight;
 import com.realdolmen.rdAir.domain.Ticket;
 import com.realdolmen.rdAir.services.FlightSearchSupplier;
 
+import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
@@ -14,6 +15,7 @@ import java.util.List;
 /**
  * Created by Frederik on 09/11/2016.
  */
+@Stateless
 public class SearchRepository{
     @PersistenceContext
     EntityManager em;

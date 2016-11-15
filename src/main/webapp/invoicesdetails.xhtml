@@ -11,12 +11,13 @@
     <ui:define name="content">
 
         <h:form>
-            <b:dataTable var="order" value="#{orderListBean.orders}">
+            <!-- invoice details (1 invoice) -->
+            <!--<b:dataTable var="order" value="#{orderListBean.orders}">
                 <b:column label="#{msgs['Invoices.table.date']}">
                     <h:outputText value="#{order.orderDate}"/>
                 </b:column>
                 <b:column label="#{msgs['Invoices.table.price']}">
-                    <!--<h:outputText value="#{order.orderPrice}"> €</h:outputText>-->
+                    <!--<h:outputText value="#{order.orderPrice}"> €</h:outputText>
                 </b:column>
                 <b:column label="#{msgs['Invoices.table.status']}">
                     <h:outputText value="#{order.status}"/>
@@ -24,14 +25,15 @@
                 <b:column label="#{msgs['Invoices.invoice.details']}">
                     <b:navLink value="#{msgs['Invoices.invoice.details.button']}"
                                outcome="invoicedetails.xhtml">
-                        <!--<f:param name="flightId" value="#{f.id}" />-->
+                        <f:param name="flightId" value="#{f.id}" />
                     </b:navLink>
                 </b:column>
-            </b:dataTable>
+            </b:dataTable>-->
 
         <br></br>
         <br></br>
 
+            <b:commandButton value="#{msgs['Invoice.print.button']}" action="invoiceBean.print"/>
         </h:form>
 
 

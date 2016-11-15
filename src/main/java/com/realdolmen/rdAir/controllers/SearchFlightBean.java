@@ -1,10 +1,16 @@
 package com.realdolmen.rdAir.controllers;
 
 import com.realdolmen.rdAir.domain.*;
+import com.realdolmen.rdAir.repositories.*;
+import com.realdolmen.rdAir.util.PriceCalculator;
+import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.annotation.PostConstruct;
+import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.inject.Inject;
+import javax.inject.Named;
 import javax.validation.constraints.Future;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
@@ -15,17 +21,35 @@ import java.util.Date;
 import java.util.List;
 
 
-@ManagedBean
+@Named
 @SessionScoped
 public class SearchFlightBean implements Serializable {
 
+//    @Inject
+//    private CriteriaSearchRepository criteriaSearchRepository;
+    @Inject
+    private SearchRepository searchRepository;
+
+    @Inject
+    private AirlineRepository airlineRepository;
+
+    @Inject
+    private LocationRepository locationRepository;
+
+    @Inject
+    private SearchresultsBean searchResultsBean;
+
+    @Inject
+    private RegionRepository regionRepository;
+
+    private Integer id;
 
     @NotNull(message="{Search.error.desiredNrOfSeats.null}")
     @Min(value=1,message="{Search.error.desiredNrOfSeats}")
     @Max(value=853, message="{Search.error.desiredNrOfSeats}")
     private Integer desiredNrOfSeats;
 
-    @NotNull(message="{Search.error.flightClass.null}")
+    @NotEmpty(message="{Search.error.flightClass.null}")
     private String flightClass;
     @NotNull(message="{Search.error.airlineCompany.null}")
     private String preferredAirline;
@@ -172,26 +196,41 @@ public class SearchFlightBean implements Serializable {
         this.dateOfReturn = dateOfReturn;
     }
 
+    public List<Location> getLocations(){
+        return locationRepository.getAllLocations();
+    }
+
+    public List<Airline> getAirlines(){
+        return airlineRepository.getAllAirlines();
+    }
+
+    public List<Region> getRegions(){
+        return regionRepository.getAllRegions();
+    }
+
     public String search(){
         //TODO: give search criteria to sql search query
+        //SHOULD GIVE search results but returns null..
+        //  can't even inject this
+//        searchResultsBean.setSearchResults(criteriaSearchRepository.searchFlights(desiredNrOfSeats, flightClass, preferredAirline, departureLocation,
+//                destinationLocation, globalRegion, dateOfDeparture));
+        if(searchRepository==null){System.err.println("Searchrepo is null");return "";}
+        if(flightClass==null){System.err.println("flightclass is null " + flightClass);return "";}
+        if(preferredAirline==null){System.err.println("preferedairline is null");return "";}
+        if(departureLocation==null){System.err.println("departureloc is null");return "";}
+        if(destinationLocation==null){System.err.println("destloc is null");return "";}
+        if(globalRegion==null){System.err.println("globalregion is null");return "";}
+        if(dateOfDeparture==null){System.err.println("datedepart is null");return "";}
+        if(searchResultsBean==null){System.err.println("searResultsBean is null"); return "";}
+
+        searchResultsBean.setSearchResults(searchRepository.searchForFlights(desiredNrOfSeats,flightClass,preferredAirline,
+                departureLocation,destinationLocation,globalRegion,dateOfDeparture));
+        //(int seats, String fClass, String airComp, String dep, String dest, String region, Date departureDate)
+
+
         System.err.println("Pressed search button");
-        return "searchresults";
+        return "pretty:view-search";
     }
 
-    public List<Flight> getSearchResults(){
-        List<Flight> results = new ArrayList<Flight>();
-        //TODO: get flight search results from backend
-        for(int i = 0; i < 5; i++){
-            Location l1 = new Location("airportName"+i, "airportCode"+i, new Region("region"+i));
-            Route r1 = new Route(l1, l1, new ArrayList<PriceModifier>(),new ArrayList<PriceModifier>(), null);
 
-            //String name, Date startDate, Date endDate, Date startTime, Date endTime, boolean isPercent, double amount
-            PriceModifier pm = new PriceModifier("name", new Date(), new Date(), new Date(), new Date(), true, true, 50);
-            //Route route, PriceModifier rdAirModifier, Date departureTime, Date flightDuration
-            Flight f = new Flight(r1, pm, new Date(), new Date());
-            results.add(f);
-        }
-
-        return results;
-    }
 }

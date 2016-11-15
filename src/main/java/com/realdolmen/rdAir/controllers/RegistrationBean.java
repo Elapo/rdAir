@@ -1,12 +1,14 @@
 package com.realdolmen.rdAir.controllers;
 
 import com.realdolmen.rdAir.domain.Customer;
+import com.realdolmen.rdAir.domain.User;
 import com.realdolmen.rdAir.repositories.UserRepository;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotEmpty;
 import org.mindrot.jbcrypt.BCrypt;
 
 import javax.faces.bean.ManagedBean;
+
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
 import javax.faces.bean.ViewScoped;
@@ -53,16 +55,17 @@ public class RegistrationBean {
 
     private String passwordHash;
 
-    private boolean registered;
+    private boolean registered = false;
 
     public String doRegistration(){
         System.err.println("Succesfully registered customer: " + lName);
         passwordHash = BCrypt.hashpw(password, BCrypt.gensalt());
         user = new Customer(fName, lName, address, telephone, email, passwordHash, null);
-        ur.save(user);
-        login.setUser(user);
+        User savedUser = ur.save(user);
+        System.err.println("Id of persisted user is: " + savedUser.getId());
+        login.setUser(savedUser);
         login.setLoggedIn(true);
-        registered= true;
+        registered=true;
         System.err.println("Registered boolean value: " + registered);
         return "pretty:view-login";
     }
