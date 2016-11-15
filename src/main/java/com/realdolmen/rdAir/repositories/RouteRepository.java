@@ -1,10 +1,13 @@
 package com.realdolmen.rdAir.repositories;
 
+import com.realdolmen.rdAir.domain.Airline;
 import com.realdolmen.rdAir.domain.Route;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import java.util.List;
 
 @Stateless
@@ -18,12 +21,23 @@ public class RouteRepository {
     }
 
     public Route save(Route r){
-        em.persist(r);
+        em.merge(r);
         return r;
     }
 
     public Route findById(int id){
         return em.find(Route.class, id);
+    }
+
+    @SuppressWarnings(value = "all")
+    public List<Route> getAllForAirline(Airline a){
+        try {
+            Query sql = em.createQuery("select r from Route r where r.airline.id=?1");
+            return sql.setParameter(1, a.getId()).getResultList();
+        }
+        catch (NoResultException e){
+            return null;
+        }
     }
 
     @SuppressWarnings(value = "all")

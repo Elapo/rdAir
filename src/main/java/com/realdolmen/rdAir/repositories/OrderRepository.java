@@ -39,12 +39,14 @@ public class OrderRepository { //todo test
     }
 
     public int getPaidOrderCount(){
-        Long l = (long)em.createQuery("select count(o) from Order o where o.status='accepted'").getSingleResult();
+        Long l = 0l;
+        l =(long)em.createQuery("select count(o) from Order o where o.status='accepted'").getSingleResult();
         return l.intValue();
     }
 
     public int getPendingOrderCount(){
-        Long l = (long)em.createQuery("select count(o) from Order o where o.status='pending'").getSingleResult();
+        Long l = 0l;
+        l =(long)em.createQuery("select count(o) from Order o where o.status='pending'").getSingleResult();
         return l.intValue();
     }
 
