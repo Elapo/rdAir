@@ -12,7 +12,7 @@
         <div class="mdl-color--white mdl-shadow--2dp mdl-cell mdl-cell--12-col mdl-grid">
             <div class="mdl-card mdl-cell mdl-cell--12-col">
                 <div class="mdl-card__title mdl-card--border">
-                    <div class="mdl-card__title-text">Locations:</div>
+                    <div class="mdl-card__title-text">Routes:</div>
                 </div>
                 <div class="mdl-card__supporting-text">
                     <h:form id="routelist">
@@ -20,13 +20,33 @@
                                      paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
                                      value="#{routeListBean.routes}" rowKey="#{route.id}" selectionMode="single" selection="#{route.selected}">
                             <p:ajax event="rowEdit" listener="#{routeListBean.editRoute}" update=":routelist:routeDt"/>
+                            <p:column headerText="From">
+                                <p:cellEditor>
+                                    <f:facet name="output"><h:outputText value="#{route.departureLocation}}"/></f:facet>
+                                    <f:facet name="input">
+                                        <p:selectOneMenu value="#{route.departureLocation}">
+                                            <f:selectItems value="#{routeListBean.locations}"/>
+                                        </p:selectOneMenu>
+                                    </f:facet>
+                                </p:cellEditor>
+                            </p:column>
+                            <p:column headerText="To">
+                                <p:cellEditor>
+                                    <f:facet name="output"><h:outputText value="#{route.destination}}"/></f:facet>
+                                    <f:facet name="input">
+                                        <p:selectOneMenu value="#{route.destination}">
+                                            <f:selectItems value="#{routeListBean.locations}"/>
+                                        </p:selectOneMenu>
+                                    </f:facet>
+                                </p:cellEditor>
+                            </p:column>
                             <p:column style="width: 32px">
                                 <p:rowEditor/>
                             </p:column>
                         </p:dataTable>
-                        <p:contextMenu for="locationDt">
+                        <p:contextMenu for="routeDt">
                             <p:submenu label="Actions">
-                                <p:menuitem value="Delete" update="@form" icon="ui-icon-close" actionListener="#{locationListBean.deleteLocation}">
+                                <p:menuitem value="Delete" update="@form" icon="ui-icon-close" actionListener="#{routeListBean.deleteRoute}">
                                     <p:ajax process="@form" update="@form"/>
                                 </p:menuitem>
                             </p:submenu>
@@ -39,20 +59,20 @@
         <div class="mdl-color--white mdl-shadow--2dp mdl-cell mdl-cell--12-col mdl-grid">
             <div class="mdl-card mdl-cell mdl-cell--12-col">
                 <div class="mdl-card__title mdl-card--border">
-                    <div class="mdl-card__title-text">Add a location:</div>
+                    <div class="mdl-card__title-text">Add a Route:</div>
                 </div>
                 <div class="mdl-card__supporting-text">
                     <h:form>
-                        <p:outputLabel for="regionSelect" value="Region:"/><br/>
-                        <p:selectOneMenu id="regionSelect" value="#{locationListBean.region}">
-                            <f:selectItems value="#{locationListBean.regions}"/>
+                        <p:outputLabel for="depSelect" value="Departure Location:"/><br/>
+                        <p:selectOneMenu id="depSelect" value="#{routeListBean.dep}">
+                            <f:selectItems value="#{routeListBean.locations}"/>
                         </p:selectOneMenu><br/>
-                        <p:outputLabel for="airportName" value="Airport name:"/><br/>
-                        <p:inputText id="airportName" required="true" value="#{locationListBean.name}"/><br/>
-                        <p:outputLabel for="airportCode" value="Airport code:"/><br/>
-                        <p:inputText id="airportCode" required="true" value="#{locationListBean.code}" maxlength="3"/><br/>
-                        <p:commandButton value="Add" action="#{locationListBean.addLocation}" update=":locationlist"><br/>
-                            <p:ajax render=":locationlist:locationDt"/>
+                        <p:outputLabel for="arrSelect" value="Arrival Location:"/><br/>
+                        <p:selectOneMenu id="arrSelect" value="#{routeListBean.dest}">
+                            <f:selectItems value="#{routeListBean.locations}"/>
+                        </p:selectOneMenu>
+                        <p:commandButton value="Add" action="#{routeListBean.addRoute}" update=":routelist"><br/>
+                            <p:ajax render=":routelist:routeDt"/>
                         </p:commandButton>
                     </h:form>
                 </div>

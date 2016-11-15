@@ -23,7 +23,7 @@ public class FlightClass implements Serializable{
     private int version;
 
     @ManyToOne(cascade = CascadeType.PERSIST)
-    @JoinColumn
+    @JoinColumn(name = "flight_id")
     private Flight flight;
 
     protected FlightClass() {

@@ -4,10 +4,11 @@ import com.realdolmen.rdAir.domain.Location;
 
 import javax.ejb.Stateless;
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.List;
 
 @Stateless
-public class LocationRepository {//todo test
+public class LocationRepository implements Serializable{//todo test
 
     @PersistenceContext
     EntityManager em;

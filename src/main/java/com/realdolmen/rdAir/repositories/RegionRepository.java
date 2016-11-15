@@ -7,13 +7,14 @@ import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
+import java.io.Serializable;
 import java.util.List;
 
 /**
  * Created by Frederik on 12/11/2016.
  */
 @Stateless
-public class RegionRepository {
+public class RegionRepository implements Serializable{
 
     @PersistenceContext
     EntityManager em;

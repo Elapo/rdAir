@@ -33,7 +33,8 @@ public class RouteRepository {
     public List<Route> getAllForAirline(Airline a){
         try {
             Query sql = em.createQuery("select r from Route r where r.airline.id=?1");
-            return sql.setParameter(1, a.getId()).getResultList();
+            if(a != null) return sql.setParameter(1, a.getId()).getResultList();
+            return null;
         }
         catch (NoResultException e){
             return null;

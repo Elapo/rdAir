@@ -22,7 +22,8 @@ public class FlightRepository {
         return flight;
     }
 
-    public Flight getById(int id){
+
+    public Flight findById(int id){
         return em.find(Flight.class, id);
     }
 

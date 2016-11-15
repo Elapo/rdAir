@@ -2,11 +2,13 @@ package com.realdolmen.rdAir.controllers;
 
 import com.realdolmen.rdAir.domain.*;
 import com.realdolmen.rdAir.util.PriceCalculator;
+import org.hibernate.Hibernate;
 
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.inject.Inject;
+import javax.transaction.Transactional;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
@@ -36,21 +38,15 @@ public class SearchresultsBean implements Serializable {
     public void init() {
         flights = new ArrayList<>();
         flights = sfb.getResults();
+        System.out.println(" flights = " + flights);
+        getdata();
     }
 
-    public double calculateFlightPrice(Flight f, String fClass) {
-        FlightClass toCalc = null;
-        for(FlightClass fc :f.getAvailableClasses()){
-            if (fc.getName().equals(fClass)){
-                toCalc = fc;
-                break;
-            }
+    @Transactional
+    private void getdata(){
+        for (Flight flight : flights) {
+            Hibernate.initialize(flight.getRoute().getAirline());
         }
-        if (toCalc != null) {
-            return PriceCalculator.calculatePrice(toCalc);
-        }
-        return 0;
-
     }
 
     public double calculateDiscount(Flight f, String fClass) {
