@@ -61,7 +61,6 @@ public class TestSearchRepository extends JpaPersistenceTest {
     public void testSearchWithoutDateWithRegion(){
         Ticket t = new Ticket(f, fc);
         em.persist(t);
-        System.out.println(t.getFlight().getAvailableFirstClass());
         List<Ticket> results = search.searchFlights(2, "First Class", "rdair", "", "", "America", null);
         Assert.assertNotNull(results.get(0));
     }

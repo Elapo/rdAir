@@ -3,11 +3,14 @@ package com.realdolmen.rdAir.repositories;
 import com.realdolmen.rdAir.domain.Flight;
 import com.realdolmen.rdAir.domain.Ticket;
 import com.realdolmen.rdAir.services.FlightSearchSupplier;
+import org.hibernate.Hibernate;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
+import javax.persistence.TemporalType;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -16,7 +19,7 @@ import java.util.List;
  * Created by Frederik on 09/11/2016.
  */
 @Stateless
-public class SearchRepository{
+public class SearchRepository implements Serializable{
     @PersistenceContext
     EntityManager em;
 
@@ -46,7 +49,7 @@ public class SearchRepository{
             query += "and f.departureTime=:departureDate";
             availableParams.add("depdate");
         }
-
+        System.out.println(query);
         Query sql = em.createQuery(query);
         //setparams
         if(availableParams.contains("airline")){
@@ -60,14 +63,29 @@ public class SearchRepository{
             sql.setParameter("region", region);
         }
         if (availableParams.contains("depdate")){
-            sql.setParameter("departureDate", departureDate);
+            sql.setParameter("departureDate", departureDate, TemporalType.DATE);
         }
         if(availableParams.contains("class")){
             sql.setParameter("seats", seats);
             sql.setParameter("fClass", fClass);
         }
+        List<Flight> results = sql.getResultList();
+        if(results.size() == 0) System.out.println("no results");
+        else System.out.println(results);
 
-        return sql.getResultList();
+        for (Flight flight : results) {
+            Hibernate.initialize(flight.getRoute());
+            Hibernate.initialize(flight.getRoute().getDepartureLocation());
+            Hibernate.initialize(flight.getRoute().getDestination());
+            Hibernate.initialize(flight.getRoute().getAirline());
+            Hibernate.initialize(flight.getRoute().getModifiers());
+            Hibernate.initialize(flight.getRoute().getRdModifiers());
+            Hibernate.initialize(flight.getAvailableClasses());
+            Hibernate.initialize(flight.getPriceModifiers());
+            Hibernate.initialize(flight.getRdAirModifiers());
+        }
+
+        return results;
     }
 
     @SuppressWarnings(value = "all")

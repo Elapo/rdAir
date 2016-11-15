@@ -3,14 +3,15 @@ package com.realdolmen.rdAir.controllers;
 import com.realdolmen.rdAir.domain.*;
 import com.realdolmen.rdAir.repositories.*;
 import com.realdolmen.rdAir.util.PriceCalculator;
-import org.hibernate.annotations.SourceType;
-import org.hibernate.validator.constraints.NotEmpty;
+import org.hibernate.Hibernate;
+import org.hibernate.SessionFactory;
 
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
+import javax.transaction.Transactional;
 import javax.validation.constraints.Future;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
@@ -20,9 +21,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-
-@ManagedBean
-@SessionScoped
+@Named
+@javax.enterprise.context.SessionScoped
 public class SearchFlightBean implements Serializable {
 
 //    @Inject
@@ -234,6 +234,7 @@ public class SearchFlightBean implements Serializable {
         if(globalRegion==null){System.err.println("globalregion is null");return "";}
         if(dateOfDeparture==null){System.err.println("datedepart is null");return "";}
         System.out.println(flightClass);
+        System.out.println(desiredNrOfSeats);
         System.out.println(preferredAirline.getAirlineName());
         System.out.println(departureLocation.split(" ")[1]);
         System.out.println(destinationLocation.split(" ")[1]);
@@ -241,13 +242,39 @@ public class SearchFlightBean implements Serializable {
         System.out.println(dateOfDeparture.toString());
 
         results = searchRepository.searchForFlights(desiredNrOfSeats,flightClass,preferredAirline.getAirlineName(),
-                departureLocation.split(" ")[1],destinationLocation.split(" ")[1],globalRegion,null);
+                departureLocation.split(" ")[1].trim(),destinationLocation.split(" ")[1].trim(),globalRegion,null);
         //(int seats, String fClass, String airComp, String dep, String dest, String region, Date departureDate)
-
-
         System.err.println("Pressed search button");
         return "/searchresults.xhtml";
     }
 
 
+    public double calculateFlightPrice(Flight f, String fClass) {
+        FlightClass toCalc = null;
+        for(FlightClass fc :f.getAvailableClasses()){
+            if (fc.getName().equals(fClass)){
+                toCalc = fc;
+                break;
+            }
+        }
+        if (toCalc != null) {
+            return PriceCalculator.calculatePrice(toCalc);
+        }
+        return 0;
+
+    }
+
+    public double calculateDiscount(Flight f, String fClass) {
+        FlightClass toCalc = null;
+        for(FlightClass fc :f.getAvailableClasses()){
+            if (fc.getName().equals(fClass)){
+                toCalc = fc;
+                break;
+            }
+        }
+        if (toCalc != null) {
+            return PriceCalculator.getDiscountAmount(toCalc);
+        }
+        return 0;
+    }
 }

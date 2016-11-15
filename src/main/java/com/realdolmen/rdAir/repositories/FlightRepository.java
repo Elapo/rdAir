@@ -22,6 +22,10 @@ public class FlightRepository {
         return flight;
     }
 
+    public Flight findById(int id){
+        return em.find(Flight.class, id);
+    }
+
     @SuppressWarnings(value = "all")
     public List<Flight> getFlightsPerPage(int page, int perpage)
     {

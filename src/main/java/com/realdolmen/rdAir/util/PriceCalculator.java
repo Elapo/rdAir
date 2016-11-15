@@ -17,8 +17,10 @@ public class PriceCalculator {
         Hibernate.initialize(f);
 
         double basePrice = fc.getPrice();
-        Hibernate.initialize(f.getRdAirModifier());
-        if(!f.getRdAirModifier().isPercent()){
+        if (f.getRdAirModifier() != null) {
+            Hibernate.initialize(f.getRdAirModifier());
+        }
+        if(f.getRdAirModifier() != null && !f.getRdAirModifier().isPercent()){
             //the RD modifier is not a percentage, so it is a flat amount
             //meaning this is the final price
             //todo check if price is lower than airline price
@@ -77,8 +79,10 @@ public class PriceCalculator {
         Hibernate.initialize(f);
 
         double discount = 0;
-        Hibernate.initialize(f.getRdAirModifier());
-        if(!f.getRdAirModifier().isPercent()){
+        if (f.getRdAirModifier() != null) {
+            Hibernate.initialize(f.getRdAirModifier());
+        }
+        if(f.getRdAirModifier() != null && !f.getRdAirModifier().isPercent()){
             return fc.getFlight().getRdAirModifier().getAmount();
         }
         else{

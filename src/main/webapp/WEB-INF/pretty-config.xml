@@ -13,7 +13,7 @@
     </url-mapping>
     <url-mapping id="view-details">
         <pattern value="/searchdetails" />
-        <view-id value="/searchedandselectedflightdetails.xhtml" />
+        <view-id value="/flightDetails.xhtml" />
     </url-mapping>
     <url-mapping id="view-login">
         <pattern value="/login" />

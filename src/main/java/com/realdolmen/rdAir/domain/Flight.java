@@ -104,32 +104,4 @@ public class Flight implements Serializable{
     public void addClass(FlightClass fc){
         availableClasses.add(fc);
     }
-
-    public int getAvailableFirstClass(){
-        Hibernate.initialize(availableClasses);
-        for(FlightClass fc: availableClasses){
-            if(fc.getName().equals("First Class")){
-                return fc.getAvailableSeatCount();
-            }
-        }
-        return 0;
-    }
-    public int getAvailableBusinessClass(){
-        Hibernate.initialize(availableClasses);
-        for(FlightClass fc: availableClasses){
-            if(fc.getName().equals("Business Class")){
-                return fc.getAvailableSeatCount();
-            }
-        }
-        return 0;
-    }
-    public int getAvailableEconomyClass(){
-        Hibernate.initialize(availableClasses);
-        for(FlightClass fc: availableClasses){
-            if(fc.getName().equals("Economy Class")){
-                return fc.getAvailableSeatCount();
-            }
-        }
-        return 0;
-    }
 }

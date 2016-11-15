@@ -10,7 +10,7 @@
     <ui:define name="title">#{msgs['Search.results.title']}</ui:define>
     <ui:define name="content">
         <h:form>
-            <b:dataTable var="f" value="#{searchresultsBean.flights}" style="margin-bottom:40px">
+            <b:dataTable var="f" value="#{searchFlightBean.results}" style="margin-bottom:40px">
                 <b:column label="#{msgs['Search.results.title.column.one']}">
                     <h:outputText value="#{f.route.destination.airportName}" />
                 </b:column>
@@ -24,10 +24,10 @@
                     <h:outputText value="#{f.flightDuration}" />
                 </b:column>
                 <b:column label="#{msgs['Search.results.title.column.five']}">
-                    <h:outputText value="#{searchresultsBean.calculateFlightPrice(f, searchFlightBean.flightClass)}" />
+                    <h:outputText value="#{searchFlightBean.calculateFlightPrice(f, searchFlightBean.flightClass)}" />
                 </b:column>
                 <b:column label="#{msgs['Search.results.title.column.six']}">
-                    <h:outputText value="#{searchresultsBean.calculateDiscount(f, searchFlightBean.flightClass)}" />
+                    <h:outputText value="#{searchFlightBean.calculateDiscount(f, searchFlightBean.flightClass)}" />
                 </b:column>
                 <b:column label="#{msgs['Search.results.title.column.seven']}">
                     <b:navLink value="#{msgs['Search.details.button']}"

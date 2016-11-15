@@ -8,10 +8,11 @@ import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
+import java.io.Serializable;
 import java.util.List;
 
 @Stateless
-public class UserRepository {
+public class UserRepository implements Serializable{
 
     @PersistenceContext
     EntityManager em;
