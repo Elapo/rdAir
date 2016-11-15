@@ -23,7 +23,7 @@
                 <h:panelGroup>
                     <b:selectOneMenu value="#{searchFlightBean.preferredAirline}"
                                      styleClass="inputText" id="preferredAirlineInput">
-                        <f:selectItems value="#{searchFlightBean.airlines}" var="a" itemLabel="#{a.airlineName}" itemValue="#{a.airlineName}" />
+                        <f:selectItems value="#{searchFlightBean.airlines}" />
                     </b:selectOneMenu>
                 </h:panelGroup>
                 <b:message for="preferredAirlineInput"/>
@@ -81,7 +81,7 @@
                 </h:panelGroup>
                 <h:panelGroup id="option1-1">
                     <b:selectOneMenu value="#{searchFlightBean.departureLocation}" styleClass="inputText" id="departureLocationInput">
-                        <f:selectItems value="#{searchFlightBean.locations}" var="l" itemLabel="#{l}" itemValue="#{l.airportName}" />
+                        <f:selectItems value="#{searchFlightBean.locations}" />
                     </b:selectOneMenu>
                 </h:panelGroup>
                 <h:panelGroup>
@@ -95,7 +95,7 @@
                 </h:panelGroup>
                 <h:panelGroup id="option1-2">
                     <b:selectOneMenu value="#{searchFlightBean.destinationLocation}" styleClass="inputText" id="destinationLocationInput">
-                        <f:selectItems value="#{searchFlightBean.locations}" var="l" itemLabel="#{l}" itemValue="#{l.airportName}" />
+                        <f:selectItems value="#{searchFlightBean.locations}"/>
                     </b:selectOneMenu>
                 </h:panelGroup>
                 <h:panelGroup>

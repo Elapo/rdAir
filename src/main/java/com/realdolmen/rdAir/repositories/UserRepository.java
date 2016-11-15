@@ -1,5 +1,6 @@
 package com.realdolmen.rdAir.repositories;
 
+import com.realdolmen.rdAir.domain.Airline;
 import com.realdolmen.rdAir.domain.User;
 
 import javax.ejb.Stateless;
@@ -73,6 +74,16 @@ public class UserRepository {
         }
     }
 
+
+    public Airline getAirlineByName(String name) {
+        try {
+            Query sql = em.createQuery("select a from Airline a where a.airlineName=?1");
+            sql.setParameter(1, name);
+            return (Airline) sql.getSingleResult();
+        } catch (NoResultException e) {
+            return null;
+        }
+    }
 
         public <T extends User> boolean delete(int id, Class<T> type){
         User u = em.getReference(type, id);

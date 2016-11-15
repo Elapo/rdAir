@@ -68,7 +68,7 @@ public class TestSearchRepository extends JpaPersistenceTest {
 
     @Test
     public void testSearchForFlight(){
-        List<Flight> flights = search.searchForFlights(2, "First Class", "rdair", "", "", "America", null);
+        List<Flight> flights = search.searchForFlights(2, "First Class", "rdair", "", "", "America", new Date(1479298272));
 
     }
 }

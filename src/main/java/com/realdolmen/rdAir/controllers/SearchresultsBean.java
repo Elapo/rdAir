@@ -18,6 +18,9 @@ import java.util.List;
 public class SearchresultsBean implements Serializable {
 
 
+    @Inject
+    SearchFlightBean sfb;
+
     private List<Flight> flights;
 
 
@@ -32,17 +35,37 @@ public class SearchresultsBean implements Serializable {
     @PostConstruct
     public void init() {
         flights = new ArrayList<>();
-        flights = getSearchResults();
+        flights = sfb.getResults();
     }
 
-//    public double calculateFlightPrice() {
-//        PriceCalculator.calculatePrice(new Ticket());
-//
-//    }
+    public double calculateFlightPrice(Flight f, String fClass) {
+        FlightClass toCalc = null;
+        for(FlightClass fc :f.getAvailableClasses()){
+            if (fc.getName().equals(fClass)){
+                toCalc = fc;
+                break;
+            }
+        }
+        if (toCalc != null) {
+            return PriceCalculator.calculatePrice(toCalc);
+        }
+        return 0;
 
-//    public int calculateDiscount() {
-//        PriceModifier pm = new PriceModifier();
-//    }
+    }
+
+    public double calculateDiscount(Flight f, String fClass) {
+        FlightClass toCalc = null;
+        for(FlightClass fc :f.getAvailableClasses()){
+            if (fc.getName().equals(fClass)){
+                toCalc = fc;
+                break;
+            }
+        }
+        if (toCalc != null) {
+            return PriceCalculator.getDiscountAmount(toCalc);
+        }
+        return 0;
+    }
 
     public List<Flight> getSearchResults(){
         List<Flight> results = new ArrayList<>();
