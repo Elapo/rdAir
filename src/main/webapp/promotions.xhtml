@@ -25,10 +25,10 @@
                 </h4>
 
         <h:panelGroup>
-            <b:button value="#{msgs['Promotions.book.button']}" rendered="#{loginBean.loggedIn}" outcome="booking.xhtml"/>
+            <b:button value="#{msgs['Promotions.book.button']}" rendered="#{loginBean.loggedIn}" outcome="pretty:view-booking"/>
         </h:panelGroup>
         <h:panelGroup>
-            <b:button value="#{msgs['Promtions.login.button']}" rendered="#{not loginBean.loggedIn}" outcome="login.xhtml"/>
+            <b:button value="#{msgs['Promtions.login.button']}" rendered="#{not loginBean.loggedIn}" outcome="pretty:view-login"/>
         </h:panelGroup>
 
 

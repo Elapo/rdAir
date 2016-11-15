@@ -129,7 +129,6 @@ public class SearchRepository{
         if (availableParams.contains("depdate")){
             sql.setParameter("departureDate", departureDate);
         }
-
         return sql.getResultList();
     }
 }

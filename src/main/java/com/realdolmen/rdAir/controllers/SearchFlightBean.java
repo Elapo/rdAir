@@ -3,10 +3,10 @@ package com.realdolmen.rdAir.controllers;
 import com.realdolmen.rdAir.domain.*;
 import com.realdolmen.rdAir.repositories.*;
 import com.realdolmen.rdAir.util.PriceCalculator;
+import org.hibernate.annotations.SourceType;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.annotation.PostConstruct;
-import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.inject.Inject;
@@ -21,7 +21,7 @@ import java.util.Date;
 import java.util.List;
 
 
-@Named
+@ManagedBean
 @SessionScoped
 public class SearchFlightBean implements Serializable {
 
@@ -31,16 +31,17 @@ public class SearchFlightBean implements Serializable {
     private SearchRepository searchRepository;
 
     @Inject
-    private AirlineRepository airlineRepository;
+    private UserRepository userRepository;
 
     @Inject
     private LocationRepository locationRepository;
 
     @Inject
-    private SearchresultsBean searchResultsBean;
-
-    @Inject
     private RegionRepository regionRepository;
+
+    private List<Airline> airlines;
+
+    private List<Flight> results;
 
     private Integer id;
 
@@ -49,10 +50,10 @@ public class SearchFlightBean implements Serializable {
     @Max(value=853, message="{Search.error.desiredNrOfSeats}")
     private Integer desiredNrOfSeats;
 
-    @NotEmpty(message="{Search.error.flightClass.null}")
+    @NotNull(message="{Search.error.flightClass.null}")
     private String flightClass;
     @NotNull(message="{Search.error.airlineCompany.null}")
-    private String preferredAirline;
+    private Airline preferredAirline;
 
 
     private String locationOption;
@@ -62,7 +63,7 @@ public class SearchFlightBean implements Serializable {
     private String departureLocation;
     @NotNull(message="{Search.error.destinationLocation.null}")
     private String destinationLocation;
-    @NotNull(message="{Search.error.globalRegion.null}")
+    // Can be left open @NotNull(message="{Search.error.globalRegion.null}")
     private String globalRegion;
 
     @NotNull(message="{Search.error.dateOfDeparture.null}")
@@ -79,7 +80,10 @@ public class SearchFlightBean implements Serializable {
     public void init() {
         flightWay = "One way";
         locationOption = "Departure location - Destination";
-    }
+        airlines = userRepository.getAllUsers(Airline.class);
+        if (airlines == null) {
+            airlines = new ArrayList<>();
+        }}
 
     public Integer getDesiredNrOfSeats() {
         return desiredNrOfSeats;
@@ -97,11 +101,11 @@ public class SearchFlightBean implements Serializable {
         this.flightClass = flightClass;
     }
 
-    public String getPreferredAirline() {
+    public Airline getPreferredAirline() {
         return preferredAirline;
     }
 
-    public void setPreferredAirline(String preferredAirline) {
+    public void setPreferredAirline(Airline preferredAirline) {
         this.preferredAirline = preferredAirline;
     }
 
@@ -201,19 +205,27 @@ public class SearchFlightBean implements Serializable {
     }
 
     public List<Airline> getAirlines(){
-        return airlineRepository.getAllAirlines();
+        return airlines;
     }
 
     public List<Region> getRegions(){
         return regionRepository.getAllRegions();
     }
 
+    public UserRepository getUserRepository() {
+        return userRepository;
+    }
+
+    public LocationRepository getLocationRepository() {
+        return locationRepository;
+    }
+
+    public List<Flight> getResults() {
+        return results;
+    }
+
     public String search(){
-        //TODO: give search criteria to sql search query
-        //SHOULD GIVE search results but returns null..
-        //  can't even inject this
-//        searchResultsBean.setSearchResults(criteriaSearchRepository.searchFlights(desiredNrOfSeats, flightClass, preferredAirline, departureLocation,
-//                destinationLocation, globalRegion, dateOfDeparture));
+
         if(searchRepository==null){System.err.println("Searchrepo is null");return "";}
         if(flightClass==null){System.err.println("flightclass is null " + flightClass);return "";}
         if(preferredAirline==null){System.err.println("preferedairline is null");return "";}
@@ -221,15 +233,20 @@ public class SearchFlightBean implements Serializable {
         if(destinationLocation==null){System.err.println("destloc is null");return "";}
         if(globalRegion==null){System.err.println("globalregion is null");return "";}
         if(dateOfDeparture==null){System.err.println("datedepart is null");return "";}
-        if(searchResultsBean==null){System.err.println("searResultsBean is null"); return "";}
+        System.out.println(flightClass);
+        System.out.println(preferredAirline.getAirlineName());
+        System.out.println(departureLocation.split(" ")[1]);
+        System.out.println(destinationLocation.split(" ")[1]);
+        System.out.println(globalRegion);
+        System.out.println(dateOfDeparture.toString());
 
-        searchResultsBean.setSearchResults(searchRepository.searchForFlights(desiredNrOfSeats,flightClass,preferredAirline,
-                departureLocation,destinationLocation,globalRegion,dateOfDeparture));
+        results = searchRepository.searchForFlights(desiredNrOfSeats,flightClass,preferredAirline.getAirlineName(),
+                departureLocation.split(" ")[1],destinationLocation.split(" ")[1],globalRegion,null);
         //(int seats, String fClass, String airComp, String dep, String dest, String region, Date departureDate)
 
 
         System.err.println("Pressed search button");
-        return "pretty:view-search";
+        return "/searchresults.xhtml";
     }
 
 

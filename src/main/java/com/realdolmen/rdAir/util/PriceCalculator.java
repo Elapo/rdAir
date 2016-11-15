@@ -72,6 +72,33 @@ public class PriceCalculator {
         return price;
     }
 
+    public static double getDiscountAmount(FlightClass fc) {
+        Flight f = fc.getFlight();
+        Hibernate.initialize(f);
+
+        double discount = 0;
+        Hibernate.initialize(f.getRdAirModifier());
+        if(!f.getRdAirModifier().isPercent()){
+            return fc.getFlight().getRdAirModifier().getAmount();
+        }
+        else{
+            Hibernate.initialize(f.getRoute());
+            Hibernate.initialize(f.getRoute().getModifiers());
+            Hibernate.initialize(f.getRoute().getRdModifiers());
+            for(PriceModifier pm: f.getRoute().getRdModifiers()){
+                if(isActive(pm)){
+                    discount += pm.getAmount();
+                }
+            }
+            for(PriceModifier pm: f.getRdAirModifiers()){
+                if(isActive(pm) && pm.isPercent()){
+                    discount *= pm.getAmount();
+                }
+            }
+            return discount;
+        }
+    }
+
     private void applyVolumeDiscount(Order o){ //call AFTER calculating the total
         List<PriceModifier> volumeDiscounts = new ArrayList<>();
         for(Ticket t: o.getTickets()){

@@ -35,6 +35,14 @@
         <pattern value="/invoices" />
         <view-id value="/invoices.xhtml" />
     </url-mapping>
+    <url-mapping id="view-invoicesdetails">
+        <pattern value="/invoicesdetails" />
+        <view-id value="/invoicesdetails.xhtml" />
+    </url-mapping>
+    <url-mapping id="view-promotions">
+        <pattern value="/promotions" />
+        <view-id value="/promotions.xhtml" />
+    </url-mapping>
     <url-mapping id="view-profile">
         <pattern value="/account/profile"/>
         <view-id value="/account/SECURE.xhtml"/>

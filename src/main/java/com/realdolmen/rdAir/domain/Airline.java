@@ -61,4 +61,8 @@ public class Airline extends User implements Serializable{
         return flights;
     }
 
+    @Override
+    public String toString() {
+        return this.airlineName;
+    }
 }

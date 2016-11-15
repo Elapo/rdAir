@@ -10,13 +10,12 @@
     <ui:define name="title">#{msgs['Search.results.title']}</ui:define>
     <ui:define name="content">
         <h:form>
-
-            <b:dataTable var="f" value="#{searchResultsBean.flights}" style="margin-bottom:40px">
+            <b:dataTable var="f" value="#{searchresultsBean.flights}" style="margin-bottom:40px">
                 <b:column label="#{msgs['Search.results.title.column.one']}">
-                    <h:outputText value="#{f.route.destination}" />
+                    <h:outputText value="#{f.route.destination.airportName}" />
                 </b:column>
                 <b:column label="#{msgs['Search.results.title.column.two']}">
-                    <h:outputText value="#{f.route.airline}" />
+                    <h:outputText value="#{f.route.airline.airlineName}" />
                 </b:column>
                 <b:column label="#{msgs['Search.results.title.column.three']}">
                     <h:outputText value="#{f.departureTime}" />
@@ -25,14 +24,14 @@
                     <h:outputText value="#{f.flightDuration}" />
                 </b:column>
                 <b:column label="#{msgs['Search.results.title.column.five']}">
-                    <h:outputText value="#{SearchresultsBean.calculatePrice}" />
+                    <h:outputText value="#{searchresultsBean.calculateFlightPrice(f, searchFlightBean.flightClass)}" />
                 </b:column>
                 <b:column label="#{msgs['Search.results.title.column.six']}">
-                    <h:outputText value="#{SearchresultsBean.calculateDiscount}" />
+                    <h:outputText value="#{searchresultsBean.calculateDiscount(f, searchFlightBean.flightClass)}" />
                 </b:column>
                 <b:column label="#{msgs['Search.results.title.column.seven']}">
                     <b:navLink value="#{msgs['Search.details.button']}"
-                                          outcome="searchedandselectedflightdetails.xhtml">
+                                          outcome="pretty:view-details">
                         <f:param name="flightId" value="#{f.id}" />-->
                     </b:navLink>
                 </b:column>

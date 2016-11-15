@@ -51,10 +51,10 @@
                 <b:button value="#{msgs['Back.button']}" outcome="searchresults.xhtml"/>
 
             <h:panelGroup>
-                <b:button value="#{msgs['Booking.button']}" rendered="#{loginBean.loggedIn}" outcome="booking.xhtml"/>
+                <b:button value="#{msgs['Booking.button']}" rendered="#{loginBean.loggedIn}" outcome="pretty:view-booking"/>
             </h:panelGroup>
             <h:panelGroup>
-                <b:button value="#{msgs['Search.details.login.button']}" rendered="#{not loginBean.loggedIn}" outcome="login.xhtml">
+                <b:button value="#{msgs['Search.details.login.button']}" rendered="#{not loginBean.loggedIn}" outcome="pretty:view-login">
                 </b:button>
             </h:panelGroup>
 
