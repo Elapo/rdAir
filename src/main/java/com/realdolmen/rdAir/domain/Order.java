@@ -35,8 +35,10 @@ public class Order implements Serializable{
     }
 
     public Order(List<Ticket> tickets, Date orderDate) {
-        this.tickets = new ArrayList<>();
         this.tickets = tickets;
+        if (tickets == null) {
+            this.tickets = new ArrayList<>();
+        }
         this.orderDate = orderDate;
         this.orderPrice = 0;
         this.status = "pending";

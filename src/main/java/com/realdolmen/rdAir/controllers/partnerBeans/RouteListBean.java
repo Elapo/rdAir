@@ -14,6 +14,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
 import javax.inject.Inject;
+import javax.inject.Named;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -26,7 +27,7 @@ import java.util.List;
 public class RouteListBean implements Serializable{
     private List<Route> routes;
 
-    @Inject
+    @ManagedProperty(value = "#{loginBean}")
     private LoginBean session;
 
     @Inject
@@ -60,6 +61,7 @@ public class RouteListBean implements Serializable{
     }
 
     public void addRoute(){
+        System.out.println("adding route");
         rr.save(new Route(dep, dest, null, null, (Airline) session.getUser()));
         routes = rr.getAllForAirline((Airline) session.getUser());
     }

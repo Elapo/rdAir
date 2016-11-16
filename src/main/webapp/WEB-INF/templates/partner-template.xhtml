@@ -21,7 +21,9 @@
                     <i class="material-icons">more_vert</i>
                 </button>
                 <ul class="mdl-menu mdl-js-menu mdl-js-ripple-effect mdl-menu--bottom-right" for="hdrbtn">
-                    <h:link style="text-decoration: none; color:black;" outcome="#{loginBean.doLogout()}"><li class="mdl-menu__item" onclick="">Logout</li></h:link>
+                    <h:form>
+                        <h:commandLink style="text-decoration: none; color:black;" action="#{loginBean.doLogout()}"><li class="mdl-menu__item" onclick="">Logout</li></h:commandLink>
+                    </h:form>
                 </ul>
             </div>
         </header>

@@ -19,7 +19,7 @@ public class OrderRepository { //todo test
     UserRepository ur;
 
     public Order save(Order order){
-        em.persist(order);
+        em.merge(order);
         return order;
     }
 

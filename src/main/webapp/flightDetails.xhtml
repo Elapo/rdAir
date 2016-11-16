@@ -7,13 +7,14 @@
       template="WEB-INF/templates/template.xhtml">
 
     <f:metadata>
-        <f:viewParam name="id" value="#{flightDetailBean.id}"/>
+        <f:viewParam name="flightId" value="#{flightDetailBean.id}"/>
         <f:viewParam name="class" value="#{flightDetailBean.fClass}"/>
+        <f:viewAction action="#{flightDetailBean.setParams}"/>
     </f:metadata>
     <ui:define name="title">#{msgs['Flight.details.title']}</ui:define>
     <ui:define name="content">
 
-        <table>
+        <!--<table>
             <tr>
                 <td><h:outputText value="#{flightDetailBean.f.departureTime}}" /></td>
                 <td><h:outputText value="#{flightDetailBean.f.flightDuration}" /></td>
@@ -23,40 +24,34 @@
                 <td><h:outputText value="#{flightDetailBean.calculateFlightPrice(flightDetailBean.f, flightDetailBean.fClass)}" /></td>
                 <td><h:outputText value="#{flightDetailBean.calculateDiscount(flightDetailBean.f, flightDetailBean.fClass)}" /></td>
             </tr>
-        </table>
+        </table>-->
         <h:form>
-            <b:dataTable var="flight" value="#{null}" style="margin-bottom:40px">
+            <b:dataTable var="flight" value="#{flightDetailBean.f}" style="margin-bottom:40px">
                 <b:column label="#{msgs['Search.details.traveling.class']}">
-                    <h:outputText value="Economy"/>
+                    <h:outputText value="#{flightDetailBean.fClass}"/>
                 </b:column>
                 <b:column label="#{msgs['Search.details.seats']}">
-                    <h:outputText value="2"/>
+                    <h:outputText value="#{flightDetailBean.selectedClass.availableSeatCount}"/>
                 </b:column>
                 <b:column label="#{msgs['Search.details.departure.location']}">
                     <!-- + codes-->
-                    <h:outputText value="x"/>
+                    <h:outputText value="#{flightDetailBean.f.route.departureLocation}"/>
                 </b:column>
                 <b:column label="#{msgs['Search.details.departure.time']}">
-                    <h:outputText value="11:00"/>
+                    <h:outputText value="#{flightDetailBean.f.departureTime}"/>
                 </b:column>
                 <b:column label="#{msgs['Search.details.destination']}">
                     <!-- + codes-->
-                    <h:outputText value="y"/>
-                </b:column>
-                <b:column label="#{msgs['Search.details.destiantion.time']}">
-                    <h:outputText value="12:30"/>
+                    <h:outputText value="#{flightDetailBean.f.route.destination}"/>
                 </b:column>
                 <b:column label="#{msgs['Search.details.flight.duration']}">
-                    <h:outputText value="1h30"/>
+                    <h:outputText value="#{flightDetailBean.f.flightDuration}"/>
                 </b:column>
                 <b:column label="#{msgs['Search.details.price.ticket']}">
-                    <h:outputText value="10"/>
-                </b:column>
-                <b:column label="#{msgs['Search.details.price.total']}">
-                    <h:outputText value="20"/>
+                    <h:outputText value="#{flightDetailBean.calculateFlightPrice(flightDetailBean.f, flightDetailBean.fClass)}"/>
                 </b:column>
                 <b:column label="#{msgs['Search.details.airline.company']}">
-                    <h:outputText value="Bull Airlines"/>
+                    <h:outputText value="#{flightDetailBean.f.route.airline.airlineName}"/>
                 </b:column>
 
             </b:dataTable>
@@ -66,7 +61,7 @@
 
             <h:panelGroup>
                 <b:button value="#{msgs['Booking.button']}" rendered="#{loginBean.loggedIn}"
-                          outcome="pretty:view-booking"/>
+                          outcome="#{flightDetailBean.bookFlight()}"/>
             </h:panelGroup>
             <h:panelGroup>
                 <b:button value="#{msgs['Search.details.login.button']}" rendered="#{not loginBean.loggedIn}"

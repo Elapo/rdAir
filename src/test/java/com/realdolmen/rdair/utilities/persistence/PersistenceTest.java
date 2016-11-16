@@ -74,7 +74,7 @@ public abstract class PersistenceTest extends Assert {
          */
         //FIXME IF tests fail with access denied, this is the place to be
 
-        mysql("com.mysql.jdbc.Driver", "jdbc:mysql://localhost:3306/", "root", "", false),
+        mysql("com.mysql.jdbc.Driver", "jdbc:mysql://localhost:3306/", "root", "9cnHadtZTjoGtzUPY8ge", false),
 
 
         /**

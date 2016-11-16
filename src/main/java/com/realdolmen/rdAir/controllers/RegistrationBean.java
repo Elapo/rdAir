@@ -58,16 +58,19 @@ public class RegistrationBean {
     private boolean registered = false;
 
     public String doRegistration(){
-        System.err.println("Succesfully registered customer: " + lName);
-        passwordHash = BCrypt.hashpw(password, BCrypt.gensalt());
-        user = new Customer(fName, lName, address, telephone, email, passwordHash, null);
-        User savedUser = ur.save(user);
-        System.err.println("Id of persisted user is: " + savedUser.getId());
-        login.setUser(savedUser);
-        login.setLoggedIn(true);
-        registered=true;
-        System.err.println("Registered boolean value: " + registered);
-        return "pretty:view-login";
+        if (ur.getUserByEmail(email) == null) {
+            System.err.println("Succesfully registered customer: " + lName);
+            passwordHash = BCrypt.hashpw(password, BCrypt.gensalt());
+            user = new Customer(fName, lName, address, telephone, email, passwordHash, null);
+            User savedUser = ur.save(user);
+            System.err.println("Id of persisted user is: " + savedUser.getId());
+            login.setUser(savedUser);
+            login.setLoggedIn(true);
+            registered=true;
+            System.err.println("Registered boolean value: " + registered);
+            return "pretty:view-login";
+        }
+        return "";
     }
 
     public String getfName() {

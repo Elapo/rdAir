@@ -2,6 +2,7 @@ package com.realdolmen.rdAir.repositories;
 
 import com.realdolmen.rdAir.domain.Flight;
 import com.realdolmen.rdAir.domain.Route;
+import net.bootsfaces.render.H;
 import org.hibernate.Hibernate;
 
 import javax.ejb.Stateless;
@@ -27,6 +28,15 @@ public class FlightRepository {
     public Flight findById(int id){
         Flight f = em.find(Flight.class, id);
         Hibernate.initialize(f.getAvailableClasses());
+        Hibernate.initialize(f.getRoute());
+        Hibernate.initialize(f.getRoute().getDestination());
+        Hibernate.initialize(f.getRoute().getDepartureLocation());
+        Hibernate.initialize(f.getRoute().getAirline());
+        Hibernate.initialize(f.getRoute().getModifiers());
+        Hibernate.initialize(f.getRoute().getRdModifiers());
+        Hibernate.initialize(f.getPriceModifiers());
+        Hibernate.initialize(f.getRdAirModifier());
+        Hibernate.initialize(f.getRdAirModifiers());
         return f;
     }
 

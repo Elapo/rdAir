@@ -7,7 +7,7 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core"
         xmlns:p="http://primefaces.org/ui">
 <ui:composition template="/WEB-INF/templates/partner-template.xhtml">
-    <ui:define name="username">user</ui:define>
+    <ui:define name="username"><h:outputText value="#{loginBean.user.firstName}"/></ui:define>
     <ui:define name="content">
         <div class="mdl-color--white mdl-shadow--2dp mdl-cell mdl-cell--12-col mdl-grid">
             <div class="mdl-card mdl-cell mdl-cell--12-col">
@@ -64,11 +64,13 @@
                 <div class="mdl-card__supporting-text">
                     <h:form>
                         <p:outputLabel for="depSelect" value="Departure Location:"/><br/>
-                        <p:selectOneMenu id="depSelect" value="#{routeListBean.dep}">
+                        <h:messages for="depSelect"/>
+                        <p:selectOneMenu id="depSelect" value="#{routeListBean.dep}" required="true">
                             <f:selectItems value="#{routeListBean.locations}"/>
                         </p:selectOneMenu><br/>
                         <p:outputLabel for="arrSelect" value="Arrival Location:"/><br/>
-                        <p:selectOneMenu id="arrSelect" value="#{routeListBean.dest}">
+                        <h:messages for="arrSelect"/>
+                        <p:selectOneMenu id="arrSelect" value="#{routeListBean.dest}" required="true">
                             <f:selectItems value="#{routeListBean.locations}"/>
                         </p:selectOneMenu>
                         <p:commandButton value="Add" action="#{routeListBean.addRoute}" update=":routelist"><br/>

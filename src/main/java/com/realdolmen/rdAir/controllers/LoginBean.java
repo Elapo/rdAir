@@ -1,11 +1,7 @@
 package com.realdolmen.rdAir.controllers;
 
-import com.realdolmen.rdAir.domain.Flight;
-import com.realdolmen.rdAir.domain.Order;
-import com.realdolmen.rdAir.domain.Ticket;
-import com.realdolmen.rdAir.domain.User;
+import com.realdolmen.rdAir.domain.*;
 import com.realdolmen.rdAir.repositories.UserRepository;
-import com.realdolmen.rdAir.util.PriceCalculator;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotEmpty;
 import org.mindrot.jbcrypt.BCrypt;
@@ -15,7 +11,6 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
-import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
@@ -41,9 +36,9 @@ public class LoginBean implements Serializable{
     @NotEmpty(message="{Login.email.empty}")
     @Email(message="{Login.email.wrong}")
     private String email;
-    @Size(min=8, max=30, message="{Login.password.size}")
+    @Size(min=6, max=30, message="{Login.password.size}")
     @NotNull(message="{Login.password.null}")
-    @Pattern(regexp = "[a-zA-Z0-9]{8,30}", message="{Login.password.pattern}")
+    @Pattern(regexp = "[a-zA-Z0-9]{6,30}", message="{Login.password.pattern}")
     private String password;
 
     private Order booking;
@@ -70,14 +65,14 @@ public class LoginBean implements Serializable{
         return "pretty:view-index";
     }
 
-    public void addToOrder(Flight f){
+    public void addToOrder(Flight f, FlightClass fc, double price){
         if(user.getClass().getSimpleName().equals("Customer")){
             if (booking == null) {
                 booking = new Order(null, new Date());
             }
-//            booking.getTickets().add(t);
-//            t.setSalesPrice(PriceCalculator.calculatePrice(t));
-//            booking.setOrderPrice(booking.getOrderPrice() + t.getSalesPrice());
+            Ticket t =new Ticket(f, fc);
+            t.setSalesPrice(price);
+            booking.getTickets().add(t);
         }
     }
 

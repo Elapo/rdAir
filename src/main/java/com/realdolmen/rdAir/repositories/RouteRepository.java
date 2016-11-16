@@ -2,6 +2,7 @@ package com.realdolmen.rdAir.repositories;
 
 import com.realdolmen.rdAir.domain.Airline;
 import com.realdolmen.rdAir.domain.Route;
+import org.hibernate.Hibernate;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -33,7 +34,14 @@ public class RouteRepository {
     public List<Route> getAllForAirline(Airline a){
         try {
             Query sql = em.createQuery("select r from Route r where r.airline.id=?1");
-            if(a != null) return sql.setParameter(1, a.getId()).getResultList();
+            if(a != null) {
+                List<Route> routes =sql.setParameter(1, a.getId()).getResultList();
+                for (Route route : routes) {
+                    Hibernate.initialize(route.getDepartureLocation());
+                    Hibernate.initialize(route.getDestination());
+                }
+                return routes;
+            }
             return null;
         }
         catch (NoResultException e){

@@ -14,7 +14,9 @@ public class AuthFilter implements Filter {
         LoginBean login = (LoginBean)((HttpServletRequest)request).getSession().getAttribute("loginBean");
         if (login == null || !login.isLoggedIn()) {
             String contextPath = ((HttpServletRequest)request).getContextPath();
-            ((HttpServletResponse)response).sendRedirect(contextPath + "/login"); //fixme correct path
+            ((HttpServletResponse)response).sendRedirect(contextPath + "/login.xhtml");
+            System.out.println("no user is logged in");
+            return;
         }
         chain.doFilter(request, response);
     }

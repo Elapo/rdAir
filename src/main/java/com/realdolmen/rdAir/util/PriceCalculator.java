@@ -3,6 +3,7 @@ package com.realdolmen.rdAir.util;
 import com.realdolmen.rdAir.domain.*;
 import org.hibernate.Hibernate;
 
+import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -27,9 +28,9 @@ public class PriceCalculator {
             return fc.getFlight().getRdAirModifier().getAmount();
         }
         else{
-            Hibernate.initialize(f.getRoute());
-            Hibernate.initialize(f.getRoute().getModifiers());
-            Hibernate.initialize(f.getRoute().getRdModifiers());
+//            Hibernate.initialize(f.getRoute());
+//            Hibernate.initialize(f.getRoute().getModifiers());
+//            Hibernate.initialize(f.getRoute().getRdModifiers());
             //get all modifiers from db
             basePrice = calcAirlinePrice(fc);
             for(PriceModifier pm: f.getRoute().getRdModifiers()){
@@ -48,13 +49,13 @@ public class PriceCalculator {
 
     public static double calcAirlinePrice(FlightClass fc){
         Flight f = fc.getFlight();
-        Hibernate.initialize(fc);
-        Hibernate.initialize(f);
-        Hibernate.initialize(f.getRoute());
-        Hibernate.initialize(f.getPriceModifiers());
+//        Hibernate.initialize(fc);
+//        Hibernate.initialize(f);
+//        Hibernate.initialize(f.getRoute());
+//        Hibernate.initialize(f.getPriceModifiers());
 
         double price = fc.getPrice();
-        Hibernate.initialize(f.getRoute().getModifiers());
+//        Hibernate.initialize(f.getRoute().getModifiers());
         for (PriceModifier pm : f.getRoute().getRdModifiers()){
             if(isActive(pm) && pm.isPercent()){
                 price = price*pm.getAmount();
@@ -76,19 +77,19 @@ public class PriceCalculator {
 
     public static double getDiscountAmount(FlightClass fc) {
         Flight f = fc.getFlight();
-        Hibernate.initialize(f);
+//        Hibernate.initialize(f);
 
         double discount = 0;
         if (f.getRdAirModifier() != null) {
-            Hibernate.initialize(f.getRdAirModifier());
+//            Hibernate.initialize(f.getRdAirModifier());
         }
         if(f.getRdAirModifier() != null && !f.getRdAirModifier().isPercent()){
             return fc.getFlight().getRdAirModifier().getAmount();
         }
         else{
-            Hibernate.initialize(f.getRoute());
-            Hibernate.initialize(f.getRoute().getModifiers());
-            Hibernate.initialize(f.getRoute().getRdModifiers());
+//            Hibernate.initialize(f.getRoute());
+//            Hibernate.initialize(f.getRoute().getModifiers());
+//            Hibernate.initialize(f.getRoute().getRdModifiers());
             for(PriceModifier pm: f.getRoute().getRdModifiers()){
                 if(isActive(pm)){
                     discount += pm.getAmount();

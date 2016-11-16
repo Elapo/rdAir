@@ -4,13 +4,17 @@ package com.realdolmen.rdAir.controllers;
 import com.realdolmen.rdAir.domain.Flight;
 import com.realdolmen.rdAir.domain.FlightClass;
 import com.realdolmen.rdAir.domain.Ticket;
+import com.realdolmen.rdAir.repositories.FlightClassRepository;
 import com.realdolmen.rdAir.repositories.FlightRepository;
 import com.realdolmen.rdAir.util.PriceCalculator;
 
 import javax.annotation.PostConstruct;
+import javax.annotation.Resource;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
 import javax.inject.Inject;
+import javax.transaction.*;
 
 @ManagedBean
 @ViewScoped
@@ -20,19 +24,37 @@ public class FlightDetailBean {
 
     private String fClass;
 
+    @Resource
+    UserTransaction ut;
+
     @Inject
     Flight f;
+
+    private FlightClass selectedClass;
 
     @Inject
     FlightRepository fr;
 
     @Inject
+    FlightClassRepository fcr;
+
+    @ManagedProperty(value = "#{loginBean}")
     LoginBean session;
 
     @PostConstruct
     public void init(){
+
+    }
+
+    public void setParams(){
         if (id != 0) {
             f = fr.findById(id);
+            for (FlightClass flightClass : f.getAvailableClasses()) {
+                if (flightClass.getName().equals(fClass)){
+                    selectedClass = flightClass;
+                    break;
+                }
+            }
         }
     }
 
@@ -66,19 +88,13 @@ public class FlightDetailBean {
         return 0;
     }
 
-    public String bookFlight(){
-        FlightClass fc = null;
-        for (FlightClass flightClass : f.getAvailableClasses()) {
-            if(flightClass.getName().equals(fClass)){
-                fc = flightClass;
-                break;
-            }
-        }
-        if (fc != null) {
-            session.getBooking().getTickets().add(new Ticket(f, fc));
-            return "pretty:view-booking";
-        }
-        return "";
+    public String bookFlight() throws HeuristicRollbackException, RollbackException, HeuristicMixedException, SystemException, NotSupportedException {
+        session.addToOrder(f, selectedClass, calculateFlightPrice(f, fClass));
+        selectedClass.setAvailableSeatCount(selectedClass.getAvailableSeatCount()-1);
+        ut.begin();
+        fcr.save(selectedClass);
+        ut.commit();
+        return "pretty:view-booking";
     }
 
     public int getId() {
@@ -103,5 +119,21 @@ public class FlightDetailBean {
 
     public void setfClass(String fClass) {
         this.fClass = fClass;
+    }
+
+    public LoginBean getSession() {
+        return session;
+    }
+
+    public void setSession(LoginBean session) {
+        this.session = session;
+    }
+
+    public FlightClass getSelectedClass() {
+        return selectedClass;
+    }
+
+    public void setSelectedClass(FlightClass selectedClass) {
+        this.selectedClass = selectedClass;
     }
 }

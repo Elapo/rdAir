@@ -12,7 +12,7 @@ public class FlightClassRepository {
 
     public FlightClass save(FlightClass fc){
         try{
-            em.persist(fc);
+            em.merge(fc);
             em.flush();
             return fc;
         }

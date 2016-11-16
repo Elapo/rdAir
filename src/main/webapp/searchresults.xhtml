@@ -32,7 +32,8 @@
                 <b:column label="#{msgs['Search.results.title.column.seven']}">
                     <b:navLink value="#{msgs['Search.details.button']}"
                                           outcome="pretty:view-details">
-                        <f:param name="flightId" value="#{f.id}" />-->
+                        <f:param name="flightId" value="#{f.id}" />
+                        <f:param name="class" value="#{searchFlightBean.flightClass}"/>
                     </b:navLink>
                 </b:column>
             </b:dataTable>

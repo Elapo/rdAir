@@ -2,6 +2,7 @@ package com.realdolmen.rdAir.controllers.employeeBeans;
 
 import com.realdolmen.rdAir.domain.Airline;
 import com.realdolmen.rdAir.repositories.UserRepository;
+import org.mindrot.jbcrypt.BCrypt;
 import org.primefaces.event.RowEditEvent;
 
 import javax.annotation.PostConstruct;
@@ -32,9 +33,12 @@ public class PartnerListBean {
     }
 
     public void addPartner(){
-        System.out.println("Adding partner");
-        ur.save(new Airline(contactFName, contactLName, address, telephone, email, airlineName, website, password));
-        partners = ur.getAllUsers(Airline.class);
+        if(ur.getUserByEmail(email) == null){
+            System.out.println("Adding partner");
+            String hash = BCrypt.hashpw(password, BCrypt.gensalt());
+            ur.save(new Airline(contactFName, contactLName, address, telephone, email, airlineName, website, hash));
+            partners = ur.getAllUsers(Airline.class);
+        }
     }
 
     public void deletePartner(){
